@@ -135,6 +135,17 @@ export const StyledButton = styled.button<buttonProps>`
             border: 1px solid ${theme.colors.sucess2};
           }
         `;
+      case "input_button":
+        return css`
+          background: transparent;
+          color: ${theme.colors.grey0};
+          border: 1px solid ${theme.colors.grey0};
+          &:hover {
+            background: transparent;
+            color: ${theme.colors.grey0};
+            border: 1px solid ${theme.colors.grey0};
+          }
+        `;
       default:
         return;
     }
