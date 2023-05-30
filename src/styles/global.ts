@@ -1,13 +1,9 @@
 import { createGlobalStyle } from "styled-components";
-import { Reset } from "./reset";
 import { theme } from "./theme";
 
-//precisamos definir uma fonte
-
 export const GlobalStyle = createGlobalStyle`
- ${Reset};
 :root {
-  font-family: 'Times New Roman', Times, serif;
+  font-family: 'Inter'; // fazer o teste
   font-size: 60%;
 }
 
@@ -42,6 +38,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   h1, h2, h3, h4, h5, h6, strong{
+    font-family: "Lexend"; // fazer o teste
     font-weight: 500;
   }
 
