@@ -30,8 +30,8 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background: ${theme.colors.grey4};
-    color: ${theme.colors.grey0};
+    background: ${theme.colors.grey0};
+    color: ${theme.colors.grey10};
     -webkit-font-smoothing: antialiased;
 
     overflow-x: hidden;
