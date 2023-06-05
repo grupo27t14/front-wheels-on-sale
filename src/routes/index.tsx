@@ -1,10 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
-import ErrorPage from "../pages/notFoundPage";
-import Products from "../pages/productPage";
 import { Login } from "../pages/Login";
 import { Register } from "../pages/Register";
 import Header from "../components/Header";
 import { GlobalStyleGray } from "../styles/global";
+import ErrorPage from "../pages/notFoundPage";
+import Products from "../pages/productPage";
 
 export const router = createBrowserRouter([
   {
