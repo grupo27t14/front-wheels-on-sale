@@ -3,7 +3,7 @@ import { theme } from "./theme";
 
 export const GlobalStyle = createGlobalStyle`
 :root {
-  font-family: 'Inter'; // fazer o teste
+  font-family: 'Inter', sans-serif; // fazer o teste
   font-size: 60%;
 }
 
