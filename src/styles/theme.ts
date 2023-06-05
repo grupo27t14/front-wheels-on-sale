@@ -39,12 +39,13 @@ export const theme = {
     random11: "#5700E3",
     random12: "#30007D",
 
+    currencyDollar: "rgba(255, 255, 255, 0.1)",
   },
 
   typography: {
     Heading1_700: {
       size: "4.4rem", //44px
-      weight: "700", 
+      weight: "700",
       height: "5.6rem", //56px
     },
     Heading2_600: {
@@ -90,7 +91,7 @@ export const theme = {
     Heading6_500: {
       size: "2rem", //20px
       weight: "500",
-      height: "2.5rem", //25px 
+      height: "2.5rem", //25px
     },
     Heading7_600: {
       size: "1.6rem", //16px
@@ -141,6 +142,15 @@ export const theme = {
       size: "1.4rem", //14px
       weight: "500",
       height: "1.7rem", //17px
+    },
+    avatar: {
+      size: "1.4rem", //36px
+      weight: "700",
+    },
+    avatar_big: {
+      size: "3.6rem", //36px
+      weight: "500",
+      height: "5.3rem", //53px
     },
   },
 };
