@@ -20,21 +20,17 @@ export const StyledButton = styled.button<buttonProps>`
     switch (buttonsize) {
       case "big":
         return css`
+          ${theme.typography.button_big_text};
           padding: 12px 28px;
           width: 146px;
           height: 48px;
-          font-size: ${theme.typography.button_big_text.size};
-          font-weight: ${theme.typography.button_big_text.weight};
-          line-height: ${theme.typography.button_big_text.height};
         `;
       case "medium":
         return css`
+          ${theme.typography.button_medium_text};
           padding: 12px 20px;
           width: 119px;
           height: 38px;
-          font-size: ${theme.typography.button_medium_text.size};
-          font-weight: ${theme.typography.button_medium_text.weight};
-          line-height: ${theme.typography.button_medium_text.height};
         `;
       default:
         return css`

@@ -18,6 +18,7 @@ export const theme = {
     grey0: "#0B0D0D",
 
     whiteFixed: "#ffffff",
+    blackFixed: "#000000",
 
     alert1: "#CD2B31",
     alert2: "#FDD8D8",
@@ -44,113 +45,113 @@ export const theme = {
 
   typography: {
     Heading1_700: {
-      size: "4.4rem", //44px
-      weight: "700",
-      height: "5.6rem", //56px
+      "font-size": "4.4rem", //44px
+      "font-weight": "700",
+      "font-height": "5.6rem", //56px
     },
     Heading2_600: {
-      size: "3.6rem", //36px
-      weight: "600",
-      height: "4.5rem", //45px
+      "font-size": "3.6rem", //36px
+      "font-weight": "600",
+      "font-height": "4.5rem", //45px
     },
     Heading3_600: {
-      size: "3.2rem", //32px
-      weight: "600",
-      height: "4rem", //40px
+      "font-size": "3.2rem", //32px
+      "font-weight": "600",
+      "font-height": "4rem", //40px
     },
     Heading3_500: {
-      size: "3.2rem", //32px
-      weight: "500",
-      height: "4rem", //40
+      "font-size": "3.2rem", //32px
+      "font-weight": "500",
+      "font-height": "4rem", //40
     },
     Heading4_600: {
-      size: "2.8rem", //28px
-      weight: "600",
-      height: "3.5rem", //35px
+      "font-size": "2.8rem", //28px
+      "font-weight": "600",
+      "font-height": "3.5rem", //35px
     },
     Heading4_500: {
-      size: "2.8rem", //28px
-      weight: "500",
-      height: "3.5rem", //35px
+      "font-size": "2.8rem", //28px
+      "font-weight": "500",
+      "font-height": "3.5rem", //35px
     },
     Heading5_600: {
-      size: "2.4rem", //24px
-      weight: "600",
-      height: "3rem", //30px
+      "font-size": "2.4rem", //24px
+      "font-weight": "600",
+      "font-height": "3rem", //30px
     },
     Heading5_500: {
-      size: "2.4rem", //24px
-      weight: "500",
-      height: "3rem", //30px
+      "font-size": "2.4rem", //24px
+      "font-weight": "500",
+      "font-height": "3rem", //30px
     },
     Heading6_600: {
-      size: "2rem", //20px
-      weight: "600",
-      height: "2.5rem", //25px
+      "font-size": "2rem", //20px
+      "font-weight": "600",
+      "font-height": "2.5rem", //25px
     },
     Heading6_500: {
-      size: "2rem", //20px
-      weight: "500",
-      height: "2.5rem", //25px
+      "font-size": "2rem", //20px
+      "font-weight": "500",
+      "font-height": "2.5rem", //25px
     },
     Heading7_600: {
-      size: "1.6rem", //16px
-      weight: "600",
-      height: "2rem", //20px
+      "font-size": "1.6rem", //16px
+      "font-weight": "600",
+      "font-height": "2rem", //20px
     },
     Heading7_500: {
-      size: "1.6rem", //16px
-      weight: "500",
-      height: "2rem", //20px
+      "font-size": "1.6rem", //16px
+      "font-weight": "500",
+      "font-height": "2rem", //20px
     },
     body1_400: {
-      size: "1.6rem", //16px
-      weight: "400",
-      height: "2.8rem", //28px
+      "font-size": "1.6rem", //16px
+      "font-weight": "400",
+      "font-height": "2.8rem", //28px
     },
     body1_600: {
-      size: "1.6rem", //16px
-      weight: "600",
-      height: "2.8rem", //28px
+      "font-size": "1.6rem", //16px
+      "font-weight": "600",
+      "font-height": "2.8rem", //28px
     },
     body2_400: {
-      size: "1.4rem", //14px
-      weight: "400",
-      height: "2.4rem", //24px
+      "font-size": "1.4rem", //14px
+      "font-weight": "400",
+      "font-height": "2.4rem", //24px
     },
     body2_500: {
-      size: "1.4rem", //14px
-      weight: "500",
-      height: "2.4rem", //24px
+      "font-size": "1.4rem", //14px
+      "font-weight": "500",
+      "font-height": "2.4rem", //24px
     },
     button_big_text: {
-      size: "1.6rem", //16px
-      weight: "600",
-      height: "0rem", //0px
+      "font-size": "1.6rem", //16px
+      "font-weight": "600",
+      "font-height": "0rem", //0px
     },
     button_medium_text: {
-      size: "1.4rem", //14px
-      weight: "600",
-      height: "0rem", //0px
+      "font-size": "1.4rem", //14px
+      "font-weight": "600",
+      "font-height": "0rem", //0px
     },
     input_placeholder: {
-      size: "1.6rem", //16px
-      weight: "400",
-      height: "0rem", //0px
+      "font-size": "1.6rem", //16px
+      "font-weight": "400",
+      "font-height": "0rem", //0px
     },
     input_label: {
-      size: "1.4rem", //14px
-      weight: "500",
-      height: "1.7rem", //17px
+      "font-size": "1.4rem", //14px
+      "font-weight": "500",
+      "font-height": "1.7rem", //17px
     },
     avatar: {
-      size: "1.4rem", //36px
-      weight: "700",
+      "font-size": "1.4rem", //36px
+      "font-weight": "700",
     },
     avatar_big: {
-      size: "3.6rem", //36px
-      weight: "500",
-      height: "5.3rem", //53px
+      "font-size": "3.6rem", //36px
+      "font-weight": "500",
+      "font-height": "5.3rem", //53px
     },
   },
 };
