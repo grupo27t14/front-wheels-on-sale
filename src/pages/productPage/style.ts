@@ -32,24 +32,46 @@ export const SectionsContainer = styled.div`
   border-radius: .4rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   padding: 4rem;
+  gap: 3.2rem;
+  margin-bottom: 2rem;
 
   img {
-    max-width: 100%;
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
   }
 
-  h6 {
-    align-self: baseline;
-    font-size: ${theme.typography.Heading6_600.size};
-    font-weight: ${theme.typography.Heading6_600.weight};
-    line-height: ${theme.typography.Heading6_600.height};
+  .avatarProfileBig {
+    align-self: center;
+  }
+
+  .heading6 {
+    ${theme.typography.Heading6_600};
+  }
+
+  .heading7 {
+    ${theme.typography.Heading7_500};
+  }
+
+  p {
+    ${theme.typography.body1_400};
+    color: ${theme.colors.grey2};
   }
 
   div {
     width: fit-content;
   }
+
+  .sellerInfos {
+    margin-top: 3.2rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 3.2rem;
+  }
+
 `
 
 export const GalleryGrid = styled.div`
@@ -74,4 +96,32 @@ export const GalleryGrid = styled.div`
       max-width: 100%;
     }
   }
+`
+
+export const CarInfoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  gap: 32px;
+
+  .carInfos {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  
+  }
+
+  h6 {
+    align-self: center;
+  }
+`
+
+export const Tag = styled.span`
+  text-transform: uppercase;
+  ${theme.typography.body2_500};
+  padding: .4rem .8rem;
+  border-radius: .4rem;
+
+  color: ${theme.colors.brand1};
+  background-color: ${theme.colors.brand4};
 `
