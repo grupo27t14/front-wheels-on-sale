@@ -223,7 +223,7 @@ const Aside: React.FC<AsideProps> = ({ onSearch }) => {
   }, [isAllOptionsEmpty]);
 
   return (
-    <StyledNav className="container">
+    <StyledNav>
       <div className="MainNavDiv">
         <div className="asideButtonMobile">
           <div>
