@@ -7,7 +7,6 @@ export const StyledNav = styled.aside`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 80px;
 
   .MainNavDiv {
     height: 95%;
@@ -41,9 +40,8 @@ export const StyledNav = styled.aside`
       margin-bottom: 20px;
 
       h2 {
-        font-size: ${theme.typography.Heading4_600.size};
-        font-weight: ${theme.typography.Heading4_600.weight};
-        line-height: ${theme.typography.Heading4_600.height};
+        ${theme.typography.Heading4_600};
+
         color: ${theme.colors.grey1};
         margin-bottom: 20px;
       }
@@ -54,10 +52,8 @@ export const StyledNav = styled.aside`
 
         li {
           a {
+            ${theme.typography.Heading6_500};
             text-decoration: none;
-            font-size: ${theme.typography.Heading6_500.size};
-            font-weight: ${theme.typography.Heading6_500.weight};
-            line-height: ${theme.typography.Heading6_500.height};
             color: ${theme.colors.grey3};
             padding: 0 2rem;
           }
@@ -65,8 +61,7 @@ export const StyledNav = styled.aside`
       }
 
       @media (max-width: 767px) {
-        /* width: 100%;
-        min-width: auto; */
+
       }
     }
 
@@ -96,10 +91,8 @@ export const StyledNav = styled.aside`
         width: 142px;
       }
       input::placeholder {
+        ${theme.typography.Heading7_600};
         color: ${theme.colors.grey3};
-        font-size:  ${theme.typography.Heading7_600.size};
-        font-weight:  ${theme.typography.Heading7_600.weight};
-        line-height:  ${theme.typography.Heading7_600.height};
       }
     }
   }

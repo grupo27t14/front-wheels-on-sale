@@ -36,9 +36,9 @@ export const StyledButton = styled.button<buttonProps>`
         return css`
           padding: 0px 22px;
           height: 50px;
-          width: 279px;
+          width: 100%;
           border: none;
-          border-radius: 4px;
+          border-radius: 30px;
         `;
     }
   }};

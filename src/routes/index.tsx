@@ -5,6 +5,7 @@ import { Login } from "../pages/Login";
 import { Register } from "../pages/Register";
 import Header from "../components/Header";
 import { GlobalStyleGray } from "../styles/global";
+import { Login2 } from "../pages/loginPage";
 
 export const router = createBrowserRouter([
   {
@@ -20,11 +21,11 @@ export const router = createBrowserRouter([
         element: <div>homepage</div>,
       },
       {
-        path: "/login",
+        path: "/login2",
         element: (
           <>
             <GlobalStyleGray />
-            <Login />
+            <Login2 />
           </>
         ),
       },
