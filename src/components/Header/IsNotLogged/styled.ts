@@ -10,7 +10,7 @@ export const UnorderedList = styled.ul`
   justify-content: center;
   gap: 14px;
   border-left: 2px solid ${theme.colors.grey6};
-  background-color: ${theme.colors.whiteFixed};
+  background-color: ${theme.colors.grey8};
 
   @media (max-width: 768px) {
     width: 200px;
@@ -44,8 +44,8 @@ export const ListItem = styled.li`
 
 export const Link = styled.a`
   cursor: pointer;
-  padding: 12px 0;
   width: 113px;
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -55,14 +55,12 @@ export const Link = styled.a`
   &.header__signUp--login {
     color: ${theme.colors.grey2};
     ${theme.typography.body1_600};
-    line-height: unset;
   }
 
   &.header__signUp--register {
     color: ${theme.colors.grey0};
     ${theme.typography.button_big_text};
     border-color: ${theme.colors.grey6};
-    line-height: unset;
   }
 
   &:hover {
