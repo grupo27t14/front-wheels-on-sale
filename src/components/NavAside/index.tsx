@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyledNav } from "./style";
 import { StyledButton } from "../../styles/button";
-
 
 interface Filtro {
   [key: string]: string;
@@ -24,8 +23,8 @@ interface AsideProps {
 
 const Aside: React.FC<AsideProps> = ({ onSearch }) => {
   const [cards] = useState<Card[]>([
-    {
-      id: "xxxxxxxxxxxx",
+{
+      id: "xxxxx534xxxxxxx",
       name: "Fiat 500",
       brand: "Fiat",
       year: "2022",
@@ -35,7 +34,7 @@ const Aside: React.FC<AsideProps> = ({ onSearch }) => {
       price: "50000",
     },
     {
-      id: "xxxxxxxxxxxx",
+      id: "xxxxx9xxxxxxx",
       name: "Panda",
       brand: "Fiat",
       year: "2022",
@@ -45,7 +44,7 @@ const Aside: React.FC<AsideProps> = ({ onSearch }) => {
       price: "150000",
     },
     {
-      id: "xxxxxxxxxxxx",
+      id: "xxxxxx32xxxxxx",
       name: "Uno",
       brand: "Fiat",
       year: "2023",
@@ -55,7 +54,7 @@ const Aside: React.FC<AsideProps> = ({ onSearch }) => {
       price: "53000",
     },
     {
-      id: "xxxxxxxxxxxx",
+      id: "xxxxxx7xxxxxx",
       name: "Doblô",
       brand: "Fiat",
       year: "2002",
@@ -65,7 +64,7 @@ const Aside: React.FC<AsideProps> = ({ onSearch }) => {
       price: "51000",
     },
     {
-      id: "xxxxxxxxxxxx",
+      id: "xxxx6xxxxxxxx",
       name: "Anglia",
       brand: "Ford",
       year: "2023",
@@ -75,7 +74,7 @@ const Aside: React.FC<AsideProps> = ({ onSearch }) => {
       price: "150000",
     },
     {
-      id: "xxxxxxxxxxxx",
+      id: "x1xxxxxxxxxxx",
       name: "MAVERICK",
       brand: "Ford",
       year: "2002",
@@ -85,7 +84,7 @@ const Aside: React.FC<AsideProps> = ({ onSearch }) => {
       price: "250000",
     },
     {
-      id: "xxxxxxxxxxxx",
+      id: "xxxxxxxxxx2xx",
       name: "F-150",
       brand: "Ford",
       year: "2022",
@@ -95,7 +94,7 @@ const Aside: React.FC<AsideProps> = ({ onSearch }) => {
       price: "150000",
     },
     {
-      id: "xxxxxxxxxxxx",
+      id: "xxxxxx3xxxxxx",
       name: "RANGER",
       brand: "Ford",
       year: "2022",
@@ -103,8 +102,7 @@ const Aside: React.FC<AsideProps> = ({ onSearch }) => {
       fuel: "Gasoline",
       km: "20000",
       price: "250000",
-    },
-  ]);
+    },  ]);
 
   const marcas = [...new Set(cards.map((card) => card.brand))];
   const cores = [...new Set(cards.map((card) => card.color))];
@@ -130,12 +128,12 @@ const Aside: React.FC<AsideProps> = ({ onSearch }) => {
       ...prevFiltro,
       [categoria]: prevFiltro[categoria] === valor ? "" : valor,
     }));
-  
+
     const updatedFiltro = {
       ...filtro,
       [categoria]: filtro[categoria] === valor ? "" : valor,
     };
-  
+
     const cardsFiltrados = cards.filter((card) => {
       const marcaMatch = updatedFiltro.marca
         ? card.brand === updatedFiltro.marca
@@ -158,7 +156,7 @@ const Aside: React.FC<AsideProps> = ({ onSearch }) => {
           ? parseInt(card.price) >= parseInt(updatedFiltro.priceMin) &&
             parseInt(card.price) <= parseInt(updatedFiltro.priceMax)
           : true;
-  
+
       return (
         marcaMatch &&
         modeloMatch &&
@@ -169,11 +167,9 @@ const Aside: React.FC<AsideProps> = ({ onSearch }) => {
         priceMatch
       );
     });
-  
+
     setCardsFiltrados(cardsFiltrados);
   };
-  
-  
 
   const handleCategoriaClick = (categoria: string) => {
     setFiltro((prevFiltro) => ({
@@ -206,17 +202,22 @@ const Aside: React.FC<AsideProps> = ({ onSearch }) => {
     setCardsFiltrados([]);
   };
 
-  const [modelosFiltrados, setModelosFiltrados] = useState<string[]>(() => [
-    ...new Set(cards.map((card) => card.name)),
-  ]);
+  const [modelosFiltrados, setModelosFiltrados] = useState<string[]>([]);
 
-  // Verificar se todas as opções estão desmarcadas
+  useEffect(() => {
+    if (filtro.marca) {
+      const modelosFiltrados = [...new Set(cards.filter((card) => card.brand === filtro.marca).map((card) => card.name))];
+      setModelosFiltrados(modelosFiltrados);
+    } else {
+      setModelosFiltrados([...new Set(cards.map((card) => card.name))]);
+    }
+  }, [filtro.marca, cards]);
+
   const isAllOptionsEmpty = Object.values(filtro).every(
     (value) => value === ""
   );
 
-  // Atualizar os cartões filtrados quando todas as opções estiverem desmarcadas
-  React.useEffect(() => {
+  useEffect(() => {
     if (isAllOptionsEmpty) {
       setCardsFiltrados([]);
     }
@@ -224,16 +225,16 @@ const Aside: React.FC<AsideProps> = ({ onSearch }) => {
 
   return (
     <StyledNav>
-      <div className="MainNavDiv">
+      <div className="mainNavDiv">
         <div className="asideButtonMobile">
           <div>
             <p>Filtro</p>
           </div>
           <div>
-            <span>X</span>
+            <button>X</button>
           </div>
         </div>
-        <div className="NavDiv">
+        <div className="navDiv">
           <h2>MARCA</h2>
           <ul>
             {marcas.map((marca) => (
@@ -355,7 +356,6 @@ const Aside: React.FC<AsideProps> = ({ onSearch }) => {
               }
             />
           </div>
-        </div>
         <StyledButton
           className="buttonClearSearch"
           buttonstyle="brand1"
@@ -363,8 +363,9 @@ const Aside: React.FC<AsideProps> = ({ onSearch }) => {
         >
           Limpar Filtros
         </StyledButton>
+        </div>
       </div>
-      {cardsFiltrados.length > 0 ? (
+      {/* {cardsFiltrados.length > 0 ? (
         cardsFiltrados.map((card) => (
           <div key={card.id}>
             <h3>{card.name}</h3>
@@ -378,10 +379,9 @@ const Aside: React.FC<AsideProps> = ({ onSearch }) => {
         ))
       ) : (
         <p>Nenhum card encontrado.</p>
-      )}
+      )} */}
     </StyledNav>
   );
 };
 
 export { Aside };
-
