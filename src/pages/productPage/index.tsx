@@ -1,4 +1,4 @@
-import { CarInfoContainer, GalleryGrid, PageContainer, ProductPageStyled, SectionsContainer, Tag } from "./style"
+import { CarInfoContainer, CommentTextarea, CommentsList, GalleryGrid, PageContainer, ProductPageStyled, SectionsContainer, Tag } from "./style"
 import Car from "../../../public/EXTERIOR-frontSidePilotNear-1653845164710-removebg-preview 1.png"
 import { Avatar } from "../../styles/global"
 import { theme } from "../../styles/theme"
@@ -53,6 +53,29 @@ const Products = () => {
               <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's</p>
               <StyledButton buttonstyle="grey" buttonsize="fit">Ver todos anúncios</StyledButton>
             </div>           
+          </SectionsContainer>
+        </div>
+        <div>
+          <SectionsContainer>
+            <h6 className="heading6">Comentários</h6>
+            <ul>
+              <CommentsList>
+                <div>
+                  <Avatar className="avatar" $bg={theme.colors.random1}>GL</Avatar>
+                  <p className="commentUsername">Gustavo Lima</p>
+                  <span className="commentTime">•</span>
+                  <p className="commentTime">há 3 dias</p>
+                </div>
+                <p className="">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+              </CommentsList>
+            </ul>
+            <CommentTextarea>
+              <div>
+                <Avatar className="avatar" $bg={theme.colors.random1}>GL</Avatar>
+                <p className="commentUsername">Gustavo Lima</p>
+              </div>
+              <textarea name="" id="" cols={30} rows={10}></textarea>
+            </CommentTextarea>   
           </SectionsContainer>
         </div>
       </PageContainer>

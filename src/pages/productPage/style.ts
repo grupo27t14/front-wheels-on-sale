@@ -125,3 +125,39 @@ export const Tag = styled.span`
   color: ${theme.colors.brand1};
   background-color: ${theme.colors.brand4};
 `
+
+export const CommentsList = styled.li`
+  div {
+    margin-bottom: 1.2rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+
+    .commentUsername {      
+      ${theme.typography.body2_500};
+      color: ${theme.colors.grey1};
+    }
+
+    .commentTime {
+      ${theme.typography.body2_500};
+      color: ${theme.colors.grey3};
+    }
+  }
+
+`
+
+export const CommentTextarea = styled.div`
+  div {
+    margin-bottom: 1.2rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+
+    .commentUsername {      
+      ${theme.typography.body2_500};
+      color: ${theme.colors.grey1};
+    }
+  }
+`
