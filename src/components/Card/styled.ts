@@ -4,11 +4,16 @@ import { theme } from "../../styles/theme";
 export const Section = styled.div`
   max-width: 31.2rem;
   min-width: 31.2rem;
-  max-height: 35rem;
+  max-height: 42rem;
+  min-height: 42rem;
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
-  margin: 10rem;
+
+  @media (max-width: 320px) {
+    max-width: 30.2rem;
+    min-width: 30.2rem;
+  }
 `;
 
 export const Flex = styled.div`
@@ -72,17 +77,14 @@ export const Img = styled.img`
 export const Title = styled.h3`
   color: ${theme.colors.grey1};
   font-family: "Lexend";
-  font-size: ${theme.typography.Heading7_600.size};
-  font-weight: ${theme.typography.Heading7_600.weight};
-  line-height: ${theme.typography.Heading7_600.height};
+  ${theme.typography.Heading7_600};
 `;
 
 export const Text = styled.p`
   &.cardInfo__text {
     color: ${theme.colors.grey2};
-    font-size: ${theme.typography.body2_400.size};
-    font-weight: ${theme.typography.body2_400.weight};
-    line-height: ${theme.typography.body2_400.height};
+    ${theme.typography.body2_400};
+
     display: -webkit-box;
     -webkit-line-clamp: 2;
     overflow: hidden;
@@ -91,15 +93,11 @@ export const Text = styled.p`
 
   &.cardInfo__text--Name {
     color: ${theme.colors.grey1};
-    font-size: ${theme.typography.body2_500.size};
-    font-weight: ${theme.typography.body2_500.weight};
-    line-height: ${theme.typography.body2_500.height};
+    font-size: ${theme.typography.body2_500};
   }
 
   &.cardInfo__price {
     color: ${theme.colors.grey1};
-    font-size: ${theme.typography.Heading7_500.size};
-    font-weight: ${theme.typography.Heading7_500.weight};
-    line-height: ${theme.typography.Heading7_500.height};
+    ${theme.typography.Heading7_500};
   }
 `;
