@@ -28,7 +28,7 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     background: ${theme.colors.whiteFixed};
-    color: ${theme.colors.grey10};
+    color: ${theme.colors.grey1};
     -webkit-font-smoothing: antialiased;
 
     overflow-x: hidden;
