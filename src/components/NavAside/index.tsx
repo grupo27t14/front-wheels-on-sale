@@ -19,11 +19,12 @@ interface Card {
 
 interface AsideProps {
   onSearch: (filtro: Filtro) => void;
+  onClick?: (() => void) | undefined;
 }
 
-const Aside: React.FC<AsideProps> = ({ onSearch }) => {
+const Aside: React.FC<AsideProps> = ({ onSearch, onClick }): JSX.Element => {
   const [cards] = useState<Card[]>([
-{
+    {
       id: "xxxxx534xxxxxxx",
       name: "Fiat 500",
       brand: "Fiat",
@@ -102,7 +103,8 @@ const Aside: React.FC<AsideProps> = ({ onSearch }) => {
       fuel: "Gasoline",
       km: "20000",
       price: "250000",
-    },  ]);
+    },
+  ]);
 
   const marcas = [...new Set(cards.map((card) => card.brand))];
   const cores = [...new Set(cards.map((card) => card.color))];
@@ -141,8 +143,12 @@ const Aside: React.FC<AsideProps> = ({ onSearch }) => {
       const modeloMatch = updatedFiltro.modelo
         ? card.name === updatedFiltro.modelo
         : true;
-      const corMatch = updatedFiltro.cor ? card.color === updatedFiltro.cor : true;
-      const anoMatch = updatedFiltro.ano ? card.year === updatedFiltro.ano : true;
+      const corMatch = updatedFiltro.cor
+        ? card.color === updatedFiltro.cor
+        : true;
+      const anoMatch = updatedFiltro.ano
+        ? card.year === updatedFiltro.ano
+        : true;
       const combustivelMatch = updatedFiltro.combustivel
         ? card.fuel === updatedFiltro.combustivel
         : true;
@@ -206,7 +212,13 @@ const Aside: React.FC<AsideProps> = ({ onSearch }) => {
 
   useEffect(() => {
     if (filtro.marca) {
-      const modelosFiltrados = [...new Set(cards.filter((card) => card.brand === filtro.marca).map((card) => card.name))];
+      const modelosFiltrados = [
+        ...new Set(
+          cards
+            .filter((card) => card.brand === filtro.marca)
+            .map((card) => card.name)
+        ),
+      ];
       setModelosFiltrados(modelosFiltrados);
     } else {
       setModelosFiltrados([...new Set(cards.map((card) => card.name))]);
@@ -225,161 +237,155 @@ const Aside: React.FC<AsideProps> = ({ onSearch }) => {
 
   return (
     <StyledNav>
-      <div className="mainNavDiv">
-        <div className="asideButtonMobile">
-          <div>
-            <p>Filtro</p>
-          </div>
-          <div>
-            <button>X</button>
-          </div>
+      <div className="asideButtonMobile">
+        <div>
+          <p>Filtro</p>
         </div>
-        <div className="navDiv">
-          <h2>MARCA</h2>
-          <ul>
-            {marcas.map((marca) => (
-              <li
-                key={marca}
-                style={{
-                  display:
-                    filtro.marca && filtro.marca !== marca
-                      ? "none"
-                      : "list-item",
-                }}
-                onClick={() => handleOptionSelect("marca", marca)}
-              >
-                <a href="#">{marca}</a>
-              </li>
-            ))}
-          </ul>
-
-          <h2>MODELO</h2>
-          <ul>
-            {modelosFiltrados.map((modelo) => (
-              <li
-                key={modelo}
-                style={{
-                  display:
-                    filtro.modelo && filtro.modelo !== modelo
-                      ? "none"
-                      : "list-item",
-                }}
-                onClick={() => handleOptionSelect("modelo", modelo)}
-              >
-                <a href="#">{modelo}</a>
-              </li>
-            ))}
-          </ul>
-
-          <h2>CORES</h2>
-          <ul>
-            {cores.map((cor) => (
-              <li
-                key={cor}
-                style={{
-                  display:
-                    filtro.cor && filtro.cor !== cor ? "none" : "list-item",
-                }}
-                onClick={() => handleOptionSelect("cor", cor)}
-              >
-                <a href="#">{cor}</a>
-              </li>
-            ))}
-          </ul>
-
-          <h2>ANOS</h2>
-          <ul>
-            {anos.map((ano) => (
-              <li
-                key={ano}
-                style={{
-                  display:
-                    filtro.ano && filtro.ano !== ano ? "none" : "list-item",
-                }}
-                onClick={() => handleOptionSelect("ano", ano)}
-              >
-                <a href="#">{ano}</a>
-              </li>
-            ))}
-          </ul>
-
-          <h2>COMBUSTÍVEIS</h2>
-          <ul>
-            {combustiveis.map((combustivel) => (
-              <li
-                key={combustivel}
-                style={{
-                  display:
-                    filtro.combustivel && filtro.combustivel !== combustivel
-                      ? "none"
-                      : "list-item",
-                }}
-                onClick={() => handleOptionSelect("combustivel", combustivel)}
-              >
-                <a href="#">{combustivel}</a>
-              </li>
-            ))}
-          </ul>
-
-          <h2>KM</h2>
-          <div className="InputDiv">
-            <input
-              type="number"
-              placeholder="Mínimo"
-              value={filtro.kmMin}
-              onChange={(e) => setFiltro({ ...filtro, kmMin: e.target.value })}
-            />
-            <input
-              type="number"
-              placeholder="Máximo"
-              value={filtro.kmMax}
-              onChange={(e) => setFiltro({ ...filtro, kmMax: e.target.value })}
-            />
-          </div>
-
-          <h2>PRICE</h2>
-          <div className="InputDiv">
-            <input
-              type="number"
-              placeholder="Mínimo"
-              value={filtro.priceMin}
-              onChange={(e) =>
-                setFiltro({ ...filtro, priceMin: e.target.value })
-              }
-            />
-            <input
-              type="number"
-              placeholder="Máximo"
-              value={filtro.priceMax}
-              onChange={(e) =>
-                setFiltro({ ...filtro, priceMax: e.target.value })
-              }
-            />
-          </div>
-        <StyledButton
-          className="buttonClearSearch"
-          buttonstyle="brand1"
-          onClick={handleLimparFiltros}
-        >
-          Limpar Filtros
-        </StyledButton>
+        <div>
+          <button onClick={onClick}>X</button>
         </div>
       </div>
+
+      <div className="navDiv">
+        <h2>MARCA</h2>
+        <ul>
+          {marcas.map((marca) => (
+            <li
+              key={marca}
+              style={{
+                display:
+                  filtro.marca && filtro.marca !== marca ? "none" : "list-item",
+              }}
+              onClick={() => handleOptionSelect("marca", marca)}
+            >
+              <a href="#">{marca}</a>
+            </li>
+          ))}
+        </ul>
+
+        <h2>MODELO</h2>
+        <ul>
+          {modelosFiltrados.map((modelo) => (
+            <li
+              key={modelo}
+              style={{
+                display:
+                  filtro.modelo && filtro.modelo !== modelo
+                    ? "none"
+                    : "list-item",
+              }}
+              onClick={() => handleOptionSelect("modelo", modelo)}
+            >
+              <a href="#">{modelo}</a>
+            </li>
+          ))}
+        </ul>
+
+        <h2>CORES</h2>
+        <ul>
+          {cores.map((cor) => (
+            <li
+              key={cor}
+              style={{
+                display:
+                  filtro.cor && filtro.cor !== cor ? "none" : "list-item",
+              }}
+              onClick={() => handleOptionSelect("cor", cor)}
+            >
+              <a href="#">{cor}</a>
+            </li>
+          ))}
+        </ul>
+
+        <h2>ANOS</h2>
+        <ul>
+          {anos.map((ano) => (
+            <li
+              key={ano}
+              style={{
+                display:
+                  filtro.ano && filtro.ano !== ano ? "none" : "list-item",
+              }}
+              onClick={() => handleOptionSelect("ano", ano)}
+            >
+              <a href="#">{ano}</a>
+            </li>
+          ))}
+        </ul>
+
+        <h2>COMBUSTÍVEIS</h2>
+        <ul>
+          {combustiveis.map((combustivel) => (
+            <li
+              key={combustivel}
+              style={{
+                display:
+                  filtro.combustivel && filtro.combustivel !== combustivel
+                    ? "none"
+                    : "list-item",
+              }}
+              onClick={() => handleOptionSelect("combustivel", combustivel)}
+            >
+              <a href="#">{combustivel}</a>
+            </li>
+          ))}
+        </ul>
+
+        <h2>KM</h2>
+        <div className="inputDiv">
+          <input
+            type="number"
+            placeholder="Mínimo"
+            value={filtro.kmMin}
+            onChange={(e) => setFiltro({ ...filtro, kmMin: e.target.value })}
+          />
+          <input
+            type="number"
+            placeholder="Máximo"
+            value={filtro.kmMax}
+            onChange={(e) => setFiltro({ ...filtro, kmMax: e.target.value })}
+          />
+        </div>
+
+        <h2>PRICE</h2>
+        <div className="inputDiv">
+          <input
+            type="number"
+            placeholder="Mínimo"
+            value={filtro.priceMin}
+            onChange={(e) => setFiltro({ ...filtro, priceMin: e.target.value })}
+          />
+          <input
+            type="number"
+            placeholder="Máximo"
+            value={filtro.priceMax}
+            onChange={(e) => setFiltro({ ...filtro, priceMax: e.target.value })}
+          />
+        </div>
+      </div>
+
+      <StyledButton
+        buttonstyle="brand1"
+        className="buttonClearSearch"
+        onClick={handleLimparFiltros}
+      >
+        Limpar Filtros
+      </StyledButton>
       {/* {cardsFiltrados.length > 0 ? (
-        cardsFiltrados.map((card) => (
-          <div key={card.id}>
-            <h3>{card.name}</h3>
-            <p>Marca: {card.brand}</p>
-            <p>Ano: {card.year}</p>
-            <p>Cor: {card.color}</p>
-            <p>Combustível: {card.fuel}</p>
-            <p>KM: {card.km}</p>
-            <p>Price: {card.price}</p>
-          </div>
-        ))
-      ) : (
-        <p>Nenhum card encontrado.</p>
-      )} */}
+cardsFiltrados.map((card) => (
+<div key={card.id}>
+  <h3>{card.name}</h3>
+  <p>Marca: {card.brand}</p>
+  <p>Ano: {card.year}</p>
+  <p>Cor: {card.color}</p>
+  <p>Combustível: {card.fuel}</p>
+  <p>KM: {card.km}</p>
+  <p>Price: {card.price}</p>
+</div>
+))
+) : (
+<p>Nenhum card encontrado.</p>
+)} */}
     </StyledNav>
   );
 };
