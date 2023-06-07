@@ -57,6 +57,10 @@ export const GlobalStyle = createGlobalStyle<iCGS>`
   button {
     cursor: pointer;
   }
+  
+  ul, ol, li {
+    list-style: none;
+  }
 `;
 
 export const StyledContainer = styled.section`
