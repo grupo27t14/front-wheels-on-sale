@@ -4,6 +4,8 @@ import { StyledContainer } from "../../styles/global";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { Box, Header as HeaderContainer, Img, Nav, Button } from "./styled";
 
+import logo from "../../assets/logo.png"
+
 import IsNotLogged from "./IsNotLogged";
 import IstLogged from "./IsLogged";
 import { Outlet } from "react-router";
@@ -25,7 +27,7 @@ const Header = () => {
       <HeaderContainer>
         <StyledContainer className="header container">
           <Box>
-            <Img src="./logo.png" alt="Logo Motors shop" />
+            <Img src={logo} alt="Logo Motors shop" />
           </Box>
           <Nav>
             {!user ? (

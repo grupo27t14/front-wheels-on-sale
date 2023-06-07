@@ -37,6 +37,15 @@ export const router = createBrowserRouter([
           </>
         ),
       },
+      {
+        path: "/product/:id",
+        element: (
+          <>
+            <GlobalStyleGray />
+            <Products />
+          </>
+        ),
+      },
     ],
   },
   {

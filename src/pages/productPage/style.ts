@@ -20,11 +20,21 @@ export const PageContainer = styled.div`
   grid-template-columns: 1fr;
   grid-row-gap: 4.6rem;
 
+  position: relative;
+
   @media (min-width: 950px) {
     grid-template-columns: 2fr 1fr;
     grid-column-gap: 4.6rem;
     grid-row-gap: 0px;
+
+    .containerSticky {
+    position: sticky;
+    top: 20px;
+    right: 0;
   }
+  }
+
+  
 `
 
 export const SectionsContainer = styled.div`
@@ -59,9 +69,9 @@ export const SectionsContainer = styled.div`
     color: ${theme.colors.grey2};
   }
 
-  div {
+  /* div {
     width: fit-content;
-  }
+  } */
 
   .sellerInfos {
     margin-top: 3.2rem;
@@ -148,6 +158,9 @@ export const CommentsList = styled.li`
 `
 
 export const CommentTextarea = styled.div`
+  max-width: 100%;
+  margin-top: 4rem;
+
   div {
     margin-bottom: 1.2rem;
     display: flex;
@@ -159,5 +172,35 @@ export const CommentTextarea = styled.div`
       ${theme.typography.body2_500};
       color: ${theme.colors.grey1};
     }
+  }
+
+  .textContainer {
+    width: 100%;
+    position: relative;
+  }
+
+  textarea {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    resize: none;
+    width: 100%;
+
+    padding: 2rem;
+
+    border-radius: .4rem;
+    border: .2rem solid ${theme.colors.grey7};
+    background-color: ${theme.colors.grey10};
+    outline: none;
+    color: ${theme.colors.grey2};
+    ${theme.typography.Heading7_500}
+
+    font-family: 'Inter', sans-serif;
+  }
+
+  button {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
   }
 `

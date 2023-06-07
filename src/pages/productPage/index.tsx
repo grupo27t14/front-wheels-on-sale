@@ -1,8 +1,8 @@
-import { CarInfoContainer, CommentTextarea, CommentsList, GalleryGrid, PageContainer, ProductPageStyled, SectionsContainer, Tag } from "./style"
-import Car from "../../../public/EXTERIOR-frontSidePilotNear-1653845164710-removebg-preview 1.png"
+import Car from "../../assets/EXTERIOR-frontSidePilotNear-1653845164710-removebg-preview 1.png"
 import { Avatar } from "../../styles/global"
 import { theme } from "../../styles/theme"
 import { StyledButton } from "../../styles/button"
+import { ProductPageStyled, PageContainer, SectionsContainer, CarInfoContainer, Tag, GalleryGrid, CommentsList, CommentTextarea } from "./style"
 
 const Products = () => {
   return (
@@ -32,7 +32,7 @@ const Products = () => {
               <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>           
           </SectionsContainer>
         </div>
-        <div>
+        <aside className="containerSticky">
           <SectionsContainer>
             <div>
               <h6 className="heading6">Fotos</h6>
@@ -54,7 +54,7 @@ const Products = () => {
               <StyledButton buttonstyle="grey" buttonsize="fit">Ver todos anúncios</StyledButton>
             </div>           
           </SectionsContainer>
-        </div>
+        </aside>
         <div>
           <SectionsContainer>
             <h6 className="heading6">Comentários</h6>
@@ -74,7 +74,10 @@ const Products = () => {
                 <Avatar className="avatar" $bg={theme.colors.random1}>GL</Avatar>
                 <p className="commentUsername">Gustavo Lima</p>
               </div>
-              <textarea name="" id="" cols={30} rows={10}></textarea>
+              <form className="textContainer">
+                <textarea name="comment" id="comment" rows={10}></textarea>
+                <StyledButton buttonstyle="brand1" buttonsize="fit">Comentar</StyledButton>
+              </form>
             </CommentTextarea>   
           </SectionsContainer>
         </div>
