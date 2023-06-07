@@ -67,7 +67,7 @@ export const StyledContainer = styled.section`
   &.container {
     width: 100%;
     margin: 0 auto;
-    padding: 0 1rem;
+    padding: 0 1.6rem;
   }
 
   @media (min-width: 475px) {
