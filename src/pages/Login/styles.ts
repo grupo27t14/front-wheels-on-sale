@@ -1,10 +1,8 @@
 import styled from "styled-components";
 import { theme } from "../../styles/theme";
 
-export const LoginStyled = styled.div`
+export const LoginStyled = styled.main`
   width: 100vw;
-  min-height: 100vh;
-  background-color: ${theme.colors.grey8};
   color: ${theme.colors.grey1};
   display: flex;
   justify-content: center;
