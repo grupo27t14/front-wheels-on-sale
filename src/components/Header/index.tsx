@@ -3,10 +3,12 @@ import { useEffect, useState } from "react";
 import { StyledContainer } from "../../styles/global";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { Box, Header as HeaderContainer, Img, Nav, Button } from "./styled";
-
+import logo from "../../../public/logo.png";
 import IsNotLogged from "./IsNotLogged";
 import IstLogged from "./IsLogged";
 import { Outlet } from "react-router";
+import React from "react";
+import Footer from "../Footer";
 
 const Header = () => {
   const [open, setOpen] = useState(false);
@@ -21,11 +23,11 @@ const Header = () => {
   }, [isWide]);
 
   return (
-    <>
-      <HeaderContainer>
+    <React.Fragment>
+      <HeaderContainer id={"home"}>
         <StyledContainer className="header container">
           <Box>
-            <Img src="./logo.png" alt="Logo Motors shop" />
+            <Img src={logo} alt="Logo Motors shop" />
           </Box>
           <Nav>
             {!user ? (
@@ -43,7 +45,8 @@ const Header = () => {
         </StyledContainer>
       </HeaderContainer>
       <Outlet />
-    </>
+      <Footer />
+    </React.Fragment>
   );
 };
 
