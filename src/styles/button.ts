@@ -40,9 +40,9 @@ export const StyledButton = styled.button<buttonProps>`
         return css`
           padding: 0px 22px;
           height: 50px;
-          width: 100%;
+          width: 279px;
           border: none;
-          border-radius: 30px;
+          border-radius: 4px;
         `;
     }
   }};

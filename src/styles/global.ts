@@ -48,7 +48,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 `;
 
-export const styledContainer = styled.section`
+export const StyledContainer = styled.section`
   &.container {
     width: 100%;
     margin: 0 auto;
