@@ -1,5 +1,3 @@
-
-
 import { createGlobalStyle } from "styled-components";
 import styled from "styled-components";
 import { theme } from "./theme";
@@ -59,7 +57,7 @@ export const GlobalStyle = createGlobalStyle<iCGS>`
   button {
     cursor: pointer;
   }
-
+  
   ul, ol, li {
     list-style: none;
   }
@@ -120,7 +118,8 @@ export const Avatar = styled.span<{ $bg?: string }>`
     border-radius: 100%;
     color: ${theme.colors.whiteFixed};
     background-color: ${(props) => props.$bg};
-    ${theme.typography.body2_500};
+    ${theme.typography.body2_500["font-size"]};
+    ${theme.typography.body2_500["font-weight"]};
   }
 
   &.avatarProfile {
@@ -138,6 +137,7 @@ export const Avatar = styled.span<{ $bg?: string }>`
     border-radius: 100%;
     color: ${theme.colors.whiteFixed};
     background-color: ${(props) => props.$bg};
-    ${theme.typography.avatar_big};
+    ${theme.typography.avatar_big["font-size"]};
+    ${theme.typography.avatar_big["font-weight"]};
   }
 `;

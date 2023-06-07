@@ -8,8 +8,4 @@ export const LoginStyled = styled.div`
   color: ${theme.colors.grey1};
 
   display: flex;
-  justify-content: center;
-  form {
-    margin-top: 5rem;
-  }
 `;
