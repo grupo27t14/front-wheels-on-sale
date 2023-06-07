@@ -96,13 +96,7 @@ export const StyledContainer = styled.section`
 
   @media (min-width: 1280px) {
     &.container {
-      max-width: 1280px;
-    }
-  }
-
-  @media (min-width: 1536px) {
-    .container {
-      max-width: 1536px;
+      max-width: 1522px;
     }
   }
 `;
