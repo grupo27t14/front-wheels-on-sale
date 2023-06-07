@@ -2,42 +2,37 @@ import styled from "styled-components";
 import { theme } from "../../styles/theme";
 
 export const StyledNav = styled.aside`
-  position: absolute;
-  height: 95%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 
-  .MainNavDiv {
-    height: 95%;
-    width: 100%;
-
+  .mainNavDiv {
     .asideButtonMobile {
+      /* border: 1px solid green; */
+
       display: flex;
-      border: 1px solid green;
       width: 100%;
       justify-content: space-between;
       align-items: center;
       padding: 5px 10px;
       display: none;
-      
+
       @media (max-width: 767px) {
-        /* Mostrar apenas em dispositivos com largura máxima de 767px */
         display: flex;
-        border: 1px solid green;
         width: 100%;
         justify-content: space-between;
         align-items: center;
         padding: 5px 10px;
       }
     }
+    .navDiv {
+      border: 1px solid green;
 
-    .NavDiv {
-      width: 375px;
-      height: 90%;
+      max-height: calc(100vh - 140px - 80px);
       overflow-y: auto;
-      padding: 1rem;
-      margin-bottom: 20px;
+      padding: 70px 30px;
+
+      @media (max-width: 767px) {
+        width: 100%;
+        max-height: calc(100vh - 140px - 80px - 30px);
+      }
 
       h2 {
         ${theme.typography.Heading4_600};
@@ -47,7 +42,8 @@ export const StyledNav = styled.aside`
       }
 
       ul {
-        border: 1px solid blue;
+        /* border: 1px solid blue; */
+
         margin-bottom: 20px;
 
         li {
@@ -60,40 +56,32 @@ export const StyledNav = styled.aside`
         }
       }
 
-      @media (max-width: 767px) {
+      .InputDiv {
+        /* border: 1px solid red; */
 
+        display: flex;
+        gap: 20px;
+        margin-bottom: 20px;
+        height: 37px;
+        justify-content: center;
+
+        input {
+          border: 1px solid ${theme.colors.grey5};
+          background-color: ${theme.colors.grey5};
+          color: ${theme.colors.grey3};
+          text-align: center;
+          width: 142px;
+        }
+        input::placeholder {
+          ${theme.typography.Heading7_600};
+          color: ${theme.colors.grey3};
+        }
       }
     }
-
     .buttonClearSearch {
-      margin: 0 auto;
-    }
-
-    .asideButton {
-      display: flex;
-      padding: 32px 0;
-      justify-content: center;
-    }
-
-    .InputDiv {
-      display: flex;
-      gap: 20px;
-      margin-bottom: 20px;
-      height: 37px;
-      border: 1px solid red;
-      justify-content: center;
-
-      input {
-        border: 1px solid ${theme.colors.grey5};
-        background-color: ${theme.colors.grey5};
-        color: ${theme.colors.grey3};
-        text-align: center;
-        width: 142px;
-      }
-      input::placeholder {
-        ${theme.typography.Heading7_600};
-        color: ${theme.colors.grey3};
-      }
+      margin: 70px auto 0;
+      border-radius: 3%;
+      width: 279px;
     }
   }
 `;
