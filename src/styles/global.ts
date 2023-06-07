@@ -3,7 +3,17 @@ import { createGlobalStyle } from "styled-components";
 import styled from "styled-components";
 import { theme } from "./theme";
 
-export const GlobalStyle = createGlobalStyle`
+interface iCGS {
+  bodyBackground?: string;
+}
+
+export const GlobalStyleGray = createGlobalStyle<iCGS>`
+ body {
+    background: ${theme.colors.grey8};
+  }
+`;
+
+export const GlobalStyle = createGlobalStyle<iCGS>`
 :root {
   font-family: 'Inter';
   font-size: 60%;
@@ -28,7 +38,8 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background: ${theme.colors.whiteFixed};
+    background: ${(props) =>
+      props.bodyBackground ? "white" : props.bodyBackground};
     color: ${theme.colors.grey1};
     -webkit-font-smoothing: antialiased;
 

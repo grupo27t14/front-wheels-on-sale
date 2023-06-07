@@ -1,10 +1,8 @@
 import styled from "styled-components";
 import { theme } from "../../styles/theme";
 
-export const RegisterStyled = styled.div`
+export const RegisterStyled = styled.main`
   width: 100vw;
-  min-height: 100vh;
-  background-color: ${theme.colors.grey8};
   color: ${theme.colors.grey1};
   display: flex;
   justify-content: center;

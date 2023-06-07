@@ -6,6 +6,7 @@ import { Box, Header as HeaderContainer, Img, Nav, Button } from "./styled";
 
 import IsNotLogged from "./IsNotLogged";
 import IstLogged from "./IsLogged";
+import { Outlet } from "react-router";
 
 const Header = () => {
   const [open, setOpen] = useState(false);
@@ -20,26 +21,29 @@ const Header = () => {
   }, [isWide]);
 
   return (
-    <HeaderContainer>
-      <StyledContainer className="header container">
-        <Box>
-          <Img src="./logo.png" alt="Logo Motors shop" />
-        </Box>
-        <Nav>
-          {!user ? (
-            <IsNotLogged open={open} />
-          ) : (
-            <IstLogged open={open} onClick={() => setOpen(!open)} />
-          )}
+    <>
+      <HeaderContainer>
+        <StyledContainer className="header container">
+          <Box>
+            <Img src="./logo.png" alt="Logo Motors shop" />
+          </Box>
+          <Nav>
+            {!user ? (
+              <IsNotLogged open={open} />
+            ) : (
+              <IstLogged open={open} onClick={() => setOpen(!open)} />
+            )}
 
-          {isWide && (
-            <Button onClick={() => setOpen(!open)}>
-              {open ? <AiOutlineClose /> : <AiOutlineMenu />}
-            </Button>
-          )}
-        </Nav>
-      </StyledContainer>
-    </HeaderContainer>
+            {isWide && (
+              <Button onClick={() => setOpen(!open)}>
+                {open ? <AiOutlineClose /> : <AiOutlineMenu />}
+              </Button>
+            )}
+          </Nav>
+        </StyledContainer>
+      </HeaderContainer>
+      <Outlet />
+    </>
   );
 };
 
