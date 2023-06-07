@@ -16,6 +16,15 @@ export const Footer = styled.footer`
 
   & .footer__Button {
   }
+
+  @media (max-width: 768px) {
+    height: 310px;
+
+    & .footer {
+      flex-direction: column;
+      gap: 60px;
+    }
+  }
 `;
 
 export const Box = styled.div``;
