@@ -2,7 +2,17 @@ import { createGlobalStyle } from "styled-components";
 import styled from "styled-components";
 import { theme } from "./theme";
 
-export const GlobalStyle = createGlobalStyle`
+interface iCGS {
+  bodyBackground?: string;
+}
+
+export const GlobalStyleGray = createGlobalStyle<iCGS>`
+ body {
+    background: ${theme.colors.grey8};
+  }
+`;
+
+export const GlobalStyle = createGlobalStyle<iCGS>`
 :root {
   font-family: 'Inter';
   font-size: 60%;
@@ -27,8 +37,9 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background: ${theme.colors.whiteFixed};
-    color: ${theme.colors.grey10};
+    background: ${(props) =>
+      props.bodyBackground ? "white" : props.bodyBackground};
+    color: ${theme.colors.grey1};
     -webkit-font-smoothing: antialiased;
 
     overflow-x: hidden;
@@ -39,7 +50,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   h1, h2, h3, h4, h5, h6, strong{
-    font-family: "Lexend";
+    font-family: "Lexend" sans-serif;
     font-weight: 500;
   }
 
@@ -103,8 +114,8 @@ export const Avatar = styled.span<{ $bg?: string }>`
     border-radius: 100%;
     color: ${theme.colors.whiteFixed};
     background-color: ${(props) => props.$bg};
-    font-size: ${theme.typography.body2_500.size};
-    font-weight: ${theme.typography.body2_500.weight};
+    ${theme.typography.body2_500["font-size"]};
+    ${theme.typography.body2_500["font-weight"]};
   }
 
   &.avatarProfile {
@@ -113,8 +124,7 @@ export const Avatar = styled.span<{ $bg?: string }>`
     border-radius: 100%;
     color: ${theme.colors.whiteFixed};
     background-color: ${(props) => props.$bg};
-    font-size: ${theme.typography.avatar.size};
-    font-weight: ${theme.typography.avatar.weight};
+    ${theme.typography.avatar};
   }
 
   &.avatarProfileBig {
@@ -123,7 +133,7 @@ export const Avatar = styled.span<{ $bg?: string }>`
     border-radius: 100%;
     color: ${theme.colors.whiteFixed};
     background-color: ${(props) => props.$bg};
-    font-size: ${theme.typography.avatar_big.size};
-    font-weight: ${theme.typography.avatar_big.weight};
+    ${theme.typography.avatar_big["font-size"]};
+    ${theme.typography.avatar_big["font-weight"]};
   }
 `;
