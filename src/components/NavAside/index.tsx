@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { StyledNav } from "./style";
 import { StyledButton } from "../../styles/button";
+import { useNavigate } from "react-router-dom";
 
 interface Filtro {
   [key: string]: string;
@@ -22,7 +23,7 @@ interface AsideProps {
   onClick?: (() => void) | undefined;
 }
 
-const Aside: React.FC<AsideProps> = ({ onSearch, onClick }): JSX.Element => {
+const Aside: React.FC<AsideProps> = ({ onClick }): JSX.Element => {
   const [cards] = useState<Card[]>([
     {
       id: "xxxxx534xxxxxxx",
@@ -90,7 +91,7 @@ const Aside: React.FC<AsideProps> = ({ onSearch, onClick }): JSX.Element => {
       brand: "Ford",
       year: "2022",
       color: "Red",
-      fuel: "Etanol",
+      fuel: "Etyearl",
       km: "20000",
       price: "150000",
     },
@@ -106,25 +107,31 @@ const Aside: React.FC<AsideProps> = ({ onSearch, onClick }): JSX.Element => {
     },
   ]);
 
-  const marcas = [...new Set(cards.map((card) => card.brand))];
-  const cores = [...new Set(cards.map((card) => card.color))];
-  const anos = [...new Set(cards.map((card) => card.year))];
-  const combustiveis = [...new Set(cards.map((card) => card.fuel))];
+  // Obtendo opções únicas para cada filtro
+  const brands = [...new Set(cards.map((card) => card.brand))];
+  const colors = [...new Set(cards.map((card) => card.color))];
+  const years = [...new Set(cards.map((card) => card.year))];
+  const fuels = [...new Set(cards.map((card) => card.fuel))];
 
+  // Estado do filtro selecionado
   const [filtro, setFiltro] = useState<Filtro>({
-    marca: "",
-    modelo: "",
-    cor: "",
-    ano: "",
-    combustivel: "",
+    brand: "",
+    model: "",
+    color: "",
+    year: "",
+    fuel: "",
     kmMin: "",
     kmMax: "",
     priceMin: "",
     priceMax: "",
   });
 
+  // Estado dos cartões filtrados
   const [cardsFiltrados, setCardsFiltrados] = useState<Card[]>([]);
-
+  const navigate = useNavigate();
+  
+  // Manipulador para selecionar uma opção de filtro
+  // e criar os parâmetros de consulta para a URL
   const handleOptionSelect = (categoria: string, valor: string) => {
     setFiltro((prevFiltro) => ({
       ...prevFiltro,
@@ -136,39 +143,62 @@ const Aside: React.FC<AsideProps> = ({ onSearch, onClick }): JSX.Element => {
       [categoria]: filtro[categoria] === valor ? "" : valor,
     };
 
+    const queryParams = new URLSearchParams();
+
+  // Adicionar os filtros selecionados como parâmetros de consulta
+  Object.entries(updatedFiltro).forEach(([key, value]) => {
+    if (value) {
+      queryParams.append(key, value);
+    }
+  });
+
+  // Atualizar a URL com os parâmetros de consulta
+  const queryString = queryParams.toString();
+  navigate(`?${queryString}`);
+
+// Filtrar os cartões com base nos filtros selecionados
     const cardsFiltrados = cards.filter((card) => {
-      const marcaMatch = updatedFiltro.marca
-        ? card.brand === updatedFiltro.marca
+      const brandMatch = updatedFiltro.brand
+        ? card.brand === updatedFiltro.brand
         : true;
-      const modeloMatch = updatedFiltro.modelo
-        ? card.name === updatedFiltro.modelo
+      const modelMatch = updatedFiltro.model
+        ? card.name === updatedFiltro.model
         : true;
-      const corMatch = updatedFiltro.cor
-        ? card.color === updatedFiltro.cor
+      const colorMatch = updatedFiltro.color
+        ? card.color === updatedFiltro.color
         : true;
-      const anoMatch = updatedFiltro.ano
-        ? card.year === updatedFiltro.ano
+      const yearMatch = updatedFiltro.year
+        ? card.year === updatedFiltro.year
         : true;
-      const combustivelMatch = updatedFiltro.combustivel
-        ? card.fuel === updatedFiltro.combustivel
+      const fuelMatch = updatedFiltro.fuel
+        ? card.fuel === updatedFiltro.fuel
         : true;
       const kmMatch =
-        updatedFiltro.kmMin !== "" && updatedFiltro.kmMax !== ""
-          ? parseInt(card.km) >= parseInt(updatedFiltro.kmMin) &&
-            parseInt(card.km) <= parseInt(updatedFiltro.kmMax)
+        updatedFiltro.kmMin !== "" || updatedFiltro.kmMax !== ""
+          ? parseInt(card.km) >= parseInt(updatedFiltro.kmMin || "0") &&
+            parseInt(card.km) <=
+              (updatedFiltro.kmMax !== ""
+                ? parseInt(updatedFiltro.kmMax)
+                : Infinity)
           : true;
       const priceMatch =
-        updatedFiltro.priceMin !== "" && updatedFiltro.priceMax !== ""
-          ? parseInt(card.price) >= parseInt(updatedFiltro.priceMin) &&
-            parseInt(card.price) <= parseInt(updatedFiltro.priceMax)
+        updatedFiltro.priceMin !== "" || updatedFiltro.priceMax !== ""
+          ? parseInt(card.price) >=
+              (updatedFiltro.priceMin !== ""
+                ? parseInt(updatedFiltro.priceMin)
+                : 0) &&
+            parseInt(card.price) <=
+              (updatedFiltro.priceMax !== ""
+                ? parseInt(updatedFiltro.priceMax)
+                : Infinity)
           : true;
 
       return (
-        marcaMatch &&
-        modeloMatch &&
-        corMatch &&
-        anoMatch &&
-        combustivelMatch &&
+        brandMatch &&
+        modelMatch &&
+        colorMatch &&
+        yearMatch &&
+        fuelMatch &&
         kmMatch &&
         priceMatch
       );
@@ -177,28 +207,15 @@ const Aside: React.FC<AsideProps> = ({ onSearch, onClick }): JSX.Element => {
     setCardsFiltrados(cardsFiltrados);
   };
 
-  const handleCategoriaClick = (categoria: string) => {
-    setFiltro((prevFiltro) => ({
-      ...prevFiltro,
-      [categoria]: "",
-    }));
-
-    if (categoria === "marca") {
-      setModelosFiltrados([...new Set(cards.map((card) => card.name))]);
-    }
-  };
-
-  const handleSearch = () => {
-    onSearch(filtro);
-  };
-
+  // Limpar todos os filtros selecionados e redefinir os cards filtrados
+  // Limpar também os parâmetros de consulta da URL
   const handleLimparFiltros = () => {
     setFiltro({
-      marca: "",
-      modelo: "",
-      cor: "",
-      ano: "",
-      combustivel: "",
+      brand: "",
+      model: "",
+      color: "",
+      year: "",
+      fuel: "",
       kmMin: "",
       kmMax: "",
       priceMin: "",
@@ -206,24 +223,26 @@ const Aside: React.FC<AsideProps> = ({ onSearch, onClick }): JSX.Element => {
     });
 
     setCardsFiltrados([]);
+    navigate(""); // Limpa o query da URL
   };
 
-  const [modelosFiltrados, setModelosFiltrados] = useState<string[]>([]);
+  const [modelsFiltrados, setmodelsFiltrados] = useState<string[]>([]);
 
+  // Limpar os cards filtrados quando todos os filtros são limpos
   useEffect(() => {
-    if (filtro.marca) {
-      const modelosFiltrados = [
+    if (filtro.brand) {
+      const modelsFiltrados = [
         ...new Set(
           cards
-            .filter((card) => card.brand === filtro.marca)
+            .filter((card) => card.brand === filtro.brand)
             .map((card) => card.name)
         ),
       ];
-      setModelosFiltrados(modelosFiltrados);
+      setmodelsFiltrados(modelsFiltrados);
     } else {
-      setModelosFiltrados([...new Set(cards.map((card) => card.name))]);
+      setmodelsFiltrados([...new Set(cards.map((card) => card.name))]);
     }
-  }, [filtro.marca, cards]);
+  }, [filtro.brand, cards]);
 
   const isAllOptionsEmpty = Object.values(filtro).every(
     (value) => value === ""
@@ -247,86 +266,86 @@ const Aside: React.FC<AsideProps> = ({ onSearch, onClick }): JSX.Element => {
       </div>
 
       <div className="navDiv">
-        <h2>MARCA</h2>
+        <h2>brand</h2>
         <ul>
-          {marcas.map((marca) => (
+          {brands.map((brand) => (
             <li
-              key={marca}
+              key={brand}
               style={{
                 display:
-                  filtro.marca && filtro.marca !== marca ? "none" : "list-item",
+                  filtro.brand && filtro.brand !== brand ? "none" : "list-item",
               }}
-              onClick={() => handleOptionSelect("marca", marca)}
+              onClick={() => handleOptionSelect("brand", brand)}
             >
-              <a href="#">{marca}</a>
+              <a href="#" onClick={(e) => e.preventDefault()}>{brand}</a>
             </li>
           ))}
         </ul>
 
-        <h2>MODELO</h2>
+        <h2>model</h2>
         <ul>
-          {modelosFiltrados.map((modelo) => (
+          {modelsFiltrados.map((model) => (
             <li
-              key={modelo}
+              key={model}
               style={{
                 display:
-                  filtro.modelo && filtro.modelo !== modelo
+                  filtro.model && filtro.model !== model
                     ? "none"
                     : "list-item",
               }}
-              onClick={() => handleOptionSelect("modelo", modelo)}
+              onClick={() => handleOptionSelect("model", model)}
             >
-              <a href="#">{modelo}</a>
+              <a href="#" onClick={(e) => e.preventDefault()}>{model}</a>
             </li>
           ))}
         </ul>
 
-        <h2>CORES</h2>
+        <h2>colorS</h2>
         <ul>
-          {cores.map((cor) => (
+          {colors.map((color) => (
             <li
-              key={cor}
+              key={color}
               style={{
                 display:
-                  filtro.cor && filtro.cor !== cor ? "none" : "list-item",
+                  filtro.color && filtro.color !== color ? "none" : "list-item",
               }}
-              onClick={() => handleOptionSelect("cor", cor)}
+              onClick={() => handleOptionSelect("color", color)}
             >
-              <a href="#">{cor}</a>
+              <a href="#" onClick={(e) => e.preventDefault()}>{color}</a>
             </li>
           ))}
         </ul>
 
-        <h2>ANOS</h2>
+        <h2>yearS</h2>
         <ul>
-          {anos.map((ano) => (
+          {years.map((year) => (
             <li
-              key={ano}
+              key={year}
               style={{
                 display:
-                  filtro.ano && filtro.ano !== ano ? "none" : "list-item",
+                  filtro.year && filtro.year !== year ? "none" : "list-item",
               }}
-              onClick={() => handleOptionSelect("ano", ano)}
+              onClick={() => handleOptionSelect("year", year)}
             >
-              <a href="#">{ano}</a>
+              <a href="#" onClick={(e) => e.preventDefault()}>{year}</a>
             </li>
           ))}
         </ul>
 
         <h2>COMBUSTÍVEIS</h2>
         <ul>
-          {combustiveis.map((combustivel) => (
+          {fuels.map((fuel) => (
             <li
-              key={combustivel}
+              key={fuel}
               style={{
                 display:
-                  filtro.combustivel && filtro.combustivel !== combustivel
+                  filtro.fuel && filtro.fuel !== fuel
                     ? "none"
                     : "list-item",
               }}
-              onClick={() => handleOptionSelect("combustivel", combustivel)}
+              onClick={() => handleOptionSelect("fuel", fuel)}
             >
-              <a href="#">{combustivel}</a>
+              <a href="#" onClick={(e) => e.preventDefault()}>{fuel}</a>
             </li>
           ))}
         </ul>
@@ -336,14 +355,14 @@ const Aside: React.FC<AsideProps> = ({ onSearch, onClick }): JSX.Element => {
           <input
             type="number"
             placeholder="Mínimo"
-            value={filtro.kmMin}
-            onChange={(e) => setFiltro({ ...filtro, kmMin: e.target.value })}
+            value={filtro.kmMin === "0" ? "Mínimo" : filtro.kmMin}
+            onChange={(e) => handleOptionSelect("kmMin", e.target.value)}
           />
           <input
             type="number"
             placeholder="Máximo"
             value={filtro.kmMax}
-            onChange={(e) => setFiltro({ ...filtro, kmMax: e.target.value })}
+            onChange={(e) => handleOptionSelect("kmMax", e.target.value)}
           />
         </div>
 
@@ -353,13 +372,15 @@ const Aside: React.FC<AsideProps> = ({ onSearch, onClick }): JSX.Element => {
             type="number"
             placeholder="Mínimo"
             value={filtro.priceMin}
-            onChange={(e) => setFiltro({ ...filtro, priceMin: e.target.value })}
+            onChange={(e) => {
+              handleOptionSelect("priceMin", e.target.value);
+            }}
           />
           <input
             type="number"
             placeholder="Máximo"
             value={filtro.priceMax}
-            onChange={(e) => setFiltro({ ...filtro, priceMax: e.target.value })}
+            onChange={(e) => handleOptionSelect("priceMax", e.target.value)}
           />
         </div>
       </div>
@@ -371,23 +392,25 @@ const Aside: React.FC<AsideProps> = ({ onSearch, onClick }): JSX.Element => {
       >
         Limpar Filtros
       </StyledButton>
-      {/* {cardsFiltrados.length > 0 ? (
-cardsFiltrados.map((card) => (
-<div key={card.id}>
-  <h3>{card.name}</h3>
-  <p>Marca: {card.brand}</p>
-  <p>Ano: {card.year}</p>
-  <p>Cor: {card.color}</p>
-  <p>Combustível: {card.fuel}</p>
-  <p>KM: {card.km}</p>
-  <p>Price: {card.price}</p>
-</div>
-))
-) : (
-<p>Nenhum card encontrado.</p>
-)} */}
+
+      {cardsFiltrados.length > 0 ? (
+        cardsFiltrados.map((card) => (
+          <div key={card.id}>
+            <h3>{card.name}</h3>
+            <p>brand: {card.brand}</p>
+            <p>year: {card.year}</p>
+            <p>color: {card.color}</p>
+            <p>Combustível: {card.fuel}</p>
+            <p>KM: {card.km}</p>
+            <p>Price: {card.price}</p>
+          </div>
+        ))
+      ) : (
+        <p>Nenhum card encontrado.</p>
+      )}
     </StyledNav>
   );
 };
 
 export { Aside };
+
