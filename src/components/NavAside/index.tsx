@@ -107,13 +107,11 @@ const Aside: React.FC<AsideProps> = ({ onClick }): JSX.Element => {
     },
   ]);
 
-  // Obtendo opções únicas para cada filtro
   const brands = [...new Set(cards.map((card) => card.brand))];
   const colors = [...new Set(cards.map((card) => card.color))];
   const years = [...new Set(cards.map((card) => card.year))];
   const fuels = [...new Set(cards.map((card) => card.fuel))];
 
-  // Estado do filtro selecionado
   const [filtro, setFiltro] = useState<Filtro>({
     brand: "",
     model: "",
@@ -126,12 +124,9 @@ const Aside: React.FC<AsideProps> = ({ onClick }): JSX.Element => {
     priceMax: "",
   });
 
-  // Estado dos cartões filtrados
   const [cardsFiltrados, setCardsFiltrados] = useState<Card[]>([]);
   const navigate = useNavigate();
   
-  // Manipulador para selecionar uma opção de filtro
-  // e criar os parâmetros de consulta para a URL
   const handleOptionSelect = (categoria: string, valor: string) => {
     setFiltro((prevFiltro) => ({
       ...prevFiltro,
@@ -145,18 +140,15 @@ const Aside: React.FC<AsideProps> = ({ onClick }): JSX.Element => {
 
     const queryParams = new URLSearchParams();
 
-  // Adicionar os filtros selecionados como parâmetros de consulta
   Object.entries(updatedFiltro).forEach(([key, value]) => {
     if (value) {
       queryParams.append(key, value);
     }
   });
 
-  // Atualizar a URL com os parâmetros de consulta
   const queryString = queryParams.toString();
   navigate(`?${queryString}`);
 
-// Filtrar os cartões com base nos filtros selecionados
     const cardsFiltrados = cards.filter((card) => {
       const brandMatch = updatedFiltro.brand
         ? card.brand === updatedFiltro.brand
@@ -207,8 +199,6 @@ const Aside: React.FC<AsideProps> = ({ onClick }): JSX.Element => {
     setCardsFiltrados(cardsFiltrados);
   };
 
-  // Limpar todos os filtros selecionados e redefinir os cards filtrados
-  // Limpar também os parâmetros de consulta da URL
   const handleLimparFiltros = () => {
     setFiltro({
       brand: "",
@@ -223,12 +213,11 @@ const Aside: React.FC<AsideProps> = ({ onClick }): JSX.Element => {
     });
 
     setCardsFiltrados([]);
-    navigate(""); // Limpa o query da URL
+    navigate(""); 
   };
 
   const [modelsFiltrados, setmodelsFiltrados] = useState<string[]>([]);
 
-  // Limpar os cards filtrados quando todos os filtros são limpos
   useEffect(() => {
     if (filtro.brand) {
       const modelsFiltrados = [
@@ -266,7 +255,7 @@ const Aside: React.FC<AsideProps> = ({ onClick }): JSX.Element => {
       </div>
 
       <div className="navDiv">
-        <h2>brand</h2>
+        <h2>Marca</h2>
         <ul>
           {brands.map((brand) => (
             <li
@@ -282,7 +271,7 @@ const Aside: React.FC<AsideProps> = ({ onClick }): JSX.Element => {
           ))}
         </ul>
 
-        <h2>model</h2>
+        <h2>Modelo</h2>
         <ul>
           {modelsFiltrados.map((model) => (
             <li
@@ -300,7 +289,7 @@ const Aside: React.FC<AsideProps> = ({ onClick }): JSX.Element => {
           ))}
         </ul>
 
-        <h2>colorS</h2>
+        <h2>Cor</h2>
         <ul>
           {colors.map((color) => (
             <li
@@ -316,7 +305,7 @@ const Aside: React.FC<AsideProps> = ({ onClick }): JSX.Element => {
           ))}
         </ul>
 
-        <h2>yearS</h2>
+        <h2>Ano</h2>
         <ul>
           {years.map((year) => (
             <li
@@ -332,7 +321,7 @@ const Aside: React.FC<AsideProps> = ({ onClick }): JSX.Element => {
           ))}
         </ul>
 
-        <h2>COMBUSTÍVEIS</h2>
+        <h2>Combustível</h2>
         <ul>
           {fuels.map((fuel) => (
             <li
@@ -350,7 +339,7 @@ const Aside: React.FC<AsideProps> = ({ onClick }): JSX.Element => {
           ))}
         </ul>
 
-        <h2>KM</h2>
+        <h2>Km</h2>
         <div className="inputDiv">
           <input
             type="number"
@@ -366,7 +355,7 @@ const Aside: React.FC<AsideProps> = ({ onClick }): JSX.Element => {
           />
         </div>
 
-        <h2>PRICE</h2>
+        <h2>Preço</h2>
         <div className="inputDiv">
           <input
             type="number"
@@ -393,7 +382,7 @@ const Aside: React.FC<AsideProps> = ({ onClick }): JSX.Element => {
         Limpar Filtros
       </StyledButton>
 
-      {cardsFiltrados.length > 0 ? (
+      {/* {cardsFiltrados.length > 0 ? (
         cardsFiltrados.map((card) => (
           <div key={card.id}>
             <h3>{card.name}</h3>
@@ -407,7 +396,7 @@ const Aside: React.FC<AsideProps> = ({ onClick }): JSX.Element => {
         ))
       ) : (
         <p>Nenhum card encontrado.</p>
-      )}
+      )} */}
     </StyledNav>
   );
 };
