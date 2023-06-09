@@ -4,13 +4,22 @@ import { Input } from "../../components/Input";
 import { StyledButton } from "../../styles/button";
 import { ErrorMessage } from "../../components/Form/styles";
 import { useCep } from "./useCep";
+import { useUsers } from "../../hooks/useUser";
+import { registerSchemaRequest, tRegister } from "./schemas";
 
 export const Register = () => {
-  const { errors, handleRegister, handleSubmit, register } = useCep();
+  const { errors, handleSubmit, register } = useCep();
+
+  const { userRegister } = useUsers()
+
+  const handleRegisterSubmit = (data: tRegister) => {
+    const parsedData = registerSchemaRequest.parse(data)
+    userRegister(parsedData)
+  }
 
   return (
     <RegisterStyled>
-      <Form title="Registro" onSubmit={handleSubmit(handleRegister)}>
+      <Form title="Registro" onSubmit={handleSubmit(handleRegisterSubmit)}>
         <h4>Informações pessoais</h4>
         <Input
           id="name"
