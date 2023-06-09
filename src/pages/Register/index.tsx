@@ -2,48 +2,11 @@ import { RegisterStyled } from "./styles";
 import { Form } from "../../components/Form";
 import { Input } from "../../components/Input";
 import { StyledButton } from "../../styles/button";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 import { ErrorMessage } from "../../components/Form/styles";
-import { registerSchema, tRegister } from "./schemas";
+import { useCep } from "./useCep";
 
 export const Register = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<tRegister>({
-    resolver: zodResolver(registerSchema),
-  });
-
-  const handleRegister = (data: tRegister) => {
-    const user = {
-      name: data.name,
-      email: data.email,
-      password: data.password,
-      is_seller: Boolean(Number(data.is_seller)),
-    };
-    const pi = {
-      cpf: data.cpf,
-      phone: data.phone,
-      birth_date: data.birth_date,
-      description: data.description,
-    };
-    const ai = {
-      cep: data.cpf,
-      state: data.state,
-      city: data.city,
-      street: data.street,
-      number: data.number,
-      complement: data.complement,
-    };
-    const regData = {
-      ...user,
-      personalInformation: pi,
-      addressInformation: ai,
-    };
-    console.log(regData);
-  };
+  const { errors, handleRegister, handleSubmit, register } = useCep();
 
   return (
     <RegisterStyled>
@@ -72,37 +35,45 @@ export const Register = () => {
           label="CPF"
           placeholder="000.000.000-00"
           type="text"
-          className={errors.cpf ? "err" : ""}
-          {...register("cpf")}
+          className={errors.personalInformation?.cpf ? "err" : ""}
+          {...register("personalInformation.cpf")}
         />
-        {errors.cpf && <ErrorMessage>{errors.cpf.message}</ErrorMessage>}
+        {errors.personalInformation?.cpf && (
+          <ErrorMessage>{errors.personalInformation.cpf.message}</ErrorMessage>
+        )}
         <Input
           id="phone"
           label="Celular"
           placeholder="(DDD) 90000-0000"
           type="text"
-          className={errors.phone ? "err" : ""}
-          {...register("phone")}
+          className={errors.personalInformation?.phone ? "err" : ""}
+          {...register("personalInformation.phone")}
         />
-        {errors.phone && <ErrorMessage>{errors.phone.message}</ErrorMessage>}
+        {errors.personalInformation?.phone && (
+          <ErrorMessage>
+            {errors.personalInformation.phone.message}
+          </ErrorMessage>
+        )}
         <Input
           id="birth_date"
           label="Data de nascimento"
           placeholder="00/00/00"
           type="date"
           pattern="\d{4}-\d{2}-\d{2}"
-          className={errors.birth_date ? "err" : ""}
-          {...register("birth_date")}
+          className={errors.personalInformation?.birth_date ? "err" : ""}
+          {...register("personalInformation.birth_date")}
         />
-        {errors.birth_date && (
-          <ErrorMessage>{errors.birth_date.message}</ErrorMessage>
+        {errors.personalInformation?.birth_date && (
+          <ErrorMessage>
+            {errors.personalInformation?.birth_date.message}
+          </ErrorMessage>
         )}
         <label htmlFor="description">Descrição</label>
         <textarea
           id="description"
           placeholder="Digitar descrição"
-          className={errors.description ? "err" : ""}
-          {...register("description")}
+          className={errors.personalInformation?.description ? "err" : ""}
+          {...register("personalInformation.description")}
         />
         <h4>Informações de endereço</h4>
         <Input
@@ -110,26 +81,29 @@ export const Register = () => {
           label="CEP"
           placeholder="000000.000"
           type="text"
-          className={errors.cep ? "err" : ""}
-          {...register("cep")}
+          maxLength={9}
+          className={errors.addressInformation?.cep ? "err" : ""}
+          {...register("addressInformation.cep")}
         />
-        {errors.cep && <ErrorMessage>{errors.cep.message}</ErrorMessage>}
+        {errors.addressInformation?.cep && (
+          <ErrorMessage>{errors.addressInformation?.message}</ErrorMessage>
+        )}
         <div>
           <Input
             id="state"
             label="Estado"
             placeholder="Digitar Estado"
             type="text"
-            className={errors.state ? "err" : ""}
-            {...register("state")}
+            className={errors.addressInformation?.state ? "err" : ""}
+            {...register("addressInformation.state")}
           />
           <Input
             id="city"
             label="Cidade"
             placeholder="Digitar cidade"
             type="text"
-            className={errors.city ? "err" : ""}
-            {...register("city")}
+            className={errors.addressInformation?.city ? "err" : ""}
+            {...register("addressInformation.city")}
           />
         </div>
         <Input
@@ -137,26 +111,30 @@ export const Register = () => {
           label="Rua"
           placeholder="Digitar rua"
           type="text"
-          className={errors.street ? "err" : ""}
-          {...register("street")}
+          className={errors.addressInformation?.city ? "err" : ""}
+          {...register("addressInformation.street")}
         />
-        {errors.street && <ErrorMessage>{errors.street.message}</ErrorMessage>}
+        {errors.addressInformation?.street && (
+          <ErrorMessage>
+            {errors.addressInformation?.street.message}
+          </ErrorMessage>
+        )}
         <div>
           <Input
             id="number"
             label="Número"
             placeholder="Digitar número"
             type="text"
-            className={errors.number ? "err" : ""}
-            {...register("number")}
+            className={errors.addressInformation?.number ? "err" : ""}
+            {...register("addressInformation.number")}
           />
           <Input
             id="complement"
             label="Complemento"
             placeholder="Ex: apart 307"
             type="text"
-            className={errors.complement ? "err" : ""}
-            {...register("complement")}
+            className={errors.addressInformation?.complement ? "err" : ""}
+            {...register("addressInformation.complement")}
           />
         </div>
         <h4>Tipo de conta</h4>
