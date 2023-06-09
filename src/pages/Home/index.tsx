@@ -7,6 +7,7 @@ import { FaAngleRight } from "react-icons/fa";
 import useMedia from "use-media";
 import { StyledButton } from "../../styles/button";
 import { useUsers } from "../../hooks/useUser";
+import { useCar } from "../../hooks/useCar";
 
 const Home = () => {
   const [open, setOpen] = useState(false);
@@ -15,6 +16,14 @@ const Home = () => {
   const { user } = useUsers();
 
   if (user) console.log(user);
+
+  const { cars, refreshCars } = useCar();
+
+  useEffect(() => {
+    refreshCars()
+  }, []);
+  
+  console.log(cars)
 
   useEffect(() => {
     if (!isWide) {
