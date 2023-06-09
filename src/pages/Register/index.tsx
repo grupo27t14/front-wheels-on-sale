@@ -6,16 +6,18 @@ import { ErrorMessage } from "../../components/Form/styles";
 import { useCep } from "./useCep";
 import { useUsers } from "../../hooks/useUser";
 import { registerSchemaRequest, tRegister } from "./schemas";
+import { RadioButton } from "../../components/RadioButton";
+import { RadioButtonDivStyles } from "../../components/RadioButton/styles";
 
 export const Register = () => {
   const { errors, handleSubmit, register } = useCep();
 
-  const { userRegister } = useUsers()
+  const { userRegister } = useUsers();
 
   const handleRegisterSubmit = (data: tRegister) => {
-    const parsedData = registerSchemaRequest.parse(data)
-    userRegister(parsedData)
-  }
+    const parsedData = registerSchemaRequest.parse(data);
+    userRegister(parsedData);
+  };
 
   return (
     <RegisterStyled>
@@ -147,23 +149,21 @@ export const Register = () => {
           />
         </div>
         <h4>Tipo de conta</h4>
-        <div className="radio">
-          <input
-            type="radio"
+        <RadioButtonDivStyles>
+          <RadioButton
             id="buyer"
+            label="Comprador"
             value={0}
             defaultChecked={true}
             {...register("is_seller")}
           />
-          <label htmlFor="buyer">Comprador</label>
-          <input
-            type="radio"
+          <RadioButton
             id="seller"
+            label="Anunciante"
             value={1}
             {...register("is_seller")}
           />
-          <label htmlFor="seller">Anunciante</label>
-        </div>
+        </RadioButtonDivStyles>
         <Input
           id="password"
           label="Senha"
