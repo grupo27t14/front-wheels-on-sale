@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { loginSchema, tLogin } from "./schemas";
 import { ErrorMessage } from "../../components/Form/styles";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
 
 export const Login = () => {
   const {
@@ -17,9 +18,7 @@ export const Login = () => {
     resolver: zodResolver(loginSchema),
   });
 
-  const signIn = (data: tLogin) => {
-    console.log(data);
-  };
+  const { signIn } = useAuth()
 
   return (
     <LoginStyled>

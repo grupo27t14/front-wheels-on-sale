@@ -55,6 +55,7 @@ export const registerSchemaRequest = z.object({
 });
 
 export type tRegister = z.infer<typeof registerSchema>;
+export type tRegisterReq = z.infer<typeof registerSchemaRequest>;
 
 export interface iCep {
   cep: string;

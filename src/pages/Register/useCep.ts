@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import {
   iCep,
   registerSchema,
-  registerSchemaRequest,
   tRegister,
 } from "./schemas";
 import { useCallback, useEffect } from "react";
@@ -21,10 +20,6 @@ export const useCep = () => {
   });
 
   const zipCode = watch("addressInformation.cep");
-
-  const handleRegister = (data: tRegister) => {
-    console.log(registerSchemaRequest.parse(data));
-  };
 
   const handleSetData = useCallback(
     (data: iCep) => {
@@ -52,5 +47,5 @@ export const useCep = () => {
     }
   }, [handleReqAddress, zipCode, setValue]);
 
-  return {errors, handleSubmit, register, handleRegister}
+  return { errors, handleSubmit, register };
 };

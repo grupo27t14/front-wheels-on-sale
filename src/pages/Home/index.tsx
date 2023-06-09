@@ -3,13 +3,18 @@ import Card from "../../components/Card";
 import { Aside } from "../../components/NavAside";
 import { StyledContainer } from "../../styles/global";
 import { Box, Flex, Main, Title, Text, HStack } from "./styles";
-import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
+import { FaAngleRight } from "react-icons/fa";
 import useMedia from "use-media";
 import { StyledButton } from "../../styles/button";
+import { useUsers } from "../../hooks/useUser";
 
 const Home = () => {
   const [open, setOpen] = useState(false);
   const isWide = useMedia({ maxWidth: "768px" });
+
+  const { user } = useUsers();
+
+  if (user) console.log(user);
 
   useEffect(() => {
     if (!isWide) {
