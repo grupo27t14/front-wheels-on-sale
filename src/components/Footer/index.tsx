@@ -1,7 +1,7 @@
 import { StyledContainer } from "../../styles/global";
 import { Footer as FooterContainer, Box, Img, Text, Link } from "./styled";
 import React from "react";
-import logo from "../../../public/logo_white.png";
+import logo from "../../assets/logo-white.svg";
 import { FaAngleUp } from "react-icons/fa";
 
 const Footer = () => {
