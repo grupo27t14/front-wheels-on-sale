@@ -3,7 +3,7 @@ import { theme } from "../../styles/theme";
 
 export const ProductPageStyled = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   background: linear-gradient(180deg, ${theme.colors.brand1} 31.25%, ${theme.colors.grey8} 31.26%, ${theme.colors.grey8} 100%);
   color: ${theme.colors.grey1};
   margin: 0;
