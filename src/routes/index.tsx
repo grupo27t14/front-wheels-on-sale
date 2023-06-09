@@ -35,6 +35,15 @@ export const router = createBrowserRouter([
         ),
       },
       {
+        path: "/login",
+        element: (
+          <>
+            <GlobalStyleGray />
+            <Login />
+          </>
+        ),
+      },
+      {
         path: "/product/:id",
         element: (
           <>
@@ -44,13 +53,5 @@ export const router = createBrowserRouter([
         ),
       },
     ],
-  },
-  {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/register",
-    element: <Register />,
   },
 ]);
