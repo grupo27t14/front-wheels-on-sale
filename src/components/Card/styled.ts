@@ -2,17 +2,17 @@ import styled from "styled-components";
 import { theme } from "../../styles/theme";
 
 export const Section = styled.div`
-  max-width: 31.2rem;
-  min-width: 31.2rem;
-  max-height: 42rem;
-  min-height: 42rem;
+  max-width: 312px;
+  min-width: 312px;
+  max-height: 42px;
+  min-height: 42px;
   display: flex;
   flex-direction: column;
-  gap: 1.6rem;
+  gap: 16px;
 
   @media (max-width: 320px) {
-    max-width: 30.2rem;
-    min-width: 30.2rem;
+    max-width: 302px;
+    min-width: 302px;
   }
 `;
 
@@ -20,10 +20,10 @@ export const Flex = styled.div`
   display: flex;
   align-items: center;
 
-  &.cardInfo__advertiser {
+  &.card__info--advertiser {
     gap: 0.8rem;
   }
-  &.cardInfo__tags {
+  &.card__info--tags {
     gap: 0.8rem;
   }
 `;
@@ -32,10 +32,20 @@ export const VStack = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  &.card__btn {
+    justify-content: unset;
+    gap: 16px;
+
+    & > button {
+      border-radius: 4px;
+      border: 2px solid ${theme.colors.grey0};
+    }
+  }
 `;
 
 export const Box = styled.div`
-  &.cardImg {
+  &.card__img {
     height: 15.2rem;
     position: relative;
 
@@ -46,20 +56,40 @@ export const Box = styled.div`
       top: -1.9rem;
       right: 0.4rem;
 
+      color: ${theme.colors.whiteFixed};
       background-color: ${theme.colors.random7};
       border-radius: 0.2rem;
       border: 0.2rem solid ${theme.colors.currencyDollar};
       z-index: 10;
     }
+
+    & .card__published--Active,
+    & .card__published--Inactive {
+      padding: 0px 8px;
+      color: ${theme.colors.whiteFixed};
+      ${theme.typography.body2_500}
+      border-radius: 4px;
+      position: absolute;
+      top: 8px;
+      left: 8px;
+    }
+
+    & .card__published--Active {
+      background-color: ${theme.colors.brand1};
+    }
+
+    & .card__published--Inactive {
+      background-color: ${theme.colors.grey4};
+    }
   }
 
-  &.cardInfo {
+  &.card__info {
     display: flex;
     flex-direction: column;
     gap: 1.6rem;
   }
 
-  &.cardInfo__tags--bag {
+  &.card__info--subTag {
     padding: 0.4rem 0.8rem;
     border-radius: 0.4rem;
     color: ${theme.colors.brand1};
@@ -81,7 +111,7 @@ export const Title = styled.h3`
 `;
 
 export const Text = styled.p`
-  &.cardInfo__text {
+  &.card__info--text {
     color: ${theme.colors.grey2};
     ${theme.typography.body2_400};
 
@@ -91,12 +121,12 @@ export const Text = styled.p`
     -webkit-box-orient: vertical;
   }
 
-  &.cardInfo__text--Name {
+  &.card__info--name {
     color: ${theme.colors.grey1};
     font-size: ${theme.typography.body2_500};
   }
 
-  &.cardInfo__price {
+  &.card__info--price {
     color: ${theme.colors.grey1};
     ${theme.typography.Heading7_500};
   }
