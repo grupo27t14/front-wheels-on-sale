@@ -18,7 +18,10 @@ export const Header = styled.header`
 
 export const Box = styled.div``;
 
-export const Img = styled.img``;
+export const Img = styled.img`
+  max-width: 100%;
+  width: 180px;
+`;
 
 export const Nav = styled.nav`
   width: 313px;

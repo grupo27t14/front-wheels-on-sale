@@ -30,6 +30,8 @@ export const Footer = styled.footer`
 export const Box = styled.div``;
 
 export const Img = styled.img`
+  width: 180px;
+  max-width: 100%;
   color: ${theme.colors.whiteFixed};
 `;
 
