@@ -8,8 +8,8 @@ const Card = () => {
   return (
     <Section>
       <Box className="card__img">
-        {/* <Box className="card__published--Active">Ativo</Box>
-        <Box className="card__published--Inactive">Inativo</Box> */}
+        <Box className="card__published--Active">Ativo</Box>
+        {/* <Box className="card__published--Inactive">Inativo</Box> */}
 
         <BsCurrencyDollar />
         <Img
@@ -38,10 +38,10 @@ const Card = () => {
           <Text className="card__info--price">R$ 00.000,00</Text>
         </VStack>
 
-        {/* <VStack className="card__btn">
+        <VStack className="card__btn">
           <StyledButton buttonstyle="medium">Editar</StyledButton>
           <StyledButton buttonstyle="medium">Ver detalhes</StyledButton>
-        </VStack> */}
+        </VStack>
       </Box>
     </Section>
   );
