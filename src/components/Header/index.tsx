@@ -5,16 +5,16 @@ import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { Box, Header as HeaderContainer, Img, Nav, Button } from "./styled";
 import logo from "../../assets/logo.svg";
 import IsNotLogged from "./IsNotLogged";
-import IstLogged from "./IsLogged";
+import IsLogged from "./IsLogged";
 import { Outlet } from "react-router";
 import React from "react";
 import Footer from "../Footer";
+import { useUsers } from "../../hooks/useUser";
 
 const Header = () => {
+  const { user } = useUsers();
   const [open, setOpen] = useState(false);
   const isWide = useMedia({ maxWidth: "768px" });
-
-  const [user, setUser] = useState(false);
 
   useEffect(() => {
     if (isWide && !user) {
@@ -33,7 +33,7 @@ const Header = () => {
             {!user ? (
               <IsNotLogged open={open} />
             ) : (
-              <IstLogged open={open} onClick={() => setOpen(!open)} />
+              <IsLogged open={open} onClick={() => setOpen(!open)} />
             )}
 
             {isWide && (
