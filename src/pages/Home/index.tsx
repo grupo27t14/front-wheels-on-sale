@@ -16,6 +16,7 @@ import { FaAngleRight } from "react-icons/fa";
 import useMedia from "use-media";
 import { StyledButton } from "../../styles/button";
 import { useUsers } from "../../hooks/useUser";
+import { useCar } from "../../hooks/useCar";
 
 const Home = () => {
   const [open, setOpen] = useState(false);

@@ -54,6 +54,8 @@ export const registerSchemaRequest = z.object({
   password: z.string().nonempty("Senha é obrigatória."),
 });
 
+export const editSchemaRequest = registerSchemaRequest.partial()
+
 export type tRegister = z.infer<typeof registerSchema>;
 export type tRegisterReq = z.infer<typeof registerSchemaRequest>;
 
