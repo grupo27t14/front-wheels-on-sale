@@ -7,10 +7,10 @@ export const UnorderedList = styled.ul`
   display: flex;
   list-style: none;
   align-items: center;
-  justify-content: center;
-  gap: 14px;
+  justify-content: space-around;
+  padding-left: 44px;
   border-left: 2px solid ${theme.colors.grey6};
-  background-color: ${theme.colors.grey8};
+  background-color: ${theme.colors.grey10};
 
   @media (max-width: 768px) {
     width: 200px;
@@ -40,36 +40,37 @@ export const ListItem = styled.li`
     width: 100%;
     padding: 10px;
   }
-`;
 
-export const Link = styled.a`
-  cursor: pointer;
-  width: 113px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 4px;
-  border: 2px solid transparent;
+  & > a {
+    cursor: pointer;
+    width: 113px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    justify-content: center;
+    border-radius: 4px;
+    border: 2px solid transparent;
 
-  &.header__signUp--login {
-    color: ${theme.colors.grey2};
-    ${theme.typography.body1_600};
-  }
+    &.header__signUp--login {
+      color: ${theme.colors.grey2};
+      ${theme.typography.body1_600};
+    }
 
-  &.header__signUp--register {
-    color: ${theme.colors.grey0};
-    ${theme.typography.button_big_text};
-    border-color: ${theme.colors.grey6};
-  }
+    &.header__signUp--register {
+      color: ${theme.colors.grey0};
+      ${theme.typography.button_big_text};
+      border-color: ${theme.colors.grey6};
+    }
 
-  &:hover {
-    color: ${theme.colors.whiteFixed};
-    background-color: ${theme.colors.random4};
-    border-color: ${theme.colors.random4};
-  }
+    &:hover {
+      color: ${theme.colors.whiteFixed};
+      background-color: ${theme.colors.random4};
+      border-color: ${theme.colors.random4};
+    }
 
-  @media (max-width: 768px) {
-    width: 100%;
+    @media (max-width: 768px) {
+      width: 100%;
+    }
   }
 `;
