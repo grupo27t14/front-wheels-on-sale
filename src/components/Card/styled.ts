@@ -4,8 +4,8 @@ import { theme } from "../../styles/theme";
 export const Section = styled.div`
   max-width: 312px;
   min-width: 312px;
-  max-height: 42px;
-  min-height: 42px;
+  max-height: 420px;
+  min-height: 420px;
   display: flex;
   flex-direction: column;
   gap: 16px;

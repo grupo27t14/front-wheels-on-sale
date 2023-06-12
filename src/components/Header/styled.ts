@@ -4,6 +4,7 @@ import { theme } from "../../styles/theme";
 export const Header = styled.header`
   width: 100%;
   height: 80px;
+  background-color: ${theme.colors.grey10};
   border-bottom: 2px solid ${theme.colors.grey6};
 
   & .header {
@@ -26,12 +27,13 @@ export const Img = styled.img`
 export const Nav = styled.nav`
   width: 313px;
   height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  background-color: ${theme.colors.grey10};
 
   @media (max-width: 768px) {
     width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: end;
   }
 `;
 

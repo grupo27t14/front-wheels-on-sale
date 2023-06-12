@@ -2,7 +2,16 @@ import { useEffect, useState } from "react";
 import Card from "../../components/Card";
 import { Aside } from "../../components/NavAside";
 import { StyledContainer } from "../../styles/global";
-import { Box, Flex, Main, Title, Text, HStack } from "./styles";
+import {
+  Box,
+  Flex,
+  Main,
+  Title,
+  Text,
+  HStack,
+  UnorderedList,
+  ListItem,
+} from "./styles";
 import { FaAngleRight } from "react-icons/fa";
 import useMedia from "use-media";
 import { StyledButton } from "../../styles/button";
@@ -15,16 +24,6 @@ const Home = () => {
 
   const { user } = useUsers();
 
-  // if (user) console.log(user);
-
-  const { cars, refreshCars } = useCar();
-
-  useEffect(() => {
-    refreshCars()
-  }, []);
-  
-  console.log(cars)
-
   useEffect(() => {
     if (!isWide) {
       setOpen(false);
@@ -34,6 +33,8 @@ const Home = () => {
   const handleSearch = (filtro: any) => {
     // Lógica para lidar com a busca com base no filtro
   };
+
+  const arrayCar = ["1", "1", "1", "1", "1", "1", "1", "1"];
 
   return (
     <Main>
@@ -66,15 +67,13 @@ const Home = () => {
           )}
         </Flex>
         {!open && (
-          <Flex className="rightSide">
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-          </Flex>
+          <UnorderedList className="rightSide">
+            {arrayCar.map((card, index) => (
+              <ListItem key={index}>
+                <Card />
+              </ListItem>
+            ))}
+          </UnorderedList>
         )}
       </StyledContainer>
       <Flex className="pageButton">

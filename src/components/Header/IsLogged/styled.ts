@@ -29,7 +29,7 @@ export const UnorderedList = styled.ul`
   top: 65px;
   right: 10px;
   z-index: 10;
-  background-color: ${theme.colors.whiteFixed};
+  background-color: ${theme.colors.grey10};
   box-shadow: 0px 4px 40px -10px rgba(0, 0, 0, 0.25);
 
   @media (max-width: 375px) {

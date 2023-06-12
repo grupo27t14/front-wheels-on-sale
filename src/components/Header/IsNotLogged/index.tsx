@@ -1,6 +1,7 @@
 import React from "react";
-import { Link, UnorderedList, ListItem } from "./styled";
+import { UnorderedList, ListItem } from "./styled";
 import { useMedia } from "use-media";
+import { Link } from "react-router-dom";
 
 export interface Iprops {
   open: boolean;
@@ -9,8 +10,12 @@ export interface Iprops {
 const IsNotLogged = ({ open }: Iprops): JSX.Element => {
   const isWide = useMedia({ maxWidth: "768px" });
   const navbarIsNotLogged = [
-    { title: "Fazer Login", class: "header__signUp--login" },
-    { title: "Cadastrar", class: "header__signUp--register" },
+    { title: "Fazer Login", class: "header__signUp--login", link: "/login" },
+    {
+      title: "Cadastrar",
+      class: "header__signUp--register",
+      link: "/register",
+    },
   ];
 
   return (
@@ -20,7 +25,9 @@ const IsNotLogged = ({ open }: Iprops): JSX.Element => {
           <UnorderedList className="header__navbar--isNotLogged">
             {navbarIsNotLogged.map((elem, index) => (
               <ListItem key={index}>
-                <Link className={elem.class}>{elem.title}</Link>
+                <Link className={elem.class} to={elem.link}>
+                  {elem.title}
+                </Link>
               </ListItem>
             ))}
           </UnorderedList>
@@ -29,7 +36,9 @@ const IsNotLogged = ({ open }: Iprops): JSX.Element => {
         <UnorderedList className="header__navbar--isNotLogged">
           {navbarIsNotLogged.map((elem, index) => (
             <ListItem key={index}>
-              <Link className={elem.class}>{elem.title}</Link>
+              <Link className={elem.class} to={elem.link}>
+                {elem.title}
+              </Link>
             </ListItem>
           ))}
         </UnorderedList>

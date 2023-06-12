@@ -10,8 +10,10 @@ export const Main = styled.main`
   flex-direction: column;
 
   & .main {
+    height: 100%;
     width: 100%;
     display: flex;
+    justify-content: space-between;
 
     @media (max-width: 768px) {
       flex-direction: column;
@@ -20,7 +22,6 @@ export const Main = styled.main`
 `;
 
 export const Flex = styled.div`
-  width: 100%;
   display: flex;
   align-items: center;
 
@@ -49,7 +50,7 @@ export const Flex = styled.div`
   }
 
   &.leftSide {
-    flex: 1;
+    height: 100%;
     margin-right: 35px;
     align-items: unset;
     padding-top: 50px;
@@ -67,26 +68,9 @@ export const Flex = styled.div`
     }
 
     @media (max-width: 768px) {
-      flex: unset;
       order: 2;
       padding-top: unset;
       margin-right: unset;
-    }
-  }
-
-  &.rightSide {
-    flex: 3;
-    flex-wrap: wrap;
-    padding-top: 50px;
-    gap: 48px;
-    align-items: unset;
-
-    @media (max-width: 768px) {
-      flex-wrap: unset;
-      overflow-x: auto;
-      padding-bottom: 20px;
-      order: 1;
-      flex: unset;
     }
   }
 
@@ -119,6 +103,38 @@ export const Box = styled.div`
     background-position: center;
   }
 `;
+
+export const UnorderedList = styled.ul`
+  display: flex;
+  padding-top: 50px;
+
+  &.rightSide {
+    height: 100%;
+    max-width: 1032px;
+    flex-wrap: wrap;
+    gap: 48px;
+
+    @media (max-width: 1402px) {
+      gap: 12px;
+      justify-content: space-between;
+    }
+
+    @media (max-width: 1023px) {
+      justify-content: center;
+    }
+
+    @media (max-width: 768px) {
+      max-width: 100%;
+      flex-wrap: unset;
+      overflow-x: auto;
+      justify-content: unset;
+      padding-bottom: 20px;
+      order: 1;
+    }
+  }
+`;
+
+export const ListItem = styled.li``;
 
 export const Text = styled.p`
   color: ${theme.colors.random4};
