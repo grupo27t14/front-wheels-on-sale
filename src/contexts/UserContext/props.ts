@@ -1,6 +1,6 @@
 import { tRegisterReq } from "../../pages/Register/schemas";
 import { iUser } from "../AuthContext/props";
-import { iCarRes } from "../CarContext/props";
+import { iPaginationCars } from "../CarContext/props";
 
 export interface UserProviderProps {
   children: React.ReactNode;
@@ -13,6 +13,6 @@ export interface UserProviderValues {
   user: iUser | null;
   userEdit: (data: Partial<tRegisterReq>, userId: string) => Promise<void>;
   getUser: (userId: string) => Promise<iUser | undefined>;
-  getUserCars: (userId: string) => Promise<iCarRes[] | undefined>;
+  getUserCars: (userId: string) => Promise<iPaginationCars | undefined>;
   userDelete: (userId: string) => Promise<void>;
 }

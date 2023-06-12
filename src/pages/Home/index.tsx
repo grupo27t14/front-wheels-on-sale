@@ -23,7 +23,7 @@ const Home = () => {
     refreshCars()
   }, []);
   
-  // console.log(cars)
+  console.log(cars)
 
   useEffect(() => {
     if (!isWide) {

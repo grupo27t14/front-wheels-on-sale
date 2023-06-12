@@ -1,6 +1,12 @@
 import { createContext, useState } from "react";
 import { api } from "../../services/api";
-import { CarProviderProps, CarProviderValues, iCarReq, iCarRes } from "./props";
+import {
+  CarProviderProps,
+  CarProviderValues,
+  iCarReq,
+  iCarRes,
+  iPaginationCars,
+} from "./props";
 import { toast } from "react-toastify";
 
 export const CarContext = createContext<CarProviderValues>(
@@ -8,11 +14,11 @@ export const CarContext = createContext<CarProviderValues>(
 );
 
 export const CarContextProvider = ({ children }: CarProviderProps) => {
-  const [cars, setCars] = useState(null as iCarRes[] | null);
+  const [cars, setCars] = useState(null as iPaginationCars | null);
 
   const refreshCars = async () => {
     try {
-      const { data } = await api.get<iCarRes[]>("car");
+      const { data } = await api.get<iPaginationCars>("car");
       setCars(data);
     } catch (err) {
       toast.error("Não foi possível completar a requisição.");

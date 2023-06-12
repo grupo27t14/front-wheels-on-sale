@@ -3,8 +3,8 @@ export interface CarProviderProps {
 }
 
 export interface CarProviderValues {
-  setCars: React.Dispatch<React.SetStateAction<iCarRes[] | null>>;
-  cars: iCarRes[] | null;
+  setCars: React.Dispatch<React.SetStateAction<iPaginationCars | null>>;
+  cars: iPaginationCars | null;
   refreshCars: () => Promise<void>;
   createCar: (data: iCarReq) => Promise<void>;
   getCar: (carId: string) => Promise<iCarRes | undefined>;
@@ -34,6 +34,11 @@ export interface iCarRes extends iCarReq {
   };
 }
 
-export interface iCarEdit extends iCarReq {
-  asd: string;
+export interface iPaginationCars {
+  next: string | null;
+  previous: string | null;
+  currentPage: number;
+  totalPages: number;
+  totalCount: number;
+  results: iCarRes[];
 }

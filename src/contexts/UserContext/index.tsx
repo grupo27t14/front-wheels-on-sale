@@ -5,7 +5,7 @@ import { UserProviderProps, UserProviderValues } from "./props";
 import { toast } from "react-toastify";
 import { editSchemaRequest, tRegisterReq } from "../../pages/Register/schemas";
 import { iUser } from "../AuthContext/props";
-import { iCarRes } from "../CarContext/props";
+import { iPaginationCars } from "../CarContext/props";
 
 export const UserContext = createContext<UserProviderValues>(
   {} as UserProviderValues
@@ -50,7 +50,7 @@ export const UserContextProvider = ({ children }: UserProviderProps) => {
 
   const getUserCars = async (userId: string) => {
     try {
-      const { data } = await api.get<iCarRes[]>(`user/${userId}/cars`);
+      const { data } = await api.get<iPaginationCars>(`user/${userId}/cars`);
       return data;
     } catch (err) {
       toast.error("Não foi possível completar a requisição.");
