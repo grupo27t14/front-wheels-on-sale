@@ -15,7 +15,7 @@ const Home = () => {
 
   const { user } = useUsers();
 
-  if (user) console.log(user);
+  // if (user) console.log(user);
 
   const { cars, refreshCars } = useCar();
 
@@ -23,7 +23,7 @@ const Home = () => {
     refreshCars()
   }, []);
   
-  console.log(cars)
+  // console.log(cars)
 
   useEffect(() => {
     if (!isWide) {
