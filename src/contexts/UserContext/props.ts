@@ -1,5 +1,4 @@
 import { tRegisterReq } from "../../pages/Register/schemas";
-import { iUser } from "../AuthContext/props";
 import { iPaginationCars } from "../CarContext/props";
 
 export interface UserProviderProps {
@@ -15,4 +14,29 @@ export interface UserProviderValues {
   getUser: (userId: string) => Promise<iUser | undefined>;
   getUserCars: (userId: string) => Promise<iPaginationCars | undefined>;
   userDelete: (userId: string) => Promise<void>;
+}
+
+export interface iUser {
+  id: string;
+  name: string;
+  email: string;
+  is_admin: boolean;
+  is_seller: boolean;
+  avatar_bg: string;
+  personalInformation: {
+    id: string;
+    cpf: string;
+    phone: string;
+    birth_date: string;
+    description: string;
+  };
+  addressInformation: {
+    id: string;
+    cep: string;
+    state: string;
+    city: string;
+    street: string;
+    number: string;
+    complement: string;
+  };
 }
