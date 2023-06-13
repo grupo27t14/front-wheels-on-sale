@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { api } from "../../services/api";
 import {
   CarProviderProps,
@@ -16,9 +16,14 @@ export const CarContext = createContext<CarProviderValues>(
 export const CarContextProvider = ({ children }: CarProviderProps) => {
   const [cars, setCars] = useState(null as iPaginationCars | null);
 
+  useEffect(() => {
+    refreshCars();
+  }, []);
+
   const refreshCars = async () => {
     try {
       const { data } = await api.get<iPaginationCars>("car");
+
       setCars(data);
     } catch (err) {
       toast.error("Não foi possível completar a requisição.");
