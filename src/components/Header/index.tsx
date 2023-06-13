@@ -10,6 +10,7 @@ import { Outlet } from "react-router";
 import React from "react";
 import Footer from "../Footer";
 import { useUsers } from "../../hooks/useUser";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const { user } = useUsers();
@@ -27,7 +28,9 @@ const Header = () => {
       <HeaderContainer id={"home"}>
         <StyledContainer className="header container">
           <Box>
-            <Img src={logo} alt="Logo Motors shop" />
+            <Link to={"/"}>
+              <Img src={logo} alt="Logo Motors shop" />
+            </Link>
           </Box>
           <Nav>
             {!user ? (
