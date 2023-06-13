@@ -48,16 +48,16 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   };
 
-  useEffect(() => {
-    refreshUser();
-  }, []);
-
   const refreshUser = async () => {
     if (api.defaults.headers.common.authorization){
       const user = await api.get("user/me");
       setUser(user.data);
     }
   };
+
+  useEffect(() => {
+    refreshUser();
+  }, []);
 
   const signOut = () => {
     try {
