@@ -150,6 +150,15 @@ export const StyledButton = styled.button<buttonProps>`
             border: 1px solid ${theme.colors.grey0};
           }
         `;
+      case "outline_brand":
+        return css`
+          background: transparent;
+          color: ${theme.colors.brand1};
+          border: 2px solid ${theme.colors.brand1};
+          &:hover {
+            background: ${theme.colors.brand4};
+          }
+        `;
       default:
         return;
     }

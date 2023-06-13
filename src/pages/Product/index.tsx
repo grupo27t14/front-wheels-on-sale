@@ -1,12 +1,12 @@
 import Car from "../../assets/EXTERIOR-frontSidePilotNear-1653845164710-removebg-preview 1.png"
-import { Avatar } from "../../styles/global"
+import { Avatar, PageStyled } from "../../styles/global"
 import { theme } from "../../styles/theme"
 import { StyledButton } from "../../styles/button"
-import { ProductPageStyled, PageContainer, SectionsContainer, CarInfoContainer, Tag, GalleryGrid, CommentsList, CommentTextarea } from "./style"
+import { PageContainer, SectionsContainer, CarInfoContainer, Tag, GalleryGrid, CommentsList, CommentTextarea } from "./style"
 
 const Products = () => {
   return (
-    <ProductPageStyled>
+    <PageStyled>
       <PageContainer>
         <div>
           <SectionsContainer>
@@ -82,7 +82,7 @@ const Products = () => {
           </SectionsContainer>
         </div>
       </PageContainer>
-    </ProductPageStyled>
+    </PageStyled>
   )
 }
 
