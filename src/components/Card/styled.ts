@@ -53,8 +53,8 @@ export const Box = styled.div`
       width: 1.6rem;
       height: 2.7rem;
       position: absolute;
-      top: -1.9rem;
-      right: 0.4rem;
+      top: 0rem;
+      right: 0rem;
 
       color: ${theme.colors.whiteFixed};
       background-color: ${theme.colors.random7};
@@ -112,6 +112,7 @@ export const Title = styled.h3`
 
 export const Text = styled.p`
   &.card__info--text {
+    height: 48px;
     color: ${theme.colors.grey2};
     ${theme.typography.body2_400};
 

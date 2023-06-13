@@ -112,8 +112,7 @@ export const Avatar = styled.span<{ $bg?: string }>`
     border-radius: 100%;
     color: ${theme.colors.whiteFixed};
     background-color: ${(props) => props.$bg};
-    ${theme.typography.body2_500["font-size"]};
-    ${theme.typography.body2_500["font-weight"]};
+    ${theme.typography.avatar};
   }
 
   &.avatarProfile {
@@ -122,7 +121,7 @@ export const Avatar = styled.span<{ $bg?: string }>`
     border-radius: 100%;
     color: ${theme.colors.whiteFixed};
     background-color: ${(props) => props.$bg};
-    ${theme.typography.avatar};
+    ${theme.typography.avatar_profile};
   }
 
   &.avatarProfileBig {

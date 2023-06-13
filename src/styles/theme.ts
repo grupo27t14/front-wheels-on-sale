@@ -145,7 +145,12 @@ export const theme = {
       "line-height": "1.7rem", //17px
     },
     avatar: {
-      "font-size": "1.4rem", //36px
+      "font-size": "1.2rem", //14px
+      "font-weight": "500",
+    },
+
+    avatar_profile: {
+      "font-size": "1.4rem", //14px
       "font-weight": "700",
     },
     avatar_big: {

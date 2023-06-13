@@ -15,14 +15,13 @@ import {
 import { FaAngleRight } from "react-icons/fa";
 import useMedia from "use-media";
 import { StyledButton } from "../../styles/button";
-import { useUsers } from "../../hooks/useUser";
 import { useCar } from "../../hooks/useCar";
 
 const Home = () => {
   const [open, setOpen] = useState(false);
   const isWide = useMedia({ maxWidth: "768px" });
 
-  const { user } = useUsers();
+  const { cars } = useCar();
 
   useEffect(() => {
     if (!isWide) {
@@ -33,8 +32,6 @@ const Home = () => {
   const handleSearch = (filtro: any) => {
     // Lógica para lidar com a busca com base no filtro
   };
-
-  const arrayCar = ["1", "1", "1", "1", "1", "1", "1", "1"];
 
   return (
     <Main>
@@ -68,11 +65,14 @@ const Home = () => {
         </Flex>
         {!open && (
           <UnorderedList className="rightSide">
-            {arrayCar.map((card, index) => (
-              <ListItem key={index}>
-                <Card />
-              </ListItem>
-            ))}
+            {cars?.results.map(
+              (car) =>
+                car.is_published && (
+                  <ListItem key={car.id}>
+                    <Card car={car} />
+                  </ListItem>
+                )
+            )}
           </UnorderedList>
         )}
       </StyledContainer>

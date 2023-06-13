@@ -110,6 +110,7 @@ export const UnorderedList = styled.ul`
 
   &.rightSide {
     height: 100%;
+    width: 100%;
     max-width: 1032px;
     flex-wrap: wrap;
     gap: 48px;
