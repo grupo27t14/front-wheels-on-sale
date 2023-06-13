@@ -1,16 +1,6 @@
 import styled from "styled-components";
 import { theme } from "../../styles/theme";
 
-export const ProductPageStyled = styled.div`
-  width: 100vw;
-  height: 100%;
-  background: linear-gradient(180deg, ${theme.colors.brand1} 31.25%, ${theme.colors.grey8} 31.26%, ${theme.colors.grey8} 100%);
-  color: ${theme.colors.grey1};
-  margin: 0;
-  padding: 1.2rem;
-`;
-
-
 export const PageContainer = styled.div`
   padding-top: 40px;
   width: 123rem;
@@ -68,10 +58,6 @@ export const SectionsContainer = styled.div`
     ${theme.typography.body1_400};
     color: ${theme.colors.grey2};
   }
-
-  /* div {
-    width: fit-content;
-  } */
 
   .sellerInfos {
     margin-top: 3.2rem;

@@ -130,7 +130,16 @@ export const Avatar = styled.span<{ $bg?: string }>`
     border-radius: 100%;
     color: ${theme.colors.whiteFixed};
     background-color: ${(props) => props.$bg};
-    ${theme.typography.avatar_big["font-size"]};
-    ${theme.typography.avatar_big["font-weight"]};
+    ${theme.typography.avatar_big};
   }
+`;
+
+
+export const PageStyled = styled.div`
+  width: 100vw;
+  height: 100%;
+  background: linear-gradient(180deg, ${theme.colors.brand1} 31.25%, ${theme.colors.grey8} 31.26%, ${theme.colors.grey8} 100%);
+  color: ${theme.colors.grey1};
+  margin: 0;
+  padding: 1.2rem;
 `;
