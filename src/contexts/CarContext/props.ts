@@ -28,10 +28,12 @@ export interface iCarRes extends iCarReq {
   id: string;
   is_promo: boolean;
   created_at: string;
+  is_published: boolean;
   user: {
     id: string;
     name: string;
   };
+  images: { id: string; url: string }[];
 }
 
 export interface iPaginationCars {
