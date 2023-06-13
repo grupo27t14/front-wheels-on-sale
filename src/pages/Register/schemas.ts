@@ -8,13 +8,13 @@ export const registerSchema = z
       city: z.string().nonempty("Cidade é obrigatório"),
       street: z.string().nonempty("Rua é obrigatório."),
       number: z.string().nonempty("Número é obrigatório."),
-      complement: z.string().nonempty(), //obrigatório?
+      complement: z.string().optional(),
     }),
     personalInformation: z.object({
       cpf: z.string().nonempty("Cpf é obrigatório."),
       phone: z.string().nonempty("Telefone é obrigatório"),
       birth_date: z.string().nonempty("Data de nascimento é obrigatório."),
-      description: z.string().nonempty(), //obrigatório?
+      description: z.string().optional(),
     }),
     name: z.string().nonempty("Nome é obrigatório."),
     email: z
@@ -37,13 +37,13 @@ export const registerSchemaRequest = z.object({
     city: z.string().nonempty("Cidade é obrigatório"),
     street: z.string().nonempty("Rua é obrigatório."),
     number: z.string().nonempty("Número é obrigatório."),
-    complement: z.string().nonempty(), //obrigatório?
+    complement: z.string().optional(),
   }),
   personalInformation: z.object({
     cpf: z.string().nonempty("Cpf é obrigatório."),
     phone: z.string().nonempty("Telefone é obrigatório"),
     birth_date: z.string().nonempty("Data de nascimento é obrigatório."),
-    description: z.string().nonempty(), //obrigatório?
+    description: z.string().optional(),
   }),
   name: z.string().nonempty("Nome é obrigatório."),
   email: z
@@ -54,7 +54,7 @@ export const registerSchemaRequest = z.object({
   password: z.string().nonempty("Senha é obrigatória."),
 });
 
-export const editSchemaRequest = registerSchemaRequest.partial()
+export const editSchemaRequest = registerSchemaRequest.partial();
 
 export type tRegister = z.infer<typeof registerSchema>;
 export type tRegisterReq = z.infer<typeof registerSchemaRequest>;

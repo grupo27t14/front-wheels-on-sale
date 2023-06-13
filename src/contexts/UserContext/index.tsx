@@ -4,8 +4,9 @@ import { api } from "../../services/api";
 import { UserProviderProps, UserProviderValues } from "./props";
 import { toast } from "react-toastify";
 import { editSchemaRequest, tRegisterReq } from "../../pages/Register/schemas";
-import { iUser } from "../AuthContext/props";
+import { iUser } from "./props";
 import { iPaginationCars } from "../CarContext/props";
+import { randomColor } from "../../utils/randomColor";
 
 export const UserContext = createContext<UserProviderValues>(
   {} as UserProviderValues
@@ -20,7 +21,7 @@ export const UserContextProvider = ({ children }: UserProviderProps) => {
     try {
       setReqLoading(true);
       await api
-        .post("user", data)
+        .post("user", { ...data, avatar_bg: randomColor() })
         .then(() => {
           toast.success("Usuário cadastrado com sucesso!");
           navigate("/login");
