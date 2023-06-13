@@ -20,13 +20,13 @@ const backgroundGray = (element: JSX.Element) => {
 export const RoutesMain = () => {
   return (
     <Routes>
-      <Route element={<LoadUser />}>
-        <Route path="/" element={<Header />}>
-          <Route path="/" element={<Home />} />
+      <Route path="/" element={<Header />}>
+        <Route path="/" element={<Home />} />
+        <Route element={<LoadUser />}>
           <Route path="/login" element={backgroundGray(<Login />)} />
           <Route path="/register" element={backgroundGray(<Register />)} />
-          <Route path="/product/:id" element={backgroundGray(<Products />)} />
         </Route>
+        <Route path="/product/:id" element={backgroundGray(<Products />)} />
       </Route>
       <Route path="/404" element={<ErrorPage />} />
       <Route path="*" element={<Navigate to={"/404"} />} />

@@ -1,9 +1,20 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
-import { LoadUserBlock } from "./styles";
+import { useEffect } from "react";
+import { useUsers } from "../../hooks/useUser";
 
 export const LoadUser = () => {
-  const { loading } = useAuth();
+  const navigate = useNavigate();
+  const { refreshUser } = useAuth();
+  const { user } = useUsers();
 
-  return loading ? <LoadUserBlock /> : <Outlet />
+  useEffect(() => {
+    async () => {
+      await refreshUser();
+    };
+  }, []);
+
+  if (user) navigate("");
+
+  return <Outlet />;
 };
