@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { iCarRes } from "../../contexts/CarContext/props";
 import { useUsers } from "../../hooks/useUser";
 import { Avatar } from "../../styles/global";
-import { theme } from "../../styles/theme";
 import { Section, Box, Img, Title, Text, Flex, VStack } from "./styled";
 import { BsCurrencyDollar } from "react-icons/bs";
 
@@ -22,6 +21,8 @@ const Card = ({ car }: ICarProps) => {
     })
     .join("");
 
+  console.log(car);
+
   return (
     <Section>
       <Box className="card__img">
@@ -37,7 +38,7 @@ const Card = ({ car }: ICarProps) => {
         <Title>{car.brand}</Title>
         <Text className="card__info--text">{car.description}</Text>
         <Flex className="card__info--advertiser">
-          <Avatar className="avatar" $bg={user?.avatar_bg}>
+          <Avatar className="avatar" $bg={car.user?.avatar_bg}>
             {nomeESobrenome}
           </Avatar>
           <Text className="card__info--name">{car.user?.name}</Text>
