@@ -37,7 +37,7 @@ const Products = () => {
       <PageContainer>
         <div>
           <SectionsContainer>
-            <img src={Car} />
+            <img src={curCar?.images[0].url} />
           </SectionsContainer>
           <SectionsContainer>
             <CarInfoContainer>
@@ -64,20 +64,16 @@ const Products = () => {
             <div>
               <h6 className="heading6">Fotos</h6>
               <GalleryGrid>
-                <div className="imgContainer"><img src={Car} /></div>
-                <div className="imgContainer"><img src={Car} /></div>
-                <div className="imgContainer"><img src={Car} /></div>
-                <div className="imgContainer"><img src={Car} /></div>
-                <div className="imgContainer"><img src={Car} /></div>
-                <div className="imgContainer"><img src={Car} /></div>
+                { curCar?.images.map((img) => <li className="imgContainer" key={img.id}><img src={img.url} /></li>)}
+                
               </GalleryGrid>
             </div>           
           </SectionsContainer>
           <SectionsContainer>
-            <Avatar className="avatarProfileBig" $bg={theme.colors.random1}>{nameSub}</Avatar>
+            <Avatar className="avatarProfileBig" $bg={curCar?.user.avatar_bg}>{nameSub}</Avatar>
             <div className="sellerInfos">
               <h6 className="heading6">{curCar?.user.name}</h6>
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's</p>
+              <p>{curCar?.user.personalInformation?.description}</p>
               <Link to={`/profile/${curCar?.user.id}`}>Ver todos anúncios</Link>
             </div>           
           </SectionsContainer>
@@ -88,7 +84,7 @@ const Products = () => {
             <ul>
               <CommentsList>
                 <div>
-                  <Avatar className="avatar" $bg={theme.colors.random1}>GL</Avatar>
+                  <Avatar className="avatar" $bg={curCar?.user.avatar_bg}>GL</Avatar>
                   <p className="commentUsername">Gustavo Lima</p>
                   <span className="commentTime">•</span>
                   <p className="commentTime">há 3 dias</p>

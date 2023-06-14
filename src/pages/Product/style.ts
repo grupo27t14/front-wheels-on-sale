@@ -66,6 +66,19 @@ export const SectionsContainer = styled.div`
     align-items: center;
     flex-direction: column;
     gap: 3.2rem;
+
+    & > a {
+      text-decoration: none;
+      background-color: ${theme.colors.grey0};
+      padding: 2.4rem 2.8rem;
+      border-radius: .4rem;
+      transition: .4s;
+      color: ${theme.colors.whiteFixed};
+      ${theme.typography.button_big_text}
+      &:hover {
+            background-color: ${theme.colors.grey1};
+          }
+    }
   }
 
 `
