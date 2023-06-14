@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { StyledNav } from "./style";
 import { StyledButton } from "../../styles/button";
 import { useNavigate } from "react-router-dom";
+import { useCar } from "../../hooks/useCar";
 
 interface Filtro {
   [key: string]: string;
@@ -9,7 +10,7 @@ interface Filtro {
 
 interface Card {
   id: string;
-  name: string;
+  model: string;
   brand: string;
   year: string;
   color: string;
@@ -23,94 +24,13 @@ interface AsideProps {
   onClick?: (() => void) | undefined;
 }
 
-const Aside: React.FC<AsideProps> = ({ onClick }): JSX.Element => {
-  const [cards] = useState<Card[]>([
-    {
-      id: "xxxxx534xxxxxxx",
-      name: "Fiat 500",
-      brand: "Fiat",
-      year: "2022",
-      color: "Red",
-      fuel: "Gasoline",
-      km: "10000",
-      price: "50000",
-    },
-    {
-      id: "xxxxx9xxxxxxx",
-      name: "Panda",
-      brand: "Fiat",
-      year: "2022",
-      color: "blue",
-      fuel: "Diesel",
-      km: "15000",
-      price: "150000",
-    },
-    {
-      id: "xxxxxx32xxxxxx",
-      name: "Uno",
-      brand: "Fiat",
-      year: "2023",
-      color: "Red",
-      fuel: "Gasoline",
-      km: "210000",
-      price: "53000",
-    },
-    {
-      id: "xxxxxx7xxxxxx",
-      name: "Doblô",
-      brand: "Fiat",
-      year: "2002",
-      color: "Red",
-      fuel: "Gasoline",
-      km: "20000",
-      price: "51000",
-    },
-    {
-      id: "xxxx6xxxxxxxx",
-      name: "Anglia",
-      brand: "Ford",
-      year: "2023",
-      color: "Red",
-      fuel: "Gasoline",
-      km: "20000",
-      price: "150000",
-    },
-    {
-      id: "x1xxxxxxxxxxx",
-      name: "MAVERICK",
-      brand: "Ford",
-      year: "2002",
-      color: "Red",
-      fuel: "Gasoline",
-      km: "20000",
-      price: "250000",
-    },
-    {
-      id: "xxxxxxxxxx2xx",
-      name: "F-150",
-      brand: "Ford",
-      year: "2022",
-      color: "Red",
-      fuel: "Etyearl",
-      km: "20000",
-      price: "150000",
-    },
-    {
-      id: "xxxxxx3xxxxxx",
-      name: "RANGER",
-      brand: "Ford",
-      year: "2022",
-      color: "Red",
-      fuel: "Gasoline",
-      km: "20000",
-      price: "250000",
-    },
-  ]);
+const Aside: React.FC<AsideProps> = ({ onClick }) => {
+  const { cars, setCars } = useCar();
 
-  const brands = [...new Set(cards.map((card) => card.brand))];
-  const colors = [...new Set(cards.map((card) => card.color))];
-  const years = [...new Set(cards.map((card) => card.year))];
-  const fuels = [...new Set(cards.map((card) => card.fuel))];
+  const brands = [...new Set(cars?.results.map((card) => card.brand))];
+  // const colors = [...new Set(cars?.results.map((card) => card.color))];
+  // const years = [...new Set(cars?.results.map((card) => card.year))];
+  // const fuels = [...new Set(cars?.results.map((card) => card.fuel))];
 
   const [filtro, setFiltro] = useState<Filtro>({
     brand: "",
@@ -124,9 +44,9 @@ const Aside: React.FC<AsideProps> = ({ onClick }): JSX.Element => {
     priceMax: "",
   });
 
-  const [cardsFiltrados, setCardsFiltrados] = useState<Card[]>([]);
+  const [cardsFiltrados, setCardsFiltrados] = useState<Card[] | undefined>([]);
   const navigate = useNavigate();
-  
+
   const handleOptionSelect = (categoria: string, valor: string) => {
     setFiltro((prevFiltro) => ({
       ...prevFiltro,
@@ -140,21 +60,21 @@ const Aside: React.FC<AsideProps> = ({ onClick }): JSX.Element => {
 
     const queryParams = new URLSearchParams();
 
-  Object.entries(updatedFiltro).forEach(([key, value]) => {
-    if (value) {
-      queryParams.append(key, value);
-    }
-  });
+    Object.entries(updatedFiltro).forEach(([key, value]) => {
+      if (value) {
+        queryParams.append(key, value);
+      }
+    });
 
-  const queryString = queryParams.toString();
-  navigate(`?${queryString}`);
+    const queryString = queryParams.toString();
+    navigate(`?${queryString}`);
 
-    const cardsFiltrados = cards.filter((card) => {
+    const cardsFiltrados = cars?.results.filter((card) => {
       const brandMatch = updatedFiltro.brand
         ? card.brand === updatedFiltro.brand
         : true;
       const modelMatch = updatedFiltro.model
-        ? card.name === updatedFiltro.model
+        ? card.model === updatedFiltro.model
         : true;
       const colorMatch = updatedFiltro.color
         ? card.color === updatedFiltro.color
@@ -196,7 +116,7 @@ const Aside: React.FC<AsideProps> = ({ onClick }): JSX.Element => {
       );
     });
 
-    setCardsFiltrados(cardsFiltrados);
+    setCardsFiltrados(cardsFiltrados!);
   };
 
   const handleLimparFiltros = () => {
@@ -213,25 +133,93 @@ const Aside: React.FC<AsideProps> = ({ onClick }): JSX.Element => {
     });
 
     setCardsFiltrados([]);
-    navigate(""); 
+    navigate("");
   };
 
-  const [modelsFiltrados, setmodelsFiltrados] = useState<string[]>([]);
+  const [modelsFiltrados, setmodelsFiltrados] = useState<string[]>([...new Set(cars?.results.map((card) => card.model))]);
+  const [colorsFiltrados, setColorsFiltrados] = useState<string[]>([...new Set(cars?.results.map((card) => card.color))]);
+  const [yearsFiltrados, setYearsFiltrados] = useState<string[]>([...new Set(cars?.results.map((card) => card.year))]);
+  const [fuelsFiltrados, setFuelsFiltrados] = useState<string[]>([...new Set(cars?.results.map((card) => card.fuel))]);
 
   useEffect(() => {
-    if (filtro.brand) {
-      const modelsFiltrados = [
-        ...new Set(
-          cards
-            .filter((card) => card.brand === filtro.brand)
-            .map((card) => card.name)
-        ),
-      ];
-      setmodelsFiltrados(modelsFiltrados);
-    } else {
-      setmodelsFiltrados([...new Set(cards.map((card) => card.name))]);
-    }
-  }, [filtro.brand, cards]);
+    const filteredModels = [
+      ...new Set(
+        cars?.results
+          .filter((car) => {
+            return (
+              (!filtro.brand || car.brand === filtro.brand) &&
+              (!filtro.model || car.model === filtro.model) &&
+              (!filtro.color || car.color === filtro.color) &&
+              (!filtro.year || car.year === filtro.year) &&
+              (!filtro.fuel || car.fuel === filtro.fuel) &&
+              (!filtro.km || car.km === filtro.km) &&
+              (!filtro.price || car.price === filtro.price)
+            );
+          })
+          .map((car) => car.model)
+      ),
+    ];
+    setmodelsFiltrados(filteredModels);
+  
+    const filteredColors = [
+      ...new Set(
+        cars?.results
+          .filter((car) => {
+            return (
+              (!filtro.brand || car.brand === filtro.brand) &&
+              (!filtro.model || car.model === filtro.model) &&
+              (!filtro.color || car.color === filtro.color) &&
+              (!filtro.year || car.year === filtro.year) &&
+              (!filtro.fuel || car.fuel === filtro.fuel) &&
+              (!filtro.km || car.km === filtro.km) &&
+              (!filtro.price || car.price === filtro.price)
+            );
+          })
+          .map((car) => car.color)
+      ),
+    ];
+    setColorsFiltrados(filteredColors);
+  
+    const filteredYears = [
+      ...new Set(
+        cars?.results
+          .filter((car) => {
+            return (
+              (!filtro.brand || car.brand === filtro.brand) &&
+              (!filtro.model || car.model === filtro.model) &&
+              (!filtro.color || car.color === filtro.color) &&
+              (!filtro.year || car.year === filtro.year) &&
+              (!filtro.fuel || car.fuel === filtro.fuel) &&
+              (!filtro.km || car.km === filtro.km) &&
+              (!filtro.price || car.price === filtro.price)
+            );
+          })
+          .map((car) => car.year)
+      ),
+    ];
+    setYearsFiltrados(filteredYears);
+  
+    const filteredFuels = [
+      ...new Set(
+        cars?.results
+          .filter((car) => {
+            return (
+              (!filtro.brand || car.brand === filtro.brand) &&
+              (!filtro.model || car.model === filtro.model) &&
+              (!filtro.color || car.color === filtro.color) &&
+              (!filtro.year || car.year === filtro.year) &&
+              (!filtro.fuel || car.fuel === filtro.fuel) &&
+              (!filtro.km || car.km === filtro.km) &&
+              (!filtro.price || car.price === filtro.price)
+            );
+          })
+          .map((car) => car.fuel)
+      ),
+    ];
+    setFuelsFiltrados(filteredFuels);
+
+  }, [filtro.brand, filtro.model, filtro.color, filtro.year, filtro.fuel, filtro.km, filtro.price, cars]);
+
 
   const isAllOptionsEmpty = Object.values(filtro).every(
     (value) => value === ""
@@ -266,7 +254,9 @@ const Aside: React.FC<AsideProps> = ({ onClick }): JSX.Element => {
               }}
               onClick={() => handleOptionSelect("brand", brand)}
             >
-              <a href="#" onClick={(e) => e.preventDefault()}>{brand}</a>
+              <a href="#" onClick={(e) => e.preventDefault()}>
+                {brand}
+              </a>
             </li>
           ))}
         </ul>
@@ -278,20 +268,20 @@ const Aside: React.FC<AsideProps> = ({ onClick }): JSX.Element => {
               key={model}
               style={{
                 display:
-                  filtro.model && filtro.model !== model
-                    ? "none"
-                    : "list-item",
+                  filtro.model && filtro.model !== model ? "none" : "list-item",
               }}
               onClick={() => handleOptionSelect("model", model)}
             >
-              <a href="#" onClick={(e) => e.preventDefault()}>{model}</a>
+              <a href="#" onClick={(e) => e.preventDefault()}>
+                {model}
+              </a>
             </li>
           ))}
         </ul>
 
         <h2>Cor</h2>
         <ul>
-          {colors.map((color) => (
+          {colorsFiltrados.map((color) => (
             <li
               key={color}
               style={{
@@ -300,14 +290,16 @@ const Aside: React.FC<AsideProps> = ({ onClick }): JSX.Element => {
               }}
               onClick={() => handleOptionSelect("color", color)}
             >
-              <a href="#" onClick={(e) => e.preventDefault()}>{color}</a>
+              <a href="#" onClick={(e) => e.preventDefault()}>
+                {color}
+              </a>
             </li>
           ))}
         </ul>
 
         <h2>Ano</h2>
         <ul>
-          {years.map((year) => (
+          {yearsFiltrados.map((year) => (
             <li
               key={year}
               style={{
@@ -316,25 +308,27 @@ const Aside: React.FC<AsideProps> = ({ onClick }): JSX.Element => {
               }}
               onClick={() => handleOptionSelect("year", year)}
             >
-              <a href="#" onClick={(e) => e.preventDefault()}>{year}</a>
+              <a href="#" onClick={(e) => e.preventDefault()}>
+                {year}
+              </a>
             </li>
           ))}
         </ul>
 
         <h2>Combustível</h2>
         <ul>
-          {fuels.map((fuel) => (
+          {fuelsFiltrados.map((fuel) => (
             <li
               key={fuel}
               style={{
                 display:
-                  filtro.fuel && filtro.fuel !== fuel
-                    ? "none"
-                    : "list-item",
+                  filtro.fuel && filtro.fuel !== fuel ? "none" : "list-item",
               }}
               onClick={() => handleOptionSelect("fuel", fuel)}
             >
-              <a href="#" onClick={(e) => e.preventDefault()}>{fuel}</a>
+              <a href="#" onClick={(e) => e.preventDefault()}>
+                {fuel}
+              </a>
             </li>
           ))}
         </ul>
@@ -382,10 +376,10 @@ const Aside: React.FC<AsideProps> = ({ onClick }): JSX.Element => {
         Limpar Filtros
       </StyledButton>
 
-      {/* {cardsFiltrados.length > 0 ? (
-        cardsFiltrados.map((card) => (
+      {cardsFiltrados!.length > 0 ? (
+        cardsFiltrados!.map((card) => (
           <div key={card.id}>
-            <h3>{card.name}</h3>
+            <h3>{card.model}</h3>
             <p>brand: {card.brand}</p>
             <p>year: {card.year}</p>
             <p>color: {card.color}</p>
@@ -396,7 +390,7 @@ const Aside: React.FC<AsideProps> = ({ onClick }): JSX.Element => {
         ))
       ) : (
         <p>Nenhum card encontrado.</p>
-      )} */}
+      )}
     </StyledNav>
   );
 };
