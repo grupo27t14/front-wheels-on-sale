@@ -32,6 +32,7 @@ export interface iCarRes extends iCarReq {
   user: {
     id: string;
     name: string;
+    avatar_bg: string;
   };
   images: { id: string; url: string }[];
 }
