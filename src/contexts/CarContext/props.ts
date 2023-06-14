@@ -33,7 +33,7 @@ export interface iCarRes extends iCarReq {
     id: string;
     name: string;
     avatar_bg: string;
-    personalInformation?: {
+    prsonalInformation?: {
       description?: string | null | undefined;
     };
   };
