@@ -56,7 +56,7 @@ export const Profile = () => {
         <p>
           {user?.is_seller
             ? user.personalInformation.description
-            : cars?.results[0].user.personalInformation.description}
+            : cars?.results[0].user.prsonalInformation?.description}
         </p>
 
         {user?.is_seller && (
