@@ -12,16 +12,28 @@ import {
   UnorderedList,
   ListItem,
 } from "./styles";
-import { FaAngleRight } from "react-icons/fa";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import useMedia from "use-media";
 import { StyledButton } from "../../styles/button";
 import { useCar } from "../../hooks/useCar";
+import { api } from "../../services/api";
+import { iPaginationCars } from "../../contexts/CarContext/props";
 
 const Home = () => {
   const [open, setOpen] = useState(false);
   const isWide = useMedia({ maxWidth: "768px" });
 
-  const { cars } = useCar();
+  const handlePagination = async (url: string | null) => {
+    if (url) {
+      url = url.split("/")[1];
+      const { data } = await api.get<iPaginationCars>(url);
+      window.scrollTo({top: 100, behavior: "smooth"})
+      setCars(data);
+    }
+  };
+
+  const { cars, setCars } = useCar();
+  console.log(cars);
 
   useEffect(() => {
     if (!isWide) {
@@ -77,12 +89,23 @@ const Home = () => {
         )}
       </StyledContainer>
       <Flex className="pageButton">
-        <HStack>1 de 2</HStack>
+        {cars?.previous ? (
+          <button onClick={() => handlePagination(cars.previous)}>
+            <FaAngleLeft /> Anterior
+          </button>
+        ) : (
+          ""
+        )}
         <HStack>
-          {/* <FaAngleLeft /> */}
-          <Text>Seguinte</Text>
-          <FaAngleRight />
+          {cars?.currentPage} de {cars?.totalPages}
         </HStack>
+        {cars?.next ? (
+          <button onClick={() => handlePagination(cars.next)}>
+            Seguinte <FaAngleRight />
+          </button>
+        ) : (
+          ""
+        )}
       </Flex>
     </Main>
   );

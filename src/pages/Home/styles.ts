@@ -79,7 +79,21 @@ export const Flex = styled.div`
     margin: 26px 0px 50px 0px;
     justify-content: center;
     gap: 40px;
-    cursor: pointer;
+
+    > button {
+      all: unset;
+      color: ${theme.colors.random4};
+      ${theme.typography.Heading6_600};
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      :hover {
+        color: ${theme.colors.random5};
+        transition: .3s;
+      }
+    }
 
     & svg {
       font-size: 20px;
@@ -141,6 +155,8 @@ export const Text = styled.p`
   color: ${theme.colors.random4};
   ${theme.typography.Heading6_600};
 `;
+
+export const pagButton = styled.button``;
 
 export const Title = styled.h1`
   text-align: center;
