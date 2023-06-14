@@ -8,20 +8,21 @@ import { iPaginationCars } from "../../contexts/CarContext/props";
 import Card from "../../components/Card";
 
 export const Profile = () => {
-  const userId = useParams();
+  const { id } = useParams();
   const { user, getUserCars } = useUsers();
   const [cars, setCars] = useState<iPaginationCars | null>();
 
   useEffect(() => {
     (async () => {
-      if (userId.id) {
-        const cars = await getUserCars(userId.id);
+      if (id) {
+        const cars = await getUserCars(id);
         setCars(cars);
       }
     })();
   }, []);
 
-  const name = user?.is_seller ? user.name : cars?.results[0].user?.name;
+  const name =
+    user?.is_seller && user.id === id ? user.name : cars?.results[0].user?.name;
 
   let nomeESobrenome = "";
 
@@ -42,24 +43,28 @@ export const Profile = () => {
         <Avatar
           className="avatarProfileBig"
           $bg={
-            user?.is_seller ? user.avatar_bg : cars?.results[0].user.avatar_bg
+            user?.is_seller && user.id === id
+              ? user.avatar_bg
+              : cars?.results[0].user.avatar_bg
           }
         >
           {nomeESobrenome}
         </Avatar>
         <div className="profileName">
           <h6 className="heading6">
-            {user?.is_seller ? user.name : cars?.results[0].user.name}
+            {user?.is_seller && user.id === id
+              ? user.name
+              : cars?.results[0].user.name}
           </h6>
           <span className="sellerTag">Anunciante</span>
         </div>
         <p>
-          {user?.is_seller
+          {user?.is_seller && user.id === id
             ? user.personalInformation.description
-            : cars?.results[0].user.prsonalInformation?.description}
+            : cars?.results[0].user.personalInformation?.description}
         </p>
 
-        {user?.is_seller && (
+        {user?.is_seller && user.id === id && (
           <StyledButton buttonstyle="outline_brand" buttonsize="fit">
             Criar Anúncio
           </StyledButton>
