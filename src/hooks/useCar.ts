@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { CarContext } from "../contexts/CarContext";
 
 export const useCar = () => {
-  const userContext = useContext(CarContext);
+  const carContext = useContext(CarContext);
 
-  return userContext
+  return carContext
 };

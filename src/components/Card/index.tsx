@@ -21,8 +21,6 @@ const Card = ({ car }: ICarProps) => {
     })
     .join("");
 
-  console.log(car);
-
   return (
     <Section>
       <Box className="card__img">
