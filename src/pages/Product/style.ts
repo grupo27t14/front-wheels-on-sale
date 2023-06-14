@@ -104,6 +104,12 @@ export const CarInfoContainer = styled.div`
     width: 100%;
     display: flex;
     justify-content: space-between;
+
+    & > div {
+      display: flex;
+      flex-direction: row;
+      gap: 1.2rem;
+    }
   
   }
 

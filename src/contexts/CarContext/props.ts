@@ -7,7 +7,7 @@ export interface CarProviderValues {
   cars: iPaginationCars | null;
   refreshCars: () => Promise<void>;
   createCar: (data: iCarReq) => Promise<void>;
-  getCar: (carId: string) => Promise<iCarRes | undefined>;
+  getCar: (carId: string | undefined) => Promise<iCarRes | undefined>;
   editCar: (data: Partial<iCarReq>, carId: string) => Promise<void>;
   deleteCar: (carId: string) => Promise<void>;
 }
