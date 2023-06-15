@@ -17,7 +17,7 @@ interface AsideProps {
   onClick?: (() => void) | undefined;
 }
 
-export const Aside: React.FC<AsideProps> = ({onClick}) => {
+export const Aside: React.FC<AsideProps> = ({ onClick }) => {
   const { cars, setCars } = useCar();
   const [allCars, setAllCars] = useState<iPaginationCars>();
   const [strFilter, setStrFilter] = useState<string>("car?");
@@ -98,13 +98,13 @@ export const Aside: React.FC<AsideProps> = ({onClick}) => {
         <>
           <h2>{key}</h2>
           <ul>
-            <li>
-              {[...new Set(value)].map((val) => (
+            {[...new Set(value)].map((val) => (
+              <li key={val}>
                 <button onClick={async () => await handleFilter(key, val)}>
                   {val}
                 </button>
-              ))}
-            </li>
+              </li>
+            ))}
           </ul>
         </>
       );
@@ -113,8 +113,7 @@ export const Aside: React.FC<AsideProps> = ({onClick}) => {
 
   const handleClearFilter = () => {
     console.log("limpar");
-    
-  }
+  };
 
   return (
     <StyledNav>
@@ -140,7 +139,6 @@ export const Aside: React.FC<AsideProps> = ({onClick}) => {
           <input type="number" placeholder="Mínimo" value={""} />
           <input type="number" placeholder="Máximo" value={""} />
         </div> */}
-
       </div>
 
       <StyledButton

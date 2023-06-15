@@ -32,7 +32,6 @@ const Products = () => {
   useEffect(() => {
     const getCurCar = async () => {
       const car: iCarRes | undefined = await getCar(id)
-      console.log(car)
       setCurCar(car)
     }
 
