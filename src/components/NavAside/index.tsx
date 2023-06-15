@@ -3,11 +3,9 @@ import { StyledNav } from "./style";
 import { StyledButton } from "../../styles/button";
 import { useNavigate } from "react-router-dom";
 import { useCar } from "../../hooks/useCar";
-
 interface Filtro {
   [key: string]: string;
 }
-
 interface Card {
   id: string;
   model: string;
@@ -18,20 +16,12 @@ interface Card {
   km: string;
   price: string;
 }
-
 interface AsideProps {
   onSearch: (filtro: Filtro) => void;
   onClick?: (() => void) | undefined;
 }
-
 const Aside: React.FC<AsideProps> = ({ onClick }) => {
   const { cars, setCars } = useCar();
-
-  const brands = [...new Set(cars?.results.map((card) => card.brand))];
-  // const colors = [...new Set(cars?.results.map((card) => card.color))];
-  // const years = [...new Set(cars?.results.map((card) => card.year))];
-  // const fuels = [...new Set(cars?.results.map((card) => card.fuel))];
-
   const [filtro, setFiltro] = useState<Filtro>({
     brand: "",
     model: "",
@@ -43,32 +33,25 @@ const Aside: React.FC<AsideProps> = ({ onClick }) => {
     priceMin: "",
     priceMax: "",
   });
-
   const [cardsFiltrados, setCardsFiltrados] = useState<Card[] | undefined>([]);
   const navigate = useNavigate();
-
   const handleOptionSelect = (categoria: string, valor: string) => {
     setFiltro((prevFiltro) => ({
       ...prevFiltro,
       [categoria]: prevFiltro[categoria] === valor ? "" : valor,
     }));
-
     const updatedFiltro = {
       ...filtro,
       [categoria]: filtro[categoria] === valor ? "" : valor,
     };
-
     const queryParams = new URLSearchParams();
-
     Object.entries(updatedFiltro).forEach(([key, value]) => {
       if (value) {
         queryParams.append(key, value);
       }
     });
-
     const queryString = queryParams.toString();
     navigate(`?${queryString}`);
-
     const cardsFiltrados = cars?.results.filter((card) => {
       const brandMatch = updatedFiltro.brand
         ? card.brand === updatedFiltro.brand
@@ -104,7 +87,6 @@ const Aside: React.FC<AsideProps> = ({ onClick }) => {
                 ? parseInt(updatedFiltro.priceMax)
                 : Infinity)
           : true;
-
       return (
         brandMatch &&
         modelMatch &&
@@ -115,10 +97,10 @@ const Aside: React.FC<AsideProps> = ({ onClick }) => {
         priceMatch
       );
     });
-
-    setCardsFiltrados(cardsFiltrados!);
+    setCardsFiltrados(cardsFiltrados!); // Atualiza os cards filtrados no estado
+    // Envia os cards filtrados para a função setCars
+    // setCars(cardsFiltrados);
   };
-
   const handleLimparFiltros = () => {
     setFiltro({
       brand: "",
@@ -131,17 +113,33 @@ const Aside: React.FC<AsideProps> = ({ onClick }) => {
       priceMin: "",
       priceMax: "",
     });
-
     setCardsFiltrados([]);
     navigate("");
   };
-
+  const [brandsFiltrados, setBrandsFiltrados] = useState<string[]>([...new Set(cars?.results.map((card) => card.brand))]);
   const [modelsFiltrados, setmodelsFiltrados] = useState<string[]>([...new Set(cars?.results.map((card) => card.model))]);
   const [colorsFiltrados, setColorsFiltrados] = useState<string[]>([...new Set(cars?.results.map((card) => card.color))]);
   const [yearsFiltrados, setYearsFiltrados] = useState<string[]>([...new Set(cars?.results.map((card) => card.year))]);
   const [fuelsFiltrados, setFuelsFiltrados] = useState<string[]>([...new Set(cars?.results.map((card) => card.fuel))]);
-
   useEffect(() => {
+    const filteredBrand = [
+      ...new Set(
+        cars?.results
+          .filter((car) => {
+            return (
+              (!filtro.brand || car.brand === filtro.brand) &&
+              (!filtro.model || car.model === filtro.model) &&
+              (!filtro.color || car.color === filtro.color) &&
+              (!filtro.year || car.year === filtro.year) &&
+              (!filtro.fuel || car.fuel === filtro.fuel) &&
+              (!filtro.km || car.km === filtro.km) &&
+              (!filtro.price || car.price === filtro.price)
+            );
+          })
+          .map((car) => car.brand)
+      ),
+    ];
+    setBrandsFiltrados(filteredBrand);
     const filteredModels = [
       ...new Set(
         cars?.results
@@ -160,7 +158,6 @@ const Aside: React.FC<AsideProps> = ({ onClick }) => {
       ),
     ];
     setmodelsFiltrados(filteredModels);
-  
     const filteredColors = [
       ...new Set(
         cars?.results
@@ -179,7 +176,6 @@ const Aside: React.FC<AsideProps> = ({ onClick }) => {
       ),
     ];
     setColorsFiltrados(filteredColors);
-  
     const filteredYears = [
       ...new Set(
         cars?.results
@@ -198,7 +194,6 @@ const Aside: React.FC<AsideProps> = ({ onClick }) => {
       ),
     ];
     setYearsFiltrados(filteredYears);
-  
     const filteredFuels = [
       ...new Set(
         cars?.results
@@ -217,20 +212,15 @@ const Aside: React.FC<AsideProps> = ({ onClick }) => {
       ),
     ];
     setFuelsFiltrados(filteredFuels);
-
   }, [filtro.brand, filtro.model, filtro.color, filtro.year, filtro.fuel, filtro.km, filtro.price, cars]);
-
-
   const isAllOptionsEmpty = Object.values(filtro).every(
     (value) => value === ""
   );
-
   useEffect(() => {
     if (isAllOptionsEmpty) {
       setCardsFiltrados([]);
     }
   }, [isAllOptionsEmpty]);
-
   return (
     <StyledNav>
       <div className="asideButtonMobile">
@@ -241,11 +231,10 @@ const Aside: React.FC<AsideProps> = ({ onClick }) => {
           <button onClick={onClick}>X</button>
         </div>
       </div>
-
       <div className="navDiv">
         <h2>Marca</h2>
         <ul>
-          {brands.map((brand) => (
+          {brandsFiltrados.map((brand) => (
             <li
               key={brand}
               style={{
@@ -254,13 +243,12 @@ const Aside: React.FC<AsideProps> = ({ onClick }) => {
               }}
               onClick={() => handleOptionSelect("brand", brand)}
             >
-              <a href="#" onClick={(e) => e.preventDefault()}>
+              <button onClick={(e) => e.preventDefault()}>
                 {brand}
-              </a>
+              </button>
             </li>
           ))}
         </ul>
-
         <h2>Modelo</h2>
         <ul>
           {modelsFiltrados.map((model) => (
@@ -272,13 +260,12 @@ const Aside: React.FC<AsideProps> = ({ onClick }) => {
               }}
               onClick={() => handleOptionSelect("model", model)}
             >
-              <a href="#" onClick={(e) => e.preventDefault()}>
+              <button onClick={(e) => e.preventDefault()}>
                 {model}
-              </a>
+              </button>
             </li>
           ))}
         </ul>
-
         <h2>Cor</h2>
         <ul>
           {colorsFiltrados.map((color) => (
@@ -290,13 +277,12 @@ const Aside: React.FC<AsideProps> = ({ onClick }) => {
               }}
               onClick={() => handleOptionSelect("color", color)}
             >
-              <a href="#" onClick={(e) => e.preventDefault()}>
+              <button onClick={(e) => e.preventDefault()}>
                 {color}
-              </a>
+              </button>
             </li>
           ))}
         </ul>
-
         <h2>Ano</h2>
         <ul>
           {yearsFiltrados.map((year) => (
@@ -308,13 +294,12 @@ const Aside: React.FC<AsideProps> = ({ onClick }) => {
               }}
               onClick={() => handleOptionSelect("year", year)}
             >
-              <a href="#" onClick={(e) => e.preventDefault()}>
+              <button onClick={(e) => e.preventDefault()}>
                 {year}
-              </a>
+              </button>
             </li>
           ))}
         </ul>
-
         <h2>Combustível</h2>
         <ul>
           {fuelsFiltrados.map((fuel) => (
@@ -332,7 +317,6 @@ const Aside: React.FC<AsideProps> = ({ onClick }) => {
             </li>
           ))}
         </ul>
-
         <h2>Km</h2>
         <div className="inputDiv">
           <input
@@ -348,7 +332,6 @@ const Aside: React.FC<AsideProps> = ({ onClick }) => {
             onChange={(e) => handleOptionSelect("kmMax", e.target.value)}
           />
         </div>
-
         <h2>Preço</h2>
         <div className="inputDiv">
           <input
@@ -367,7 +350,6 @@ const Aside: React.FC<AsideProps> = ({ onClick }) => {
           />
         </div>
       </div>
-
       <StyledButton
         buttonstyle="brand1"
         className="buttonClearSearch"
@@ -375,25 +357,7 @@ const Aside: React.FC<AsideProps> = ({ onClick }) => {
       >
         Limpar Filtros
       </StyledButton>
-
-      {cardsFiltrados!.length > 0 ? (
-        cardsFiltrados!.map((card) => (
-          <div key={card.id}>
-            <h3>{card.model}</h3>
-            <p>brand: {card.brand}</p>
-            <p>year: {card.year}</p>
-            <p>color: {card.color}</p>
-            <p>Combustível: {card.fuel}</p>
-            <p>KM: {card.km}</p>
-            <p>Price: {card.price}</p>
-          </div>
-        ))
-      ) : (
-        <p>Nenhum card encontrado.</p>
-      )}
     </StyledNav>
   );
 };
-
 export { Aside };
-
