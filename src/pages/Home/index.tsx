@@ -40,9 +40,6 @@ const Home = () => {
     }
   }, [isWide]);
 
-  const handleSearch = (filtro: any) => {
-    // Lógica para lidar com a busca com base no filtro
-  };
 
   return (
     <Main>
@@ -58,10 +55,10 @@ const Home = () => {
         <Flex className="leftSide">
           {isWide ? (
             open && (
-              <Aside onSearch={handleSearch} onClick={() => setOpen(!open)} />
+              <Aside onClick={() => setOpen(!open)} />
             )
           ) : (
-            <Aside onSearch={handleSearch} />
+            <Aside />
           )}
 
           {!open && (
