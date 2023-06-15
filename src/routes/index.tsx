@@ -8,6 +8,7 @@ import Home from "../pages/Home";
 import { GlobalStyleGray } from "../styles/global";
 import { LoadUser } from "../pages/LoadUser";
 import { Profile } from "../pages/Profile";
+import { TestAside } from "../components/NavAside/test";
 
 const backgroundGray = (element: JSX.Element) => {
   return (
@@ -30,6 +31,7 @@ export const RoutesMain = () => {
           <Route path="/profile/:id" element={backgroundGray(<Profile/>)} />
         </Route>
       </Route>
+      <Route path="/test" element={<TestAside />} />
       <Route path="/404" element={<ErrorPage />} />
       <Route path="*" element={<Navigate to={"/404"} />} />
     </Routes>

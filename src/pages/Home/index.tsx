@@ -33,7 +33,6 @@ const Home = () => {
   };
 
   const { cars, setCars } = useCar();
-  console.log(cars);
 
   useEffect(() => {
     if (!isWide) {
