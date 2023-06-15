@@ -3,33 +3,60 @@ import { Avatar, PageStyled } from "../../styles/global"
 import { theme } from "../../styles/theme"
 import { StyledButton } from "../../styles/button"
 import { PageContainer, SectionsContainer, CarInfoContainer, Tag, GalleryGrid, CommentsList, CommentTextarea } from "./style"
+import { Link, useParams } from "react-router-dom"
+import { useEffect, useState } from "react"
+import { useCar } from "../../hooks/useCar"
+import { iCarRes } from "../../contexts/CarContext/props"
 
 const Products = () => {
+  const { id } = useParams()
+  const { getCar } = useCar()
+  const [curCar, setCurCar] = useState<iCarRes | undefined>()
+
+  const nameSub = curCar?.user.name
+    .split(" ")
+    .map((letter: string, index: number) => {
+      if (index === 0 || index === curCar.user?.name.split(" ").length - 1) {
+        return letter[0].toUpperCase();
+      }
+    })
+    .join("");
+
+  useEffect(() => {
+    const getCurCar = async () => {
+      const car: iCarRes | undefined = await getCar(id)
+      console.log(car)
+      setCurCar(car)
+    }
+
+    getCurCar()
+  }, []);
+
   return (
     <PageStyled>
       <PageContainer>
         <div>
           <SectionsContainer>
-            <img src={Car} />
+            <img src={curCar?.images[0].url} />
           </SectionsContainer>
           <SectionsContainer>
             <CarInfoContainer>
-              <h6 className="heading6">Mercedes Benz A 200 CGI ADVANCE SEDAN Mercedes Benz A 200 </h6>
+              <h6 className="heading6">{curCar?.brand} - {curCar?.model} </h6>
               <div className="carInfos">
                 <div>
-                  <Tag>2013</Tag>
-                  <Tag>0km</Tag>
+                  <Tag>{curCar?.year}</Tag>
+                  <Tag>{curCar?.km}km</Tag>
                 </div>
                 <h6 className="heading7">
-                  R$ 00.000,00
+                  {Number(curCar?.price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
                 </h6>
               </div>
-              <StyledButton buttonstyle="brand1" buttonsize="fit">Comprar</StyledButton>
+              <StyledButton buttonstyle="brand1" buttonsize="fit">Compar</StyledButton>
             </CarInfoContainer>
           </SectionsContainer>
           <SectionsContainer>
               <h6 className="heading6">Descrição</h6>
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>           
+              <p>{curCar?.description}</p>           
           </SectionsContainer>
         </div>
         <aside className="containerSticky">
@@ -37,21 +64,17 @@ const Products = () => {
             <div>
               <h6 className="heading6">Fotos</h6>
               <GalleryGrid>
-                <div className="imgContainer"><img src={Car} /></div>
-                <div className="imgContainer"><img src={Car} /></div>
-                <div className="imgContainer"><img src={Car} /></div>
-                <div className="imgContainer"><img src={Car} /></div>
-                <div className="imgContainer"><img src={Car} /></div>
-                <div className="imgContainer"><img src={Car} /></div>
+                { curCar?.images.map((img) => <li className="imgContainer" key={img.id}><img src={img.url} /></li>)}
+                
               </GalleryGrid>
             </div>           
           </SectionsContainer>
           <SectionsContainer>
-            <Avatar className="avatarProfileBig" $bg={theme.colors.random1}>GL</Avatar>
+            <Avatar className="avatarProfileBig" $bg={curCar?.user.avatar_bg}>{nameSub}</Avatar>
             <div className="sellerInfos">
-              <h6 className="heading6">Gustavo Lima</h6>
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's</p>
-              <StyledButton buttonstyle="grey" buttonsize="fit">Ver todos anúncios</StyledButton>
+              <h6 className="heading6">{curCar?.user.name}</h6>
+              <p>{curCar?.user.personalInformation?.description}</p>
+              <Link to={`/profile/${curCar?.user.id}`}>Ver todos anúncios</Link>
             </div>           
           </SectionsContainer>
         </aside>
@@ -61,7 +84,7 @@ const Products = () => {
             <ul>
               <CommentsList>
                 <div>
-                  <Avatar className="avatar" $bg={theme.colors.random1}>GL</Avatar>
+                  <Avatar className="avatar" $bg={curCar?.user.avatar_bg}>GL</Avatar>
                   <p className="commentUsername">Gustavo Lima</p>
                   <span className="commentTime">•</span>
                   <p className="commentTime">há 3 dias</p>

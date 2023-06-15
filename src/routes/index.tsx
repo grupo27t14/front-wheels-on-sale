@@ -27,9 +27,9 @@ export const RoutesMain = () => {
         <Route element={<LoadUser />}>
           <Route path="/login" element={backgroundGray(<Login />)} />
           <Route path="/register" element={backgroundGray(<Register />)} />
+          <Route path="/product/:id" element={backgroundGray(<Products />)} />
+          <Route path="/profile/:id" element={backgroundGray(<Profile/>)} />
         </Route>
-        <Route path="/profile/:id" element={backgroundGray(<Profile />)} />
-        <Route path="/product/:id" element={backgroundGray(<Products />)} />
       </Route>
       <Route path="/test" element={<TestAside />} />
       <Route path="/404" element={<ErrorPage />} />
