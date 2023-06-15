@@ -5,7 +5,6 @@ export const StyledNav = styled.aside`
   width: 100%;
 
   .asideButtonMobile {
-    /* border: 1px solid green; */
 
     width: 100%;
     display: none;
@@ -20,7 +19,6 @@ export const StyledNav = styled.aside`
   }
 
   .navDiv {
-    /* border: 1px solid green; */
     overflow-y: auto;
 
     @media (max-width: 768px) {
@@ -35,12 +33,17 @@ export const StyledNav = styled.aside`
     }
 
     ul {
-      /* border: 1px solid blue; */
 
       margin-bottom: 20px;
 
       li {
-        a {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        button {
+          background: none;
+          border: none;
+          padding: 0;
           ${theme.typography.Heading6_500};
           text-decoration: none;
           color: ${theme.colors.grey3};
@@ -77,3 +80,4 @@ export const StyledNav = styled.aside`
     width: 279px;
   }
 `;
+
