@@ -1,17 +1,19 @@
-import Car from "../../assets/EXTERIOR-frontSidePilotNear-1653845164710-removebg-preview 1.png"
 import { Avatar, PageStyled } from "../../styles/global"
 import { theme } from "../../styles/theme"
 import { StyledButton } from "../../styles/button"
-import { PageContainer, SectionsContainer, CarInfoContainer, Tag, GalleryGrid, CommentsList, CommentTextarea } from "./style"
+import { PageContainer, SectionsContainer, CarInfoContainer, Tag, GalleryGrid, CommentsList, CommentTextarea, ModalImg } from "./style"
 import { Link, useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { useCar } from "../../hooks/useCar"
 import { iCarRes } from "../../contexts/CarContext/props"
+import { Modal } from "../../components/Modal"
 
 const Products = () => {
   const { id } = useParams()
   const { getCar } = useCar()
   const [curCar, setCurCar] = useState<iCarRes | undefined>()
+  const [isOpen, setIsOpen] = useState(false)
+  const [modalImg, setModalImg] = useState('')
 
   const nameSub = curCar?.user.name
     .split(" ")
@@ -21,6 +23,11 @@ const Products = () => {
       }
     })
     .join("");
+
+  const openModal = (img: string) => {
+    setIsOpen(true)
+    setModalImg(img)
+  }
 
   useEffect(() => {
     const getCurCar = async () => {
@@ -64,7 +71,7 @@ const Products = () => {
             <div>
               <h6 className="heading6">Fotos</h6>
               <GalleryGrid>
-                { curCar?.images.map((img) => <li className="imgContainer" key={img.id}><img src={img.url} /></li>)}
+                { curCar?.images.map((img) => <li className="imgContainer" key={img.id} onClick={() => openModal(img.url)}><img src={img.url} /></li>)}
                 
               </GalleryGrid>
             </div>           
@@ -104,6 +111,14 @@ const Products = () => {
             </CommentTextarea>   
           </SectionsContainer>
         </div>
+        {
+          isOpen ?
+            <Modal toggleModal={() => setIsOpen(false)}>
+              <ModalImg src={modalImg} alt="Imagem do carro" />
+            </Modal>
+        : null
+        }
+        
       </PageContainer>
     </PageStyled>
   )

@@ -91,6 +91,7 @@ export const GalleryGrid = styled.div`
   gap: 10px;
 
   .imgContainer {
+    cursor: pointer;
     width: 9rem;
     height: 9rem;
     background-color: ${theme.colors.grey7};
@@ -208,4 +209,8 @@ export const CommentTextarea = styled.div`
     bottom: 2rem;
     right: 2rem;
   }
+`
+
+export const ModalImg = styled.img`
+  width: 100%;
 `
