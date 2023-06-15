@@ -47,7 +47,7 @@ const Card = ({ car }: ICarProps) => {
             <Box className="card__info--subTag">{car.km} KM</Box>
             <Box className="card__info--subTag">{car.year}</Box>
           </Flex>
-          <Text className="card__info--price">R$ {car.price}</Text>
+          <Text className="card__info--price">{Number(car.price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</Text>
         </VStack>
 
         {/* <VStack className="card__btn">
