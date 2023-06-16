@@ -32,7 +32,15 @@ export const NewAnnounce = ({
 
   const { id } = useParams();
 
-  // VEICLES
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+  } = useForm<announceData>({
+    resolver: zodResolver(announceSchema),
+  });
+
   useEffect(() => {
     fipe
       .get("/cars")
@@ -62,12 +70,20 @@ export const NewAnnounce = ({
 
   const onModelChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedModelId = event.target.value;
-    const selectedModel = models.find((model) => model.id === selectedModelId);
+    const selectedModel = models.find(
+      (model) => model.name === selectedModelId
+    );
 
     if (selectedModel) {
       setSelectedModel(selectedModel);
+      setValue("fipe", selectedModel.value.toString());
+      setValue("year", selectedModel.year.toString());
+      setValue("fuel", getFuelType(selectedModel.fuel));
     } else {
       setSelectedModel(null);
+      setValue("fipe", "");
+      setValue("year", "");
+      setValue("fuel", "");
     }
   };
 
@@ -81,9 +97,7 @@ export const NewAnnounce = ({
     }
     return "";
   };
-  // END VEICLES
 
-  // IMAGE
   const uploadImage = async (carID: string, imageFile: any) => {
     try {
       const formData = new FormData();
@@ -95,22 +109,10 @@ export const NewAnnounce = ({
         },
       });
 
-      console.log("Imagem enviada com sucesso:", response.data);
     } catch (error) {
       console.error("Erro ao enviar a imagem:", error);
     }
   };
-  // END IMAGE
-
-  // FORM
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    formState: { errors },
-  } = useForm<announceData>({
-    resolver: zodResolver(announceSchema),
-  });
 
   const onsubmit = async (newData: announceData) => {
     const image = newData.image;
@@ -119,7 +121,6 @@ export const NewAnnounce = ({
     try {
       const carData = await createCar(newData);
       await uploadImage(carData.id, image);
-      console.log("carData", carData);
 
       if (id) {
         const cars = await getUserCars(id);
@@ -133,7 +134,13 @@ export const NewAnnounce = ({
   };
 
   return (
-    <Form title="Criar anúncio" onSubmit={handleSubmit(onsubmit)} margin="0" padding="0" width="100%">
+    <Form
+      title="Criar anúncio"
+      onSubmit={handleSubmit(onsubmit)}
+      margin="0"
+      padding="0"
+      width="100%"
+    >
       <h4>Informações do veículo</h4>
 
       <label>Marca</label>
@@ -154,7 +161,7 @@ export const NewAnnounce = ({
       <select {...register("model")} onChange={onModelChange}>
         <option value="">Selecione um modelo</option>
         {models.map((model) => (
-          <option key={model.id} value={model.id}>
+          <option key={model.id} value={model.name}>
             {model.name}
           </option>
         ))}
@@ -167,8 +174,8 @@ export const NewAnnounce = ({
           placeholder="Qual o Ano?"
           type="text"
           {...register("year")}
-          // disabled={selectedModel}
-          value={selectedModel ? selectedModel.year : ""}
+          value={selectedModel ? selectedModel.year.toString() : ""}
+          disabled={selectedModel}
         />
         {errors.year && <ErrorMessage>{errors.year.message}</ErrorMessage>}
         <Input
@@ -178,8 +185,8 @@ export const NewAnnounce = ({
           type="text"
           className=""
           {...register("fuel")}
-          disabled={selectedModel}
           value={selectedModel ? getFuelType(selectedModel.fuel) : ""}
+          disabled={selectedModel}
         />
         {errors.fuel && <ErrorMessage>{errors.fuel.message}</ErrorMessage>}
       </div>
@@ -202,29 +209,30 @@ export const NewAnnounce = ({
           {...register("color")}
         />
         {errors.color && <ErrorMessage>{errors.color.message}</ErrorMessage>}
-        </div>
-        <div>
-          <Input
-            id="fipe"
-            label="Preço tabela FIPE"
-            placeholder="Qual o valor Fipe?"
-            type="text"
-            className=""
-            {...register("fipe")}
-            disabled={selectedModel}
-            value={selectedModel ? selectedModel.value : ""}
-          />
-          {errors.fipe && <ErrorMessage>{errors.fipe.message}</ErrorMessage>}
-          <Input
-            id="price"
-            label="Preço"
-            placeholder="Deseja vender por quanto?"
-            type="text"
-            className=""
-            {...register("price")}
-          />
-          {errors.price && <ErrorMessage>{errors.price.message}</ErrorMessage>}
-        </div>
+      </div>
+      <div>
+        <Input
+          id="fipe"
+          label="Preço tabela FIPE"
+          placeholder="Qual o valor Fipe?"
+          type="text"
+          className=""
+          {...register("fipe")}
+          value={selectedModel ? selectedModel.value.toString() : ""}
+          disabled={selectedModel}
+        />
+        {errors.fipe && <ErrorMessage>{errors.fipe.message}</ErrorMessage>}
+
+        <Input
+          id="price"
+          label="Preço"
+          placeholder="Deseja vender por quanto?"
+          type="text"
+          className=""
+          {...register("price")}
+        />
+        {errors.price && <ErrorMessage>{errors.price.message}</ErrorMessage>}
+      </div>
 
       <label>Descrição</label>
       <textarea
@@ -232,16 +240,12 @@ export const NewAnnounce = ({
         placeholder="Faça uma breve descrição do veículo"
         {...register("description")}
       />
-      {errors.description && (
-        <ErrorMessage>{errors.description.message}</ErrorMessage>
-      )}
 
       <Input
         id="image"
         label="Imagem da capa"
         placeholder="Adicione uma imágem aqui"
         type="file"
-        // onSubmit={handleImageChange}
         {...register("image")}
       />
       {errors.image && <ErrorMessage>{errors.image.message}</ErrorMessage>}
@@ -257,3 +261,4 @@ export const NewAnnounce = ({
     </Form>
   );
 };
+
