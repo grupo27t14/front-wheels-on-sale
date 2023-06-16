@@ -10,6 +10,7 @@ import { StyledForm } from "./styles";
 import { StyledButton } from "../../../styles/button";
 import { useParams } from "react-router-dom";
 import { useUsers } from "../../../hooks/useUser";
+import { unknown } from "zod";
 
 interface modalProps {
   setIsModalOpen: any;
@@ -22,7 +23,7 @@ export const NewAnnounce = ({
   isModalOpen,
   setCars,
 }: modalProps): JSX.Element => {
-  const { createCar } = useContext(CarContext);
+  const { createCar, refreshCars } = useContext(CarContext);
   const [brands, setBrands] = useState<string[]>([]);
   const [models, setModels] = useState<any[]>([]);
   const [selectedBrand, setSelectedBrand] = useState("");
@@ -84,10 +85,10 @@ export const NewAnnounce = ({
   // END VEICLES
 
   // IMAGE
-  const uploadImage = async (carID: string, imageFile: string | Blob) => {
+  const uploadImage = async (carID: string, imageFile: any) => {
     try {
       const formData = new FormData();
-      formData.append("image", imageFile);
+      formData.append("image", imageFile[0]);
 
       const response = await api.post(`/image/${carID}`, formData, {
         headers: {
@@ -119,16 +120,25 @@ export const NewAnnounce = ({
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<announceData>({
     resolver: zodResolver(announceSchema),
   });
 
-  const onsubmit = async (data: announceData) => {
+  const onsubmit = async (newData: announceData) => {
+    //   console.log("newData", newData);
+    const image = newData.image;
+    Reflect.deleteProperty(newData, "image");
+    console.log("image", image);
+
     try {
-      await createCar(data);
+      const carData = await createCar(newData);
+      await uploadImage(carData.id, image);
+      console.log("carData", carData);
+
       if (id) {
-          const cars = await getUserCars(id);
+        const cars = await getUserCars(id);
         setCars(cars);
       }
       setIsModalOpen(!isModalOpen);
@@ -175,7 +185,7 @@ export const NewAnnounce = ({
             placeholder="Qual o Ano?"
             type="text"
             {...register("year")}
-            disabled={selectedModel}
+            // disabled={selectedModel}
             value={selectedModel ? selectedModel.year : ""}
           />
           {errors.year && <ErrorMessage>{errors.year.message}</ErrorMessage>}
@@ -260,11 +270,10 @@ export const NewAnnounce = ({
         label="Imagem da capa"
         placeholder="Adicione uma imágem aqui"
         type="file"
-        onSubmit={handleImageChange}
+        // onSubmit={handleImageChange}
+        {...register("image")}
       />
-      {errors.description && (
-        <ErrorMessage>{errors.description.message}</ErrorMessage>
-      )}
+      {errors.image && <ErrorMessage>{errors.image.message}</ErrorMessage>}
 
       <div className="form__buttons">
         <StyledButton buttonsize="big" buttonstyle="negative">

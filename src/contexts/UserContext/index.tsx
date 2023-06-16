@@ -53,7 +53,7 @@ export const UserContextProvider = ({ children }: UserProviderProps) => {
     try {
       const { data } = await api.get<iPaginationCars>(`user/${userId}/cars`);
       
-      console.log(data);
+      // console.log(data);
       
 
       return data;
