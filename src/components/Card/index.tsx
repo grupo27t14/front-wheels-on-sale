@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { iCarRes } from "../../contexts/CarContext/props";
 import { useUsers } from "../../hooks/useUser";
 import { Avatar } from "../../styles/global";
 import { Section, Box, Img, Title, Text, Flex, VStack } from "./styled";
 import { BsCurrencyDollar } from "react-icons/bs";
+import { StyledButton } from "../../styles/button";
 
 interface ICarProps {
   car: iCarRes;
@@ -11,6 +12,7 @@ interface ICarProps {
 
 const Card = ({ car }: ICarProps) => {
   const { user } = useUsers();
+  const { id } = useParams();
 
   const nomeESobrenome = car.user?.name
     .split(" ")
@@ -24,16 +26,28 @@ const Card = ({ car }: ICarProps) => {
   return (
     <Section>
       <Box className="card__img">
-        {/* <Box className="card__published--Active">Ativo</Box>
-        <Box className="card__published--Inactive">Inativo</Box> */}
+        {user?.is_seller && (
+          <Box>
+            {user?.id === id && car.is_published ? (
+              <Box className="card__published--Active">Ativo</Box>
+            ) : (
+              <Box className="card__published--Inactive">Inativo</Box>
+            )}
+          </Box>
+        )}
 
         {car.is_promo && <BsCurrencyDollar />}
-        <Link to={`/product/${car.id}`}>
+        <Link
+          to={user?.id === id ? "" : `/product/${car.id}`}
+          style={user?.id === id ? { cursor: "unset" } : { cursor: "pointer" }}
+        >
           <Img src={car.images[0]?.url} alt={car.brand} />
         </Link>
       </Box>
       <Box className="card__info">
-        <Title>{car.brand}</Title>
+        <Title>
+          {car.brand} - {car.model}
+        </Title>
         <Text className="card__info--text">{car.description}</Text>
         <Flex className="card__info--advertiser">
           <Avatar className="avatar" $bg={car.user?.avatar_bg}>
@@ -47,13 +61,22 @@ const Card = ({ car }: ICarProps) => {
             <Box className="card__info--subTag">{car.km} KM</Box>
             <Box className="card__info--subTag">{car.year}</Box>
           </Flex>
-          <Text className="card__info--price">{Number(car.price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</Text>
+          <Text className="card__info--price">
+            {Number(car.price).toLocaleString("pt-BR", {
+              style: "currency",
+              currency: "BRL",
+            })}
+          </Text>
         </VStack>
 
-        {/* <VStack className="card__btn">
-          <StyledButton buttonstyle="medium">Editar</StyledButton>
-          <StyledButton buttonstyle="medium">Ver detalhes</StyledButton>
-        </VStack> */}
+        {user?.id === id && (
+          <VStack className="card__btn">
+            <StyledButton buttonstyle="medium">Editar</StyledButton>
+            <StyledButton buttonstyle="medium">
+              <Link to={`/product/${car.id}`}>Ver detalhes</Link>
+            </StyledButton>
+          </VStack>
+        )}
       </Box>
     </Section>
   );
