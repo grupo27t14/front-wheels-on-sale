@@ -6,18 +6,29 @@ export const Container = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
   width: 100vw;
   height: 100vh;
-  position: absolute;
+  position: fixed;
 
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 999;
 
-  .closeButton {
+  >div>button {
+    all: unset;
+    cursor: pointer;
     position: absolute;
-    top: 22px;
-    right: 30px;
-    padding: 5px;
+    top: 16px;
+    right: 16px;
+    svg {
+      font-size: 3rem;
+      transform: scale(1);
+      color: ${theme.colors.grey4};
+      transition: 0.3s;
+    }
+    :hover svg {
+      transform: scale(1.1);
+      color: ${theme.colors.alert1};
+    }
   }
 
   > div {
@@ -29,12 +40,13 @@ export const Container = styled.div`
     padding: 20px;
     width: 80%;
     max-width: 500px;
+    height: 90vh;
 
     color: ${theme.colors.grey1};
 
-    position: absolute;
-    top: 8rem;
-    margin: 0 auto;
+    position: relative;
+    /* top: 12rem; */
+    margin: 3rem auto;
+    overflow-y: scroll;
   }
 `;
-

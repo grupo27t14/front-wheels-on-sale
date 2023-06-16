@@ -64,8 +64,8 @@ export const ProductsContainer = styled.section`
     grid-auto-rows: auto;
     grid-column-gap: 20px;
     grid-row-gap: 40px;
-/* 
-    overflow-x: auto; */
+    
+    overflow-x: auto;
     max-width: 100%;
 
     .card {

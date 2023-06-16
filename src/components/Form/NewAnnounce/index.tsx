@@ -6,11 +6,10 @@ import { api, fipe } from "../../../services/api";
 import { CarContext } from "../../../contexts/CarContext";
 import { useContext, useEffect, useState } from "react";
 import { ErrorMessage } from "../styles";
-import { StyledForm } from "./styles";
 import { StyledButton } from "../../../styles/button";
 import { useParams } from "react-router-dom";
 import { useUsers } from "../../../hooks/useUser";
-import { unknown } from "zod";
+import { Form } from "..";
 
 interface modalProps {
   setIsModalOpen: any;
@@ -23,7 +22,7 @@ export const NewAnnounce = ({
   isModalOpen,
   setCars,
 }: modalProps): JSX.Element => {
-  const { createCar, refreshCars } = useContext(CarContext);
+  const { createCar } = useContext(CarContext);
   const [brands, setBrands] = useState<string[]>([]);
   const [models, setModels] = useState<any[]>([]);
   const [selectedBrand, setSelectedBrand] = useState("");
@@ -101,19 +100,6 @@ export const NewAnnounce = ({
       console.error("Erro ao enviar a imagem:", error);
     }
   };
-
-  const handleImageChange: React.ChangeEventHandler<HTMLInputElement> = (
-    event
-  ) => {
-    const file = event.target.files?.[0];
-    const carID = selectedModel?.id || ""; // Usando o ID do modelo selecionado ou uma string vazia se não houver modelo selecionado
-
-    console.log("carID", carID);
-
-    if (file && carID) {
-      uploadImage(carID, file);
-    }
-  };
   // END IMAGE
 
   // FORM
@@ -127,10 +113,8 @@ export const NewAnnounce = ({
   });
 
   const onsubmit = async (newData: announceData) => {
-    //   console.log("newData", newData);
     const image = newData.image;
     Reflect.deleteProperty(newData, "image");
-    console.log("image", image);
 
     try {
       const carData = await createCar(newData);
@@ -141,17 +125,16 @@ export const NewAnnounce = ({
         const cars = await getUserCars(id);
         setCars(cars);
       }
-      setIsModalOpen(!isModalOpen);
     } catch (err) {
       console.log(err);
+    } finally {
+      setIsModalOpen(!isModalOpen);
     }
   };
 
   return (
-    <StyledForm title="Criar anúncio" onSubmit={handleSubmit(onsubmit)}>
-      <h2>Criar Anúncio</h2>
-
-      <h3>Informações do veículo</h3>
+    <Form title="Criar anúncio" onSubmit={handleSubmit(onsubmit)} margin="0" padding="0" width="100%">
+      <h4>Informações do veículo</h4>
 
       <label>Marca</label>
       <select
@@ -177,57 +160,49 @@ export const NewAnnounce = ({
         ))}
       </select>
 
-      <div className="form__about-car">
-        <div>
-          <Input
-            id="year"
-            label="Ano"
-            placeholder="Qual o Ano?"
-            type="text"
-            {...register("year")}
-            // disabled={selectedModel}
-            value={selectedModel ? selectedModel.year : ""}
-          />
-          {errors.year && <ErrorMessage>{errors.year.message}</ErrorMessage>}
+      <div>
+        <Input
+          id="year"
+          label="Ano"
+          placeholder="Qual o Ano?"
+          type="text"
+          {...register("year")}
+          // disabled={selectedModel}
+          value={selectedModel ? selectedModel.year : ""}
+        />
+        {errors.year && <ErrorMessage>{errors.year.message}</ErrorMessage>}
+        <Input
+          id="fuel"
+          label="Combustível"
+          placeholder="Qual o tipo de combustível?"
+          type="text"
+          className=""
+          {...register("fuel")}
+          disabled={selectedModel}
+          value={selectedModel ? getFuelType(selectedModel.fuel) : ""}
+        />
+        {errors.fuel && <ErrorMessage>{errors.fuel.message}</ErrorMessage>}
+      </div>
+      <div>
+        <Input
+          id="km"
+          label="Quilometragem"
+          placeholder="Qual a Quilometragem?"
+          type="text"
+          className=""
+          {...register("km")}
+        />
+        {errors.km && <ErrorMessage>{errors.km.message}</ErrorMessage>}
+        <Input
+          id="color"
+          label="Cor"
+          placeholder="Qual a Cor?"
+          type="text"
+          className=""
+          {...register("color")}
+        />
+        {errors.color && <ErrorMessage>{errors.color.message}</ErrorMessage>}
         </div>
-        <div>
-          <Input
-            id="fuel"
-            label="Combustível"
-            placeholder="Qual o tipo de combustível?"
-            type="text"
-            className=""
-            {...register("fuel")}
-            disabled={selectedModel}
-            value={selectedModel ? getFuelType(selectedModel.fuel) : ""}
-          />
-          {errors.fuel && <ErrorMessage>{errors.fuel.message}</ErrorMessage>}
-        </div>
-
-        <div>
-          <Input
-            id="km"
-            label="Quilometragem"
-            placeholder="Qual a Quilometragem?"
-            type="text"
-            className=""
-            {...register("km")}
-          />
-          {errors.km && <ErrorMessage>{errors.km.message}</ErrorMessage>}
-        </div>
-
-        <div>
-          <Input
-            id="color"
-            label="Cor"
-            placeholder="Qual a Cor?"
-            type="text"
-            className=""
-            {...register("color")}
-          />
-          {errors.color && <ErrorMessage>{errors.color.message}</ErrorMessage>}
-        </div>
-
         <div>
           <Input
             id="fipe"
@@ -240,9 +215,6 @@ export const NewAnnounce = ({
             value={selectedModel ? selectedModel.value : ""}
           />
           {errors.fipe && <ErrorMessage>{errors.fipe.message}</ErrorMessage>}
-        </div>
-
-        <div>
           <Input
             id="price"
             label="Preço"
@@ -253,7 +225,6 @@ export const NewAnnounce = ({
           />
           {errors.price && <ErrorMessage>{errors.price.message}</ErrorMessage>}
         </div>
-      </div>
 
       <label>Descrição</label>
       <textarea
@@ -283,7 +254,6 @@ export const NewAnnounce = ({
           Criar anúncio
         </StyledButton>
       </div>
-    </StyledForm>
+    </Form>
   );
 };
-

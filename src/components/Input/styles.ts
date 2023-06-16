@@ -8,10 +8,12 @@ export const StyledInput = styled.fieldset`
   gap: 0.75rem;
   width: 100%;
   margin: 20px 0;
+
   label {
     ${theme.typography.input_label}
     color: ${theme.colors.grey1};
   }
+  
   input {
     width: 100%;
     padding: 12px 16px;

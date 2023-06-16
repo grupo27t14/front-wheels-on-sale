@@ -1,6 +1,7 @@
 import { createPortal } from "react-dom";
 import { Container } from "./styles";
 import { ReactNode, useEffect, useRef } from "react";
+import { MdClose } from "react-icons/md";
 
 interface ModalProps {
   toggleModal: () => void;
@@ -40,7 +41,7 @@ export const Modal = ({ toggleModal, children, blockClosing }: ModalProps) => {
   return createPortal(
     <Container>
       <div ref={blockClosing ? null : ref}>
-        {!blockClosing && <button className="closeButton" onClick={handleClose}>X</button>}
+        {!blockClosing && <button onClick={handleClose}><MdClose /></button>}
         {children}
       </div>
     </Container>,
