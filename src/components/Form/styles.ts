@@ -1,23 +1,41 @@
 import styled from "styled-components";
 import { theme } from "../../styles/theme";
 
-export const StyledForm = styled.form`
+interface iStFormProps {
+  padding?: string;
+  margin?: string;
+  width?: string;
+}
+
+export const StyledForm = styled.form<iStFormProps>`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding: 44px clamp(12px, 2.5%, 38px);
-  width: 411px;
+  padding: ${(props) => (props.padding ? props.padding : "44px")}
+    clamp(12px, 2.5%, 38px);
+  width: ${(props) => (props.width ? props.width : "411px")};
   height: max-content;
-  margin: 3rem 1rem;
+  margin: ${(props) => (props.margin ? props.margin : "3rem")};
 
   background: ${theme.colors.grey10};
   border-radius: 4px;
+
+  label {
+    ${theme.typography.input_label}
+    color: ${theme.colors.grey1};
+  }
 
   h3 {
     ${theme.typography.Heading5_500}
     color: ${theme.colors.blackFixed};
     margin-bottom: 20px;
+  }
+
+  h4 {
+    ${theme.typography.body2_500}
+    color: ${theme.colors.blackFixed};
+    margin: 10px 0;
   }
 
   div {
@@ -32,6 +50,52 @@ export const StyledForm = styled.form`
     border-radius: 4px;
     margin: 20px 0;
   }
+
+  textarea {
+    all: unset;
+    resize: none;
+    box-sizing: border-box;
+    height: 80px;
+    width: 100%;
+    padding: 12px 16px;
+    gap: 10px;
+    margin-top: 0.75rem;
+    word-wrap: break-word;
+
+    border: 1.5px solid ${theme.colors.grey7};
+    border-radius: 4px;
+    box-shadow: none;
+
+    ::placeholder {
+      ${theme.typography.input_placeholder}
+      color: ${theme.colors.grey3};
+      padding-top: 12px;
+    }
+  }
+
+  select {
+    width: 100%;
+    padding: 12px 16px;
+    gap: 10px;
+    margin: 20px 0px;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    border: 1.5px solid ${theme.colors.grey7};
+    border-radius: 4px;
+    box-shadow: none;
+
+    :focus {
+      border: 1.5px solid ${theme.colors.brand2};
+    }
+
+    ::placeholder {
+      ${theme.typography.input_placeholder}
+      color: ${theme.colors.grey3};
+    }
+  }
 `;
 
 export const ErrorMessage = styled.h5`
@@ -40,7 +104,7 @@ export const ErrorMessage = styled.h5`
   width: 100%;
   ${theme.typography.input_placeholder}
   font-size: 1.4rem;
-  animation: blinding .5s forwards;
+  animation: blinding 0.5s forwards;
   animation-iteration-count: 2;
   transform: translateY(-6px) translateX(2px);
   @keyframes blinding {
