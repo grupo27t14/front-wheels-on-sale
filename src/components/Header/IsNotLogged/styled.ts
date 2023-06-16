@@ -13,7 +13,7 @@ export const UnorderedList = styled.ul`
   background-color: ${theme.colors.grey10};
 
   @media (max-width: 768px) {
-    width: 200px;
+    width: 250px;
     height: 202px;
     flex-direction: column;
     position: absolute;
@@ -21,6 +21,7 @@ export const UnorderedList = styled.ul`
     right: 10px;
     z-index: 100;
     border-left: none;
+    padding: 32px 12px;
 
     box-shadow: 0px 4px 40px -10px rgba(0, 0, 0, 0.25);
   }
