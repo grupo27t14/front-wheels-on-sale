@@ -5,6 +5,7 @@ import { iPaginationCars } from "../../contexts/CarContext/props";
 import { useSearchParams } from "react-router-dom";
 import { StyledNav } from "./style";
 import { StyledButton } from "../../styles/button";
+import React from "react";
 
 type tKeys = {
   brand: string[];
@@ -95,7 +96,7 @@ export const Aside: React.FC<AsideProps> = ({ onClick }) => {
   if (keys) {
     for (const [key, value] of Object.entries(keys)) {
       objects.push(
-        <>
+        <React.Fragment key={key}>
           <h2>{key}</h2>
           <ul>
             {[...new Set(value)].map((val) => (
@@ -106,7 +107,7 @@ export const Aside: React.FC<AsideProps> = ({ onClick }) => {
               </li>
             ))}
           </ul>
-        </>
+        </React.Fragment>
       );
     }
   }

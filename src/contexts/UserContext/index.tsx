@@ -52,6 +52,10 @@ export const UserContextProvider = ({ children }: UserProviderProps) => {
   const getUserCars = async (userId: string) => {
     try {
       const { data } = await api.get<iPaginationCars>(`user/${userId}/cars`);
+      
+      console.log(data);
+      
+
       return data;
     } catch (err) {
       toast.error("Não foi possível completar a requisição.");
