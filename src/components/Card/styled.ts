@@ -40,6 +40,11 @@ export const VStack = styled.div`
     & > button {
       border-radius: 4px;
       border: 2px solid ${theme.colors.grey0};
+
+      & > a {
+        text-decoration: none;
+        color: ${theme.colors.grey0};
+      }
     }
   }
 `;
