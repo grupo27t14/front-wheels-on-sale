@@ -8,7 +8,7 @@ export type buttonProps = {
 
 export const StyledButton = styled.button<buttonProps>`
   display: flex;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -38,6 +38,13 @@ export const StyledButton = styled.button<buttonProps>`
           ${theme.typography.button_big_text};
           padding: 12px 28px;
           width: fit-content;
+          height: 48px;
+        `;
+      case "form":
+        return css`
+          ${theme.typography.button_big_text};
+          padding: 12px 28px;
+          width: 193px;
           height: 48px;
         `;
       default:

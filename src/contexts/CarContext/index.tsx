@@ -31,7 +31,7 @@ export const CarContextProvider = ({ children }: CarProviderProps) => {
     }
   };
 
-  const getCar = async (carId: string) => {
+  const getCar = async (carId: string | undefined) => {
     try {
       const { data } = await api.get<iCarRes>(`car/${carId}`);
       return data;

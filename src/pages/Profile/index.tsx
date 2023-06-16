@@ -6,11 +6,14 @@ import { useUsers } from "../../hooks/useUser";
 import { useEffect, useState } from "react";
 import { iPaginationCars } from "../../contexts/CarContext/props";
 import Card from "../../components/Card";
+import { Modal } from "../../components/Modal";
+import { NewAnnounce } from "../../components/Form/NewAnnounce";
 
 export const Profile = () => {
   const { id } = useParams();
   const { user, getUserCars } = useUsers();
   const [cars, setCars] = useState<iPaginationCars | null>();
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   useEffect(() => {
     (async () => {
@@ -35,6 +38,10 @@ export const Profile = () => {
         }
       })
       .join("");
+  }
+
+  const handleOpenModal = () => {
+    setIsModalOpen(!isModalOpen)
   }
 
   return (
@@ -65,7 +72,7 @@ export const Profile = () => {
         </p>
 
         {user?.is_seller && user.id === id && (
-          <StyledButton buttonstyle="outline_brand" buttonsize="fit">
+          <StyledButton buttonstyle="outline_brand" buttonsize="fit" onClick={handleOpenModal}>
             Criar Anúncio
           </StyledButton>
         )}
@@ -81,6 +88,12 @@ export const Profile = () => {
           ))}
         </ul>
       </ProductsContainer>
+
+      {isModalOpen && (
+        <Modal toggleModal={handleOpenModal}>
+          <NewAnnounce setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} setCars={setCars} />
+        </Modal>
+      )}
     </PageStyled>
   );
 };
