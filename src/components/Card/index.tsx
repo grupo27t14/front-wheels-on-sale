@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { iCarRes } from "../../contexts/CarContext/props";
 import { useUsers } from "../../hooks/useUser";
 import { Avatar } from "../../styles/global";
@@ -11,8 +11,11 @@ interface ICarProps {
 }
 
 const Card = ({ car }: ICarProps) => {
+  const { pathname } = useLocation();
   const { user } = useUsers();
   const { id } = useParams();
+
+  const path = pathname.substring(1, 8);
 
   const nomeESobrenome = car.user?.name
     .split(" ")
@@ -26,7 +29,7 @@ const Card = ({ car }: ICarProps) => {
   return (
     <Section>
       <Box className="card__img">
-        {user?.is_seller && (
+        {user && user?.is_seller && path === "profile" && (
           <Box>
             {user?.id === id && car.is_published ? (
               <Box className="card__published--Active">Ativo</Box>
@@ -38,8 +41,12 @@ const Card = ({ car }: ICarProps) => {
 
         {car.is_promo && <BsCurrencyDollar />}
         <Link
-          to={user?.id === id ? "" : `/product/${car.id}`}
-          style={user?.id === id ? { cursor: "unset" } : { cursor: "pointer" }}
+          to={user && user?.id === id ? "" : `/product/${car.id}`}
+          style={
+            user && user?.id === id
+              ? { cursor: "unset" }
+              : { cursor: "pointer" }
+          }
         >
           <Img src={car.images[0]?.url} alt={car.brand} />
         </Link>
@@ -69,7 +76,7 @@ const Card = ({ car }: ICarProps) => {
           </Text>
         </VStack>
 
-        {user?.id === id && (
+        {user && user?.is_seller && user?.id === id && (
           <VStack className="card__btn">
             <StyledButton buttonstyle="medium">Editar</StyledButton>
             <StyledButton buttonstyle="medium">
