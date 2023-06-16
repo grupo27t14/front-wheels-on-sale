@@ -36,7 +36,11 @@ const Header = () => {
             {!user ? (
               <IsNotLogged open={open} />
             ) : (
-              <IsLogged open={open} onClick={() => setOpen(!open)} />
+              <IsLogged
+                open={open}
+                setOpen={setOpen}
+                onClick={() => setOpen(!open)}
+              />
             )}
 
             {isWide && (
