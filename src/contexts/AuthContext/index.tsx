@@ -49,7 +49,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   };
 
   const refreshUser = async () => {
-    if (api.defaults.headers.common.authorization){
+    if (api.defaults.headers.common.authorization) {
       const user = await api.get("user/me");
       setUser(user.data);
     }

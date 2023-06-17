@@ -49,13 +49,13 @@ export const Aside: React.FC<AsideProps> = ({ onClick }) => {
   );
 
   useEffect(() => {
-    let ass = "";
+    let queryConcat = "";
     for (const [k, v] of searchParams.entries()) {
-      ass += `${k}=${v}&`;
+      queryConcat += `${k}=${v}&`;
     }
-    setStrFilter("car?" + ass);
-    if (ass !== "") {
-      getFilteredCars("car?" + ass);
+    setStrFilter("car?" + queryConcat);
+    if (queryConcat !== "") {
+      getFilteredCars("car?" + queryConcat);
     }
   }, [searchParams, getFilteredCars]);
 
@@ -152,4 +152,3 @@ export const Aside: React.FC<AsideProps> = ({ onClick }) => {
     </StyledNav>
   );
 };
-
