@@ -33,33 +33,29 @@ export const NewAnnounce = ({
     carBrand,
   } = useAnnounce();
 
-  // IMAGE
   const uploadImage = async (carID: string, imageFile: File[]) => {
     try {
       const formData = new FormData();
       formData.append("image", imageFile[0]);
 
-      const response = await api.post(`/image/${carID}`, formData, {
+      await api.post(`/image/${carID}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-
-      console.log("Imagem enviada com sucesso:", response.data);
     } catch (error) {
       console.error("Erro ao enviar a imagem:", error);
     }
   };
-  // END IMAGE
 
-  const onsubmit = async (newData: announceData) => {
-    const image: any = newData.image;
+  const onSubmit = async (newData: announceData) => {
+    const image = newData.image as File[];
     Reflect.deleteProperty(newData, "image");
+    setIsModalOpen(!isModalOpen);
 
     try {
       const carData = await createCar(newData);
       await uploadImage(carData.id, image);
-      console.log("carData", carData);
 
       if (id) {
         const cars = await getUserCars(id);
@@ -67,15 +63,13 @@ export const NewAnnounce = ({
       }
     } catch (err) {
       console.log(err);
-    } finally {
-      setIsModalOpen(!isModalOpen);
     }
   };
 
   return (
     <Form
       title="Criar anúncio"
-      onSubmit={handleSubmit(onsubmit)}
+      onSubmit={handleSubmit(onSubmit)}
       margin="0"
       padding="0"
       width="100%"
@@ -88,7 +82,9 @@ export const NewAnnounce = ({
         {...register("brand")}
         onChange={(e) => setValue("brand", e.target.value)}
       >
-        <option value="">Selecione uma marca</option>
+        <option value="">
+          {brands ? "Selecione uma marca" : "carregando..."}
+        </option>
         {brands &&
           brands.map((brand) => (
             <option key={brand} value={brand}>
@@ -105,7 +101,9 @@ export const NewAnnounce = ({
         })}
         onChange={(e) => setValue("model", e.target.value)}
       >
-        <option value="">Selecione um modelo</option>
+        <option value="">
+          {models ? "Selecione um modelo" : "carregando..."}
+        </option>
         {models &&
           models.map((model) => {
             return (

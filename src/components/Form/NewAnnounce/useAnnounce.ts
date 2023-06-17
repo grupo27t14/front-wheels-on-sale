@@ -27,8 +27,8 @@ export const useAnnounce = () => {
       try {
         const { data } = await fipe.get<iKenzieBrands>("cars");
         const allBrands = [];
-        for (const k of Object.keys(data)) {
-          allBrands.push(k);
+        for (const keys of Object.keys(data)) {
+          allBrands.push(keys);
         }
         setBrands(allBrands);
       } catch (error) {
