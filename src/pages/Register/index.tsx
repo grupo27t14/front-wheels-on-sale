@@ -8,11 +8,13 @@ import { useUsers } from "../../hooks/useUser";
 import { registerSchemaRequest, tRegister } from "./schemas";
 import { RadioButton } from "../../components/RadioButton";
 import { RadioButtonDivStyles } from "../../components/RadioButton/styles";
+import { LoadingRing } from "../../styles/LoadingRing";
+import { theme } from "../../styles/theme";
 
 export const Register = () => {
   const { errors, handleSubmit, register } = useCep();
 
-  const { userRegister } = useUsers();
+  const { userRegister, reqLoading } = useUsers();
 
   const handleRegisterSubmit = (data: tRegister) => {
     const parsedData = registerSchemaRequest.parse(data);
@@ -97,7 +99,7 @@ export const Register = () => {
           {...register("addressInformation.cep")}
         />
         {errors.addressInformation?.cep && (
-          <ErrorMessage>{errors.addressInformation?.message}</ErrorMessage>
+          <ErrorMessage>{errors.addressInformation?.cep.message}</ErrorMessage>
         )}
         <div>
           <Input
@@ -186,8 +188,12 @@ export const Register = () => {
         {errors.confirm && (
           <ErrorMessage>{errors.confirm.message}</ErrorMessage>
         )}
-        <StyledButton buttonstyle="brand1" type="submit">
-          Finalizar Cadastro
+        <StyledButton buttonstyle="brand1" type="submit" disabled={reqLoading}>
+          {reqLoading ? (
+            <LoadingRing color={theme.colors.whiteFixed} />
+          ) : (
+            "Finalizar Cadastro"
+          )}
         </StyledButton>
       </Form>
     </RegisterStyled>

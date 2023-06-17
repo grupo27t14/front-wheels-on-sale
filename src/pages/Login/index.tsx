@@ -8,6 +8,8 @@ import { loginSchema, tLogin } from "./schemas";
 import { ErrorMessage } from "../../components/Form/styles";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
+import { LoadingRing } from "../../styles/LoadingRing";
+import { theme } from "../../styles/theme";
 
 export const Login = () => {
   const {
@@ -18,7 +20,7 @@ export const Login = () => {
     resolver: zodResolver(loginSchema),
   });
 
-  const { signIn } = useAuth()
+  const { signIn, reqLoading } = useAuth();
 
   return (
     <LoginStyled>
@@ -46,8 +48,16 @@ export const Login = () => {
         <a href="#" className="forgot">
           Esqueci minha senha
         </a>
-        <StyledButton buttonstyle="brand1" type="submit">
-          Entrar
+        <StyledButton
+          buttonstyle="brand1"
+          type="submit"
+          disabled={reqLoading ? true : false}
+        >
+          {reqLoading ? (
+            <LoadingRing color={theme.colors.whiteFixed} />
+          ) : (
+            "Entrar"
+          )}
         </StyledButton>
         <span>Ainda não tem conta</span>
         <Link to="/register" className="toRegister">

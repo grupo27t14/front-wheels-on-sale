@@ -1,19 +1,14 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { announceData, announceSchema } from "./schema";
 import { fipe } from "../../../services/api";
-
-interface iKenzieCars {
-  id: string
-  name: string
-  brand: string
-  year: string
-  fuel: number
-  value: number
-}
+import { iKenzieBrands, iKenzieCars } from "./props";
 
 export const useAnnounce = () => {
+  const [brands, setBrands] = useState<string[]>();
+  const [models, setModels] = useState<iKenzieCars[]>([]);
+
   const {
     register,
     handleSubmit,
@@ -25,33 +20,79 @@ export const useAnnounce = () => {
   });
 
   const carModel = watch("model");
+  const carBrand = watch("brand");
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await fipe.get<iKenzieBrands>("cars");
+        const allBrands = [];
+        for (const k of Object.keys(data)) {
+          allBrands.push(k);
+        }
+        setBrands(allBrands);
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, []);
 
   const handleSetData = useCallback(
-    (data: iKenzieCars[]) => {
-      // setValue("brand", a);
-      // setValue("addressInformation.state", data.uf);
-      // setValue("addressInformation.street", data.logradouro);
+    (car: iKenzieCars) => {
+      const setFuel = (type: number) => {
+        return type === 1 ? "Gasolina" : type === 2 ? "Diesel" : "Elétrico";
+      };
+
+      setValue("fipe", String(car.value));
+      setValue("year", car.year);
+      setValue("fuel", setFuel(car.fuel));
     },
     [setValue]
   );
 
-  const handleReqAddress = useCallback(
-    async (carBrand: string) => {
-      if (carBrand) {
-        const { data } = await fipe.get(`/cars?brand=${carBrand}`);
-        handleSetData(data);
-      }
+  const handleCarList = useCallback(
+    (modelsList: iKenzieCars[], carModel: string) => {
+      const car: iKenzieCars | undefined = modelsList.find(
+        (value) => value.name === carModel
+      );
+      if (car) handleSetData(car);
     },
     [handleSetData]
   );
 
+  const handleBrand = useCallback(
+    async (carBrand: string) => {
+      if (carBrand) {
+        const { data } = await fipe.get<iKenzieCars[]>(
+          `/cars?brand=${carBrand}`
+        );
+        setModels(data);
+      }
+    },
+    [setModels]
+  );
+
   useEffect(() => {
     setValue("model", carModel);
+    setValue("brand", carBrand);
 
     if (carModel) {
-      handleReqAddress(carModel);
+      handleCarList(models, carModel);
     }
-  }, [handleReqAddress, carModel, setValue]);
 
-  return { errors, handleSubmit, register };
+    if (carBrand) {
+      handleBrand(carBrand);
+    }
+  }, [carModel, handleCarList, models, setValue, carBrand, handleBrand]);
+
+  return {
+    errors,
+    handleSubmit,
+    register,
+    brands,
+    models,
+    setValue,
+    carModel,
+    carBrand,
+  };
 };
