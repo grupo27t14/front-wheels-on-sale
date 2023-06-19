@@ -34,6 +34,12 @@ export const StyledNav = styled.aside`
 
     ul {
       margin-bottom: 20px;
+      overflow-y: hidden;
+
+      &.overflow {
+        height: 100%;
+        overflow-y: none;
+      }
 
       li {
         display: flex;
@@ -50,6 +56,20 @@ export const StyledNav = styled.aside`
         }
       }
     }
+
+    .showextras {
+      height: auto;
+      border: none;
+      background: none;
+      margin-bottom: 30px;
+      padding: 0 2rem;
+      color: ${theme.colors.brand1};
+      font-weight: 600;
+
+      :hover {
+        text-decoration: underline;
+      }
+    }
   }
   .buttonClearSearch {
     margin: 22px auto 32px auto;
@@ -57,3 +77,4 @@ export const StyledNav = styled.aside`
     width: 279px;
   }
 `;
+
