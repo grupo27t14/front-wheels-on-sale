@@ -24,9 +24,11 @@ export const Aside: React.FC<AsideProps> = ({ onClick }) => {
   const { cars, setCars } = useCar();
   // Estado para manter todos os carros do banco de dados
   const [allCars, setAllCars] = useState<iPaginationCars>();
-  //
+  // Estado que guarda o filtro atual
   const [strFilter, setStrFilter] = useState<string>("car?");
+  // Estado que guarda as chaves do aside
   const [keys, setKeys] = useState<tKeys>();
+  // Estado do proprio router dom que pega os parametros da rota
   const [searchParams, setSearchParams] = useSearchParams();
 
   // Função que recebe key e value, formatando elas como query, setando os
@@ -119,10 +121,6 @@ export const Aside: React.FC<AsideProps> = ({ onClick }) => {
     }
   }
 
-  const handleClearFilter = () => {
-    console.log("limpar");
-  };
-
   return (
     <StyledNav>
       <div className="asideButtonMobile">
@@ -143,7 +141,7 @@ export const Aside: React.FC<AsideProps> = ({ onClick }) => {
       <StyledButton
         buttonstyle="brand1"
         className="buttonClearSearch"
-        onClick={handleClearFilter}
+        onClick={() => setSearchParams("")}
       >
         Limpar Filtros
       </StyledButton>

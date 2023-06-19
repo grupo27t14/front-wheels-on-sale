@@ -27,9 +27,24 @@ export const InputsAside = ({ setStrFilter, strFilter }: iInputsAsideProps) => {
 
   type tIAside = z.infer<typeof filterSchema>;
 
-  const { register, handleSubmit, watch } = useForm<tIAside>({
+  const { register, handleSubmit, watch, setValue } = useForm<tIAside>({
     resolver: zodResolver(filterSchema),
   });
+
+  useEffect(() => {
+    const km = searchParams.get("km");
+    if (km) {
+      const [min, max] = km.split("_");
+      setValue("km_min", min);
+      setValue("km_max", max);
+    }
+    const price = searchParams.get("price");
+    if (price) {
+      const [min, max] = price.split("_");
+      setValue("price_min", min);
+      setValue("price_max", max);
+    }
+  }, [searchParams, setValue]);
 
   const onSub = async (inputData: tIAside) => {
     let query = "";
@@ -40,12 +55,12 @@ export const InputsAside = ({ setStrFilter, strFilter }: iInputsAsideProps) => {
       query += `price=${inputData.price_min}_${inputData.price_max}&`;
     }
 
-    let newStrFilter = "";
+    let newStrFilter = strFilter + query;
 
     const splitedKm = strFilter.split("km=");
     const splitedPrice = strFilter.split("price=");
 
-    if (splitedKm.length > 1 && splitedKm.length > 1) {
+    if (splitedKm.length > 1 && splitedPrice.length > 1) {
       newStrFilter = strFilter + query;
     }
 
@@ -56,7 +71,8 @@ export const InputsAside = ({ setStrFilter, strFilter }: iInputsAsideProps) => {
     if (splitedPrice.length > 1) {
       newStrFilter = splitedPrice[0] + query;
     }
-
+    newStrFilter = newStrFilter.slice(0, -1);
+    console.log(newStrFilter);
     const { data } = await api.get<iPaginationCars>(newStrFilter);
 
     setStrFilter(newStrFilter);
