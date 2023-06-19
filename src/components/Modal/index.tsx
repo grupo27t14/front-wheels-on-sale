@@ -27,9 +27,19 @@ export const Modal = ({ toggleModal, children, blockClosing }: ModalProps) => {
       }
     };
 
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        toggleModal();
+      }
+    });
     window.addEventListener("mousedown", handleClick);
 
     return () => {
+      window.removeEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          toggleModal();
+        }
+      });
       window.removeEventListener("mousedown", handleClick);
     };
   }, [toggleModal]);
@@ -41,7 +51,11 @@ export const Modal = ({ toggleModal, children, blockClosing }: ModalProps) => {
   return createPortal(
     <Container>
       <div ref={blockClosing ? null : ref}>
-        {!blockClosing && <button onClick={handleClose}><MdClose /></button>}
+        {!blockClosing && (
+          <button onClick={handleClose}>
+            <MdClose />
+          </button>
+        )}
         {children}
       </div>
     </Container>,

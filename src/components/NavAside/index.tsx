@@ -6,6 +6,7 @@ import { useSearchParams } from "react-router-dom";
 import { StyledNav } from "./style";
 import { StyledButton } from "../../styles/button";
 import React from "react";
+import { InputsAside } from "./InputsAside";
 
 type tKeys = {
   brand: string[];
@@ -19,12 +20,17 @@ interface AsideProps {
 }
 
 export const Aside: React.FC<AsideProps> = ({ onClick }) => {
+  // Contexto de carros, respectivamente: lista, setLista
   const { cars, setCars } = useCar();
+  // Estado para manter todos os carros do banco de dados
   const [allCars, setAllCars] = useState<iPaginationCars>();
+  //
   const [strFilter, setStrFilter] = useState<string>("car?");
   const [keys, setKeys] = useState<tKeys>();
   const [searchParams, setSearchParams] = useSearchParams();
 
+  // Função que recebe key e value, formatando elas como query, setando os
+  // carros, e guardando as queries em um estado e na própria url do site
   const handleFilter = async (key: string, value: string) => {
     const query = `${key}=${value}&`;
 
@@ -40,25 +46,22 @@ export const Aside: React.FC<AsideProps> = ({ onClick }) => {
     setSearchParams(newStrFilter.split("car?")[1]);
   };
 
-  const getFilteredCars = useCallback(
-    async (url: string) => {
-      const { data } = await api.get<iPaginationCars>(url);
-      setCars(data);
-    },
-    [setCars]
-  );
-
+  // Effect que busca todas as queries da url, formata elas e chama o useCallback acima
   useEffect(() => {
-    let queryConcat = "";
+    let queryConcat = "car?";
     for (const [k, v] of searchParams.entries()) {
       queryConcat += `${k}=${v}&`;
     }
-    setStrFilter("car?" + queryConcat);
-    if (queryConcat !== "") {
-      getFilteredCars("car?" + queryConcat);
+    setStrFilter(queryConcat);
+    if (queryConcat !== "car?") {
+      (async () => {
+        const { data } = await api.get<iPaginationCars>(queryConcat);
+        setCars(data);
+      })();
     }
-  }, [searchParams, getFilteredCars]);
+  }, [searchParams, setCars]);
 
+  // Effect que observa a troca do strFilter e seta os carros a partir da requisição dela
   useEffect(() => {
     (async () => {
       const { data } = await api.get<iPaginationCars>(strFilter);
@@ -66,6 +69,7 @@ export const Aside: React.FC<AsideProps> = ({ onClick }) => {
     })();
   }, [strFilter, setCars]);
 
+  // Effect que pega todos os carros do banco de dados
   useEffect(() => {
     (async () => {
       const { data } = await api.get<iPaginationCars>(
@@ -75,6 +79,8 @@ export const Aside: React.FC<AsideProps> = ({ onClick }) => {
     })();
   }, [strFilter, cars?.totalCount]);
 
+  // Effect que observa o estado que guarda todos os carros do banco de dados,
+  // e faz a primeira listagem dos keys do filtro, guardando essas keys em um state
   useEffect(() => {
     const thisKeys = {
       brand: [] as string[],
@@ -92,6 +98,7 @@ export const Aside: React.FC<AsideProps> = ({ onClick }) => {
     setKeys(thisKeys);
   }, [allCars]);
 
+  // Constante que guarda os componentes feitos na iteração do state keys
   const objects = [];
   if (keys) {
     for (const [key, value] of Object.entries(keys)) {
@@ -130,16 +137,7 @@ export const Aside: React.FC<AsideProps> = ({ onClick }) => {
       <div className="navDiv">
         {objects}
 
-        {/* <h2>Km</h2>
-        <div className="inputDiv">
-          <input type="number" placeholder="Mínimo" value={""} />
-          <input type="number" placeholder="Máximo" value={""} />
-        </div>
-        <h2>Preço</h2>
-        <div className="inputDiv">
-          <input type="number" placeholder="Mínimo" value={""} />
-          <input type="number" placeholder="Máximo" value={""} />
-        </div> */}
+        <InputsAside setStrFilter={setStrFilter} strFilter={strFilter} />
       </div>
 
       <StyledButton
