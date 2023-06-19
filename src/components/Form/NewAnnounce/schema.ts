@@ -5,10 +5,10 @@ export const announceSchema = z.object({
   model: z.string().nonempty().min(2),
   year: z.string().nonempty(),
   fuel: z.string().nonempty(),
-  km: z.string().nonempty(),
+  km: z.string().transform((value) => Number(value)),
   color: z.string().nonempty(),
   fipe: z.string().nonempty(),
-  price: z.string().nonempty(),
+  price: z.string().transform((value) => Number(value)),
   description: z.string(),
   image: z.unknown(),
 });

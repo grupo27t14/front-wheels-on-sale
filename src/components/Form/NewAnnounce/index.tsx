@@ -141,7 +141,7 @@ export const NewAnnounce = ({
           id="km"
           label="Quilometragem"
           placeholder="Qual a Quilometragem?"
-          type="text"
+          type="number"
           className={errors.km ? "err" : ""}
           {...register("km")}
         />
@@ -171,7 +171,7 @@ export const NewAnnounce = ({
           id="price"
           label="Preço"
           placeholder="Deseja vender por quanto?"
-          type="text"
+          type="number"
           className={errors.price ? "err" : ""}
           {...register("price")}
         />

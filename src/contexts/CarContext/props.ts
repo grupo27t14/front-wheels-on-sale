@@ -6,7 +6,7 @@ export interface CarProviderValues {
   setCars: React.Dispatch<React.SetStateAction<iPaginationCars | null>>;
   cars: iPaginationCars | null;
   refreshCars: () => Promise<void>;
-  createCar: (newData: iCarReq) => Promise<any>
+  createCar: (newData: iCarReq) => Promise<any>;
   getCar: (carId: string | undefined) => Promise<iCarRes | undefined>;
   editCar: (data: Partial<iCarReq>, carId: string) => Promise<void>;
   deleteCar: (carId: string) => Promise<void>;
@@ -17,10 +17,10 @@ export interface iCarReq {
   model: string;
   year: string;
   fuel: string;
-  km: string;
+  km: number;
   color: string;
   fipe: string;
-  price: string;
+  price: number;
   description: string;
 }
 

@@ -5,7 +5,6 @@ export const StyledNav = styled.aside`
   width: 100%;
 
   .asideButtonMobile {
-
     width: 100%;
     display: none;
     align-items: center;
@@ -19,7 +18,7 @@ export const StyledNav = styled.aside`
   }
 
   .navDiv {
-    overflow-y: auto;
+    /* overflow-y: auto; */
 
     @media (max-width: 768px) {
       width: 100%;
@@ -30,10 +29,10 @@ export const StyledNav = styled.aside`
 
       color: ${theme.colors.grey1};
       margin-bottom: 20px;
+      width: 100%;
     }
 
     ul {
-
       margin-bottom: 20px;
 
       li {
@@ -51,28 +50,6 @@ export const StyledNav = styled.aside`
         }
       }
     }
-
-    .inputDiv {
-      /* border: 1px solid red; */
-
-      display: flex;
-      gap: 20px;
-      margin-bottom: 20px;
-      height: 37px;
-      justify-content: center;
-
-      input {
-        border: 1px solid ${theme.colors.grey5};
-        background-color: ${theme.colors.grey5};
-        color: ${theme.colors.grey3};
-        text-align: center;
-        width: 142px;
-      }
-      input::placeholder {
-        ${theme.typography.Heading7_600};
-        color: ${theme.colors.grey3};
-      }
-    }
   }
   .buttonClearSearch {
     margin: 22px auto 32px auto;
@@ -80,4 +57,3 @@ export const StyledNav = styled.aside`
     width: 279px;
   }
 `;
-

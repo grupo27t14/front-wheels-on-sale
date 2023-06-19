@@ -69,7 +69,7 @@ const Card = ({ car }: ICarProps) => {
             <Box className="card__info--subTag">{car.year}</Box>
           </Flex>
           <Text className="card__info--price">
-            {Number(car.price).toLocaleString("pt-BR", {
+            {car.price.toLocaleString("pt-BR", {
               style: "currency",
               currency: "BRL",
             })}
