@@ -31,6 +31,11 @@ export const Aside: React.FC<AsideProps> = ({ onClick }) => {
   // Estado do proprio router dom que pega os parametros da rota
   const [searchParams, setSearchParams] = useSearchParams();
 
+  // controle para o overflow
+  const [showOverflow, setShowOverflow] = useState<{ [key: string]: boolean }>(
+    {}
+  );
+
   // Função que recebe key e value, formatando elas como query, setando os
   // carros, e guardando as queries em um estado e na própria url do site
   const handleFilter = async (key: string, value: string) => {
@@ -100,26 +105,19 @@ export const Aside: React.FC<AsideProps> = ({ onClick }) => {
     setKeys(thisKeys);
   }, [allCars]);
 
-  // Constante que guarda os componentes feitos na iteração do state keys
-  const objects = [];
-  if (keys) {
-    for (const [key, value] of Object.entries(keys)) {
-      objects.push(
-        <React.Fragment key={key}>
-          <h2>{key}</h2>
-          <ul>
-            {[...new Set(value)].map((val) => (
-              <li key={val}>
-                <button onClick={async () => await handleFilter(key, val)}>
-                  {val}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </React.Fragment>
-      );
-    }
-  }
+  const handleShowMore = (key: string) => {
+    setShowOverflow((prevShowOverflow) => ({
+      ...prevShowOverflow,
+      [key]: true,
+    }));
+  };
+
+  const handleShowLess = (key: string) => {
+    setShowOverflow((prevShowOverflow) => ({
+      ...prevShowOverflow,
+      [key]: false,
+    }));
+  };
 
   return (
     <StyledNav>
@@ -131,13 +129,43 @@ export const Aside: React.FC<AsideProps> = ({ onClick }) => {
           <button onClick={onClick}>X</button>
         </div>
       </div>
-
+  
       <div className="navDiv">
-        {objects}
-
-        <InputsAside setStrFilter={setStrFilter} strFilter={strFilter} />
+        {keys &&
+          Object.entries(keys).map(([key, value]) => {
+            const uniqueValues = [...new Set(value)];
+            const shouldShowOverflow = showOverflow[key];
+            const showMoreButton = uniqueValues.length > 6 && !shouldShowOverflow;
+            const showLessButton = shouldShowOverflow;
+  
+            return (
+              <React.Fragment key={key}>
+                <h2>{key}</h2>
+                <ul className={shouldShowOverflow ? "overflow" : ""}>
+                  {uniqueValues.map((val, index) => {
+                    if (!shouldShowOverflow && index >= 6) {
+                      return null;
+                    }
+                    return (
+                      <li key={val}>
+                        <button onClick={async () => await handleFilter(key, val)}>
+                          {val}
+                        </button>
+                      </li>
+                    );
+                  })}
+                </ul>
+                {showMoreButton && (
+                  <button className="showextras" onClick={() => handleShowMore(key)}>Ver mais</button>
+                )}
+                {showLessButton && (
+                  <button className="showextras" onClick={() => handleShowLess(key)}>Ver menos</button>
+                )}
+              </React.Fragment>
+            );
+          })}
       </div>
-
+  
       <StyledButton
         buttonstyle="brand1"
         className="buttonClearSearch"
@@ -148,3 +176,4 @@ export const Aside: React.FC<AsideProps> = ({ onClick }) => {
     </StyledNav>
   );
 };
+
