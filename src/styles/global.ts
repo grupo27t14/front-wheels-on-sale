@@ -134,12 +134,15 @@ export const Avatar = styled.span<{ $bg?: string }>`
   }
 `;
 
-
 export const PageStyled = styled.div`
   width: 100vw;
-  height: 100%;
-  background: linear-gradient(180deg, ${theme.colors.brand1} 31.25%, ${theme.colors.grey8} 31.26%, ${theme.colors.grey8} 100%);
+  background: linear-gradient(
+    180deg,
+    ${theme.colors.brand1} 574px,
+    ${theme.colors.grey8} 574px,
+    ${theme.colors.grey8} 100%
+  );
   color: ${theme.colors.grey1};
   margin: 0;
-  padding: 1.2rem;
+  padding-top: 1.2rem;
 `;
