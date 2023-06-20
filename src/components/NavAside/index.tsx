@@ -1,9 +1,9 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useCar } from "../../hooks/useCar";
 import { api } from "../../services/api";
 import { iPaginationCars } from "../../contexts/CarContext/props";
 import { useSearchParams } from "react-router-dom";
-import { StyledNav } from "./style";
+import { StyledKeySection, StyledNav } from "./style";
 import { StyledButton } from "../../styles/button";
 import React from "react";
 import { InputsAside } from "./InputsAside";
@@ -30,11 +30,8 @@ export const Aside: React.FC<AsideProps> = ({ onClick }) => {
   const [keys, setKeys] = useState<tKeys>();
   // Estado do proprio router dom que pega os parametros da rota
   const [searchParams, setSearchParams] = useSearchParams();
-
   // controle para o overflow
-  const [showOverflow, setShowOverflow] = useState<{ [key: string]: boolean }>(
-    {}
-  );
+  const [showAllList, setShowAllList] = useState<string[]>([]);
 
   // Função que recebe key e value, formatando elas como query, setando os
   // carros, e guardando as queries em um estado e na própria url do site
@@ -46,14 +43,11 @@ export const Aside: React.FC<AsideProps> = ({ onClick }) => {
         ? strFilter + query
         : strFilter.replace(query, "");
 
-    const { data } = await api.get<iPaginationCars>(newStrFilter);
-
     setStrFilter(newStrFilter);
-    setCars(data);
     setSearchParams(newStrFilter.split("car?")[1]);
   };
 
-  // Effect que busca todas as queries da url, formata elas e chama o useCallback acima
+  // Effect que busca todas as queries da url, busca e os carros
   useEffect(() => {
     let queryConcat = "car?";
     for (const [k, v] of searchParams.entries()) {
@@ -105,19 +99,49 @@ export const Aside: React.FC<AsideProps> = ({ onClick }) => {
     setKeys(thisKeys);
   }, [allCars]);
 
-  const handleShowMore = (key: string) => {
-    setShowOverflow((prevShowOverflow) => ({
-      ...prevShowOverflow,
-      [key]: true,
-    }));
+  const remove = (key: string) => {
+    const newShowAllList = [...showAllList];
+    newShowAllList.splice(newShowAllList.indexOf(key), 1);
+    setShowAllList(newShowAllList);
   };
 
-  const handleShowLess = (key: string) => {
-    setShowOverflow((prevShowOverflow) => ({
-      ...prevShowOverflow,
-      [key]: false,
-    }));
+  const keysName: { [key: string]: string } = {
+    brand: "Marca",
+    model: "Modelo",
+    color: "Cor",
+    year: "Ano",
   };
+
+  const objects = [];
+  if (keys) {
+    for (const [key, value] of Object.entries(keys)) {
+      objects.push(
+        <StyledKeySection key={key}>
+          <h2>{keysName[key]}</h2>
+          <ul className={showAllList.includes(key) ? "show" : ""}>
+            {[...new Set(value)].map((val) => (
+              <li key={val}>
+                <button onClick={async () => await handleFilter(key, val)}>
+                  {val}
+                </button>
+              </li>
+            ))}
+          </ul>
+          {[...new Set(value)].length > 4 && (
+            <button
+              onClick={() =>
+                !showAllList.includes(key)
+                  ? setShowAllList([...showAllList, key])
+                  : remove(key)
+              }
+            >
+              {showAllList.includes(key) ? "Mostrar menos" : "Mostrar mais"}
+            </button>
+          )}
+        </StyledKeySection>
+      );
+    }
+  }
 
   return (
     <StyledNav>
@@ -129,43 +153,13 @@ export const Aside: React.FC<AsideProps> = ({ onClick }) => {
           <button onClick={onClick}>X</button>
         </div>
       </div>
-  
+
       <div className="navDiv">
-        {keys &&
-          Object.entries(keys).map(([key, value]) => {
-            const uniqueValues = [...new Set(value)];
-            const shouldShowOverflow = showOverflow[key];
-            const showMoreButton = uniqueValues.length > 6 && !shouldShowOverflow;
-            const showLessButton = shouldShowOverflow;
-  
-            return (
-              <React.Fragment key={key}>
-                <h2>{key}</h2>
-                <ul className={shouldShowOverflow ? "overflow" : ""}>
-                  {uniqueValues.map((val, index) => {
-                    if (!shouldShowOverflow && index >= 6) {
-                      return null;
-                    }
-                    return (
-                      <li key={val}>
-                        <button onClick={async () => await handleFilter(key, val)}>
-                          {val}
-                        </button>
-                      </li>
-                    );
-                  })}
-                </ul>
-                {showMoreButton && (
-                  <button className="showextras" onClick={() => handleShowMore(key)}>Ver mais</button>
-                )}
-                {showLessButton && (
-                  <button className="showextras" onClick={() => handleShowLess(key)}>Ver menos</button>
-                )}
-              </React.Fragment>
-            );
-          })}
+        {objects}
+
+        <InputsAside strFilter={strFilter} setStrFilter={setStrFilter} />
       </div>
-  
+
       <StyledButton
         buttonstyle="brand1"
         className="buttonClearSearch"
@@ -176,4 +170,3 @@ export const Aside: React.FC<AsideProps> = ({ onClick }) => {
     </StyledNav>
   );
 };
-

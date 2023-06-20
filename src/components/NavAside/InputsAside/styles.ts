@@ -4,7 +4,14 @@ import { theme } from "../../../styles/theme";
 export const StyledInputsAside = styled.form`
   display: flex;
   flex-direction: column;
-  align-items: end;
+
+  h2 {
+    ${theme.typography.Heading4_600};
+
+    color: ${theme.colors.grey1};
+    margin-bottom: 20px;
+    width: 100%;
+  }
 
   .flex {
     display: flex;

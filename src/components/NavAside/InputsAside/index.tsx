@@ -72,7 +72,6 @@ export const InputsAside = ({ setStrFilter, strFilter }: iInputsAsideProps) => {
       newStrFilter = splitedPrice[0] + query;
     }
     newStrFilter = newStrFilter.slice(0, -1);
-    console.log(newStrFilter);
     const { data } = await api.get<iPaginationCars>(newStrFilter);
 
     setStrFilter(newStrFilter);
