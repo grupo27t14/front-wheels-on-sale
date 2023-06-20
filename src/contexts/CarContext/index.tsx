@@ -8,6 +8,7 @@ import {
   iPaginationCars,
 } from "./props";
 import { toast } from "react-toastify";
+import { useSearchParams } from "react-router-dom";
 
 export const CarContext = createContext<CarProviderValues>(
   {} as CarProviderValues
@@ -15,10 +16,13 @@ export const CarContext = createContext<CarProviderValues>(
 
 export const CarContextProvider = ({ children }: CarProviderProps) => {
   const [cars, setCars] = useState(null as iPaginationCars | null);
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
-    refreshCars();
-  }, []);
+    if (!searchParams.toString()) {
+      refreshCars();
+    }
+  }, [searchParams]);
 
   const refreshCars = async () => {
     try {
@@ -43,9 +47,9 @@ export const CarContextProvider = ({ children }: CarProviderProps) => {
 
   const createCar = async (newData: iCarReq) => {
     try {
-      const {data} = await api.post("car", newData);
+      const { data } = await api.post("car", newData);
       toast.success("Carro cadastrado com sucesso!");
-      return data
+      return data;
     } catch (err) {
       toast.error("Não foi possível cadastrar o carro.");
       console.log(err);
