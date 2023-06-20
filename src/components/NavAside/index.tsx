@@ -129,15 +129,16 @@ export const Aside: React.FC<AsideProps> = ({ onClick }) => {
           <button onClick={onClick}>X</button>
         </div>
       </div>
-  
+
       <div className="navDiv">
         {keys &&
           Object.entries(keys).map(([key, value]) => {
             const uniqueValues = [...new Set(value)];
             const shouldShowOverflow = showOverflow[key];
-            const showMoreButton = uniqueValues.length > 6 && !shouldShowOverflow;
+            const showMoreButton =
+              uniqueValues.length > 6 && !shouldShowOverflow;
             const showLessButton = shouldShowOverflow;
-  
+
             return (
               <React.Fragment key={key}>
                 <h2>{key}</h2>
@@ -148,7 +149,9 @@ export const Aside: React.FC<AsideProps> = ({ onClick }) => {
                     }
                     return (
                       <li key={val}>
-                        <button onClick={async () => await handleFilter(key, val)}>
+                        <button
+                          onClick={async () => await handleFilter(key, val)}
+                        >
                           {val}
                         </button>
                       </li>
@@ -156,16 +159,28 @@ export const Aside: React.FC<AsideProps> = ({ onClick }) => {
                   })}
                 </ul>
                 {showMoreButton && (
-                  <button className="showextras" onClick={() => handleShowMore(key)}>Ver mais</button>
+                  <button
+                    className="showextras"
+                    onClick={() => handleShowMore(key)}
+                  >
+                    Ver mais
+                  </button>
                 )}
                 {showLessButton && (
-                  <button className="showextras" onClick={() => handleShowLess(key)}>Ver menos</button>
+                  <button
+                    className="showextras"
+                    onClick={() => handleShowLess(key)}
+                  >
+                    Ver menos
+                  </button>
                 )}
               </React.Fragment>
             );
           })}
+
+        <InputsAside strFilter={strFilter} setStrFilter={setStrFilter} />
       </div>
-  
+
       <StyledButton
         buttonstyle="brand1"
         className="buttonClearSearch"
@@ -176,4 +191,3 @@ export const Aside: React.FC<AsideProps> = ({ onClick }) => {
     </StyledNav>
   );
 };
-
