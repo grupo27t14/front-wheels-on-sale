@@ -9,6 +9,8 @@ interface iCGS {
 export const GlobalStyleGray = createGlobalStyle<iCGS>`
  body {
     background: ${theme.colors.grey8};
+  
+
   }
 `;
 
@@ -132,17 +134,4 @@ export const Avatar = styled.span<{ $bg?: string }>`
     background-color: ${(props) => props.$bg};
     ${theme.typography.avatar_big};
   }
-`;
-
-export const PageStyled = styled.div`
-  width: 100vw;
-  background: linear-gradient(
-    180deg,
-    ${theme.colors.brand1} 574px,
-    ${theme.colors.grey8} 574px,
-    ${theme.colors.grey8} 100%
-  );
-  color: ${theme.colors.grey1};
-  margin: 0;
-  padding-top: 1.2rem;
 `;
