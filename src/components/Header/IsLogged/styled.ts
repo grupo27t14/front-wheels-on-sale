@@ -39,6 +39,7 @@ export const UnorderedList = styled.ul`
 `;
 
 export const ListItem = styled.li`
+  width: 100%;
   cursor: pointer;
   padding-left: 28px;
   border-top-left-radius: 8px;
@@ -72,5 +73,7 @@ export const ListItem = styled.li`
 `;
 
 export const Link = styled.a`
+  width: 100%;
+  display: inline-block;
   ${theme.typography.body1_400}
 `;

@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { StyledButton } from "../../styles/button";
-import { Avatar, PageStyled, StyledContainer } from "../../styles/global";
+import { Avatar, StyledContainer } from "../../styles/global";
 import { Main, ProductsContainer, ProfileContainer } from "./style";
 import { useUsers } from "../../hooks/useUser";
 import { useEffect, useState } from "react";

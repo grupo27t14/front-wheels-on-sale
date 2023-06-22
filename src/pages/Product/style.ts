@@ -1,11 +1,20 @@
 import styled from "styled-components";
 import { theme } from "../../styles/theme";
 
+export const PageStyled = styled.main`
+  width: 100vw;
+  background: linear-gradient(
+    180deg,
+    ${theme.colors.brand1} 574px,
+    ${theme.colors.grey8} 574px,
+    ${theme.colors.grey8} 100%
+  );
+  color: ${theme.colors.grey1};
+`;
+
 export const PageContainer = styled.div`
   padding-top: 40px;
-  width: 123rem;
-  max-width: 100%;
-  margin: 0 auto;
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr;
   grid-row-gap: 4.6rem;
@@ -18,28 +27,33 @@ export const PageContainer = styled.div`
     grid-row-gap: 0px;
 
     .containerSticky {
-    position: sticky;
-    top: 20px;
-    right: 0;
+      position: sticky;
+      top: 20px;
+      right: 0;
+    }
   }
-  }
-
-  
-`
+`;
 
 export const SectionsContainer = styled.div`
   background-color: ${theme.colors.grey10};
-  border-radius: .4rem;
+  border-radius: 0.4rem;
   display: flex;
   flex-direction: column;
   padding: 4rem;
   gap: 3.2rem;
   margin-bottom: 2rem;
 
-  img {
-    max-width: 500px;
-    width: 100%;
-    margin: 0 auto;
+  &.container__img {
+    height: 355px;
+    padding: 0 12px;
+
+    img {
+      max-width: 441px;
+      width: 100%;
+      height: 252.96px;
+      object-fit: cover;
+      margin: auto;
+    }
   }
 
   .avatarProfileBig {
@@ -71,17 +85,16 @@ export const SectionsContainer = styled.div`
       text-decoration: none;
       background-color: ${theme.colors.grey0};
       padding: 2.4rem 2.8rem;
-      border-radius: .4rem;
-      transition: .4s;
+      border-radius: 0.4rem;
+      transition: 0.4s;
       color: ${theme.colors.whiteFixed};
       ${theme.typography.button_big_text}
       &:hover {
-            background-color: ${theme.colors.grey1};
-          }
+        background-color: ${theme.colors.grey1};
+      }
     }
   }
-
-`
+`;
 
 export const GalleryGrid = styled.div`
   display: flex;
@@ -106,7 +119,7 @@ export const GalleryGrid = styled.div`
       max-width: 100%;
     }
   }
-`
+`;
 
 export const CarInfoContainer = styled.div`
   display: flex;
@@ -124,23 +137,22 @@ export const CarInfoContainer = styled.div`
       flex-direction: row;
       gap: 1.2rem;
     }
-  
   }
 
   h6 {
     align-self: center;
   }
-`
+`;
 
 export const Tag = styled.span`
   text-transform: uppercase;
   ${theme.typography.body2_500};
-  padding: .4rem .8rem;
-  border-radius: .4rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.4rem;
 
   color: ${theme.colors.brand1};
   background-color: ${theme.colors.brand4};
-`
+`;
 
 export const CommentsList = styled.li`
   div {
@@ -150,7 +162,7 @@ export const CommentsList = styled.li`
     align-items: center;
     gap: 1rem;
 
-    .commentUsername {      
+    .commentUsername {
       ${theme.typography.body2_500};
       color: ${theme.colors.grey1};
     }
@@ -160,8 +172,7 @@ export const CommentsList = styled.li`
       color: ${theme.colors.grey3};
     }
   }
-
-`
+`;
 
 export const CommentTextarea = styled.div`
   max-width: 100%;
@@ -174,7 +185,7 @@ export const CommentTextarea = styled.div`
     align-items: center;
     gap: 1rem;
 
-    .commentUsername {      
+    .commentUsername {
       ${theme.typography.body2_500};
       color: ${theme.colors.grey1};
     }
@@ -194,8 +205,8 @@ export const CommentTextarea = styled.div`
 
     padding: 2rem;
 
-    border-radius: .4rem;
-    border: .2rem solid ${theme.colors.grey7};
+    border-radius: 0.4rem;
+    border: 0.2rem solid ${theme.colors.grey7};
     background-color: ${theme.colors.grey10};
     outline: none;
     color: ${theme.colors.grey2};
@@ -209,8 +220,8 @@ export const CommentTextarea = styled.div`
     bottom: 2rem;
     right: 2rem;
   }
-`
+`;
 
 export const ModalImg = styled.img`
   width: 100%;
-`
+`;
