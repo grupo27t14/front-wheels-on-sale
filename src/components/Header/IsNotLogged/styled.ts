@@ -7,7 +7,7 @@ export const UnorderedList = styled.ul`
   display: flex;
   list-style: none;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   padding-left: 44px;
   border-left: 2px solid ${theme.colors.grey6};
   background-color: ${theme.colors.grey10};
