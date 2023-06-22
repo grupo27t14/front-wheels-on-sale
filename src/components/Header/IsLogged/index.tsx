@@ -4,6 +4,7 @@ import { Link, UnorderedList, ListItem, Flex, Text } from "./styled";
 import { useUsers } from "../../../hooks/useUser";
 import { useAuth } from "../../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 export interface IProps {
   open: boolean;
@@ -26,9 +27,20 @@ const IsLogged = ({ open, setOpen, onClick }: IProps): JSX.Element => {
       navigate(`/profile/${user?.id}`);
     } else if (page == "sair") {
       signOut();
+      setOpen(!open);
     }
-    setOpen(!open);
   };
+
+  useEffect(() => {
+    const handleClick = (event: MouseEvent) => {
+      const tag = event.target as HTMLTextAreaElement;
+      if (tag.nodeName !== "A" && open) {
+        setOpen(!open);
+      }
+    };
+
+    window.addEventListener("mousedown", handleClick);
+  }, []);
 
   const nomeESobrenome = user?.name
     .split(" ")
