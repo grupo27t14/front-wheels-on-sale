@@ -4,23 +4,28 @@ import { Link, UnorderedList, ListItem, Flex, Text } from "./styled";
 import { useUsers } from "../../../hooks/useUser";
 import { useAuth } from "../../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Modal } from "../../Modal";
+import EditProfile from "../../EditProfile";
 
 export interface IProps {
   open: boolean;
   setOpen: any;
   onClick: () => void;
 }
+
 const IsLogged = ({ open, setOpen, onClick }: IProps): JSX.Element => {
   const { user } = useUsers();
   const { signOut } = useAuth();
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const isWide = useMedia({ minWidth: "768px" });
 
   const browse = (page: string) => {
     if (page == "perfil") {
-      console.log("perfil");
+      setIsModalOpen(!isModalOpen);
+      setOpen(!open);
     } else if (page == "endereco") {
       console.log("endereco");
     } else if (page == "anuncio") {
@@ -51,8 +56,21 @@ const IsLogged = ({ open, setOpen, onClick }: IProps): JSX.Element => {
     })
     .join("");
 
+  const handleOpenModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+
   return (
     <>
+      {isModalOpen && (
+        <Modal toggleModal={handleOpenModal}>
+          <EditProfile
+            isModalOpen={isModalOpen}
+            setIsModalOpen={setIsModalOpen}
+          />
+        </Modal>
+      )}
+
       {isWide && (
         <Flex role="button" onClick={onClick}>
           <Avatar className="avatarProfile" $bg={user?.avatar_bg}>
