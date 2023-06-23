@@ -9,8 +9,12 @@ import { PasswordStyled } from "./style";
 import { api } from "../../services/api";
 import { toast } from "react-toastify";
 import { forgotPasswordSchema, tforgotPasswordReq } from "../Register/schemas";
+import { useUsers } from "../../hooks/useUser";
+import { LoadingRing } from "../../styles/LoadingRing";
+import { theme } from "../../styles/theme";
 
 const PasswordRecoveryPage = () => {
+  const { reqLoading, setReqLoading } = useUsers();
   const navigate = useNavigate();
   const { token } = useParams();
 
@@ -23,13 +27,15 @@ const PasswordRecoveryPage = () => {
   });
 
   const handlePasswordRecovery = async (data: tforgotPasswordReq) => {
-    console.log(token);
     try {
+      setReqLoading(true);
       await api.patch(`user/resetPassword/${token}`, data);
       toast.success("Senha alterada com sucesso!");
       navigate("/login");
     } catch (err) {
       console.error(err);
+    } finally {
+      setReqLoading(false);
     }
   };
 
@@ -64,9 +70,18 @@ const PasswordRecoveryPage = () => {
           <ErrorMessage>{errors.confirm.message}</ErrorMessage>
         )}
 
-        <StyledButton buttonstyle="brand1" type="submit">
-          Salvar
+        <StyledButton
+          buttonstyle="brand1"
+          type="submit"
+          disabled={reqLoading ? true : false}
+        >
+          {reqLoading ? (
+            <LoadingRing color={theme.colors.whiteFixed} />
+          ) : (
+            "Salvar"
+          )}
         </StyledButton>
+
         <p>
           Voltar para a <Link to="/">Página Inicial</Link>
         </p>
