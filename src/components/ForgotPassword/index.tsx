@@ -18,7 +18,7 @@ interface IProps {
 }
 
 const ForgotPassword = ({ isModalOpen, setIsModalOpen }: IProps) => {
-  const { reqLoading } = useUsers();
+  const { reqLoading, setReqLoading } = useUsers();
 
   const {
     register,
@@ -30,12 +30,15 @@ const ForgotPassword = ({ isModalOpen, setIsModalOpen }: IProps) => {
 
   const handleRegisterSubmit = async (data: tRegisterReq) => {
     try {
+      setReqLoading(true);
       await api.post(`user/resetPassword`, data);
       toast.success("Email enviado com sucesso!");
       setIsModalOpen(!isModalOpen);
     } catch (err) {
       toast.error("Email não encontrado.");
       console.error(err);
+    } finally {
+      setReqLoading(false);
     }
   };
 
@@ -77,7 +80,7 @@ const ForgotPassword = ({ isModalOpen, setIsModalOpen }: IProps) => {
           <StyledButton
             buttonstyle="brand1"
             type="submit"
-            disabled={reqLoading}
+            disabled={reqLoading ? true : false}
           >
             {reqLoading ? (
               <LoadingRing color={theme.colors.whiteFixed} />
