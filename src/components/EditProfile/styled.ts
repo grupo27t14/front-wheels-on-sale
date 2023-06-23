@@ -7,8 +7,7 @@ export const FormControl = styled.section`
   & > form {
     width: 100%;
     margin: 0;
-    padding-left: 0;
-    padding-right: 0;
+    padding: 0;
   }
 `;
 
