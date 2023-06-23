@@ -99,6 +99,7 @@ export const UserContextProvider = ({ children }: UserProviderProps) => {
       value={{
         userRegister,
         reqLoading,
+        setReqLoading,
         user,
         setUser,
         userEdit,
