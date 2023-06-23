@@ -33,6 +33,36 @@ export const GlobalStyle = createGlobalStyle<iCGS>`
     box-sizing: border-box;
   }
 
+  input[type=number] {
+    ::-webkit-outer-spin-button,
+    ::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+
+  /* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: none;
+    scrollbar-color: ${theme.colors.brand1} ${theme.colors.grey5};
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: ${theme.colors.grey5};
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: ${theme.colors.brand1};
+    border-radius: 4px;
+    border: 1px solid ${theme.colors.grey5};
+  }
+
   body,html{
     width: 100vw;
     height: 100vh;
