@@ -54,6 +54,7 @@ const EditProfile = ({ isModalOpen, setIsModalOpen }: IProps) => {
           id="name"
           label="Nome"
           value={user?.name}
+          placeholder="Ex: Samuel Leão"
           type="text"
           className={errors.name ? "err" : ""}
           {...register("name")}
@@ -63,6 +64,7 @@ const EditProfile = ({ isModalOpen, setIsModalOpen }: IProps) => {
           id="email"
           label="Email"
           value={user?.email}
+          placeholder="Ex: samuel@kenzie.com.br"
           type="email"
           className={errors.email ? "err" : ""}
           {...register("email")}
@@ -72,6 +74,7 @@ const EditProfile = ({ isModalOpen, setIsModalOpen }: IProps) => {
           id="cpf"
           label="CPF"
           value={user?.personalInformation.cpf}
+          placeholder="000.000.000-00"
           type="text"
           className={errors.personalInformation?.cpf ? "err" : ""}
           {...register("personalInformation.cpf")}
@@ -83,6 +86,7 @@ const EditProfile = ({ isModalOpen, setIsModalOpen }: IProps) => {
           id="phone"
           label="Celular"
           value={user?.personalInformation.phone}
+          placeholder="(DDD) 90000-0000"
           type="number"
           className={errors.personalInformation?.phone ? "err" : ""}
           {...register("personalInformation.phone")}
@@ -96,6 +100,7 @@ const EditProfile = ({ isModalOpen, setIsModalOpen }: IProps) => {
           id="birth_date"
           label="Data de nascimento"
           value={user?.personalInformation.birth_date}
+          placeholder="00/00/00"
           type="date"
           pattern="\d{4}-\d{2}-\d{2}"
           className={errors.personalInformation?.birth_date ? "err" : ""}
@@ -109,7 +114,7 @@ const EditProfile = ({ isModalOpen, setIsModalOpen }: IProps) => {
         <label htmlFor="description">Descrição</label>
         <textarea
           id="description"
-          value={user?.personalInformation.description}
+          defaultValue={user?.personalInformation.description}
           className={errors.personalInformation?.description ? "err" : ""}
           {...register("personalInformation.description")}
         />
