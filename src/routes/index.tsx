@@ -8,7 +8,7 @@ import Home from "../pages/Home";
 import { GlobalStyleGray } from "../styles/global";
 import { LoadUser } from "../pages/LoadUser";
 import { Profile } from "../pages/Profile";
-import PasswordRecovery from "../pages/PasswordRecovery";
+import PasswordRecoveryPage from "../pages/PasswordRecovery";
 
 const backgroundGray = (element: JSX.Element) => {
   return (
@@ -27,13 +27,13 @@ export const RoutesMain = () => {
         <Route element={<LoadUser />}>
           <Route path="/login" element={backgroundGray(<Login />)} />
           <Route path="/register" element={backgroundGray(<Register />)} />
-          <Route
-            path="/recovery"
-            element={backgroundGray(<PasswordRecovery />)}
-          />
         </Route>
         <Route path="/product/:id" element={backgroundGray(<Products />)} />
         <Route path="/profile/:id" element={backgroundGray(<Profile />)} />
+        <Route
+          path="/resetPassword/:token"
+          element={backgroundGray(<PasswordRecoveryPage />)}
+        />
       </Route>
       <Route path="/404" element={<ErrorPage />} />
       <Route path="*" element={<Navigate to={"/404"} />} />

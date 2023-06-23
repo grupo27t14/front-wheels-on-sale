@@ -10,8 +10,14 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { LoadingRing } from "../../styles/LoadingRing";
 import { theme } from "../../styles/theme";
+import { useState } from "react";
+import { Modal } from "../../components/Modal";
+import ForgotPassword from "../../components/ForgotPassword";
 
 export const Login = () => {
+  const { signIn, reqLoading } = useAuth();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -20,10 +26,21 @@ export const Login = () => {
     resolver: zodResolver(loginSchema),
   });
 
-  const { signIn, reqLoading } = useAuth();
+  const handleOpenModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
 
   return (
     <LoginStyled>
+      {isModalOpen && (
+        <Modal toggleModal={handleOpenModal}>
+          <ForgotPassword
+            isModalOpen={isModalOpen}
+            setIsModalOpen={setIsModalOpen}
+          />
+        </Modal>
+      )}
+
       <Form title="Login" onSubmit={handleSubmit(signIn)}>
         <Input
           id="email"
@@ -45,9 +62,15 @@ export const Login = () => {
         {errors.password && (
           <ErrorMessage>{errors.password.message}</ErrorMessage>
         )}
-        <a href="recovery" className="forgot">
+
+        <StyledButton
+          buttonstyle="forgot_password_btn"
+          onClick={handleOpenModal}
+          type="button"
+        >
           Esqueci minha senha
-        </a>
+        </StyledButton>
+
         <StyledButton
           buttonstyle="brand1"
           type="submit"

@@ -21,5 +21,19 @@ export const PasswordStyled = styled.main`
         margin: 12px 0;
       }
     }
+
+    > p {
+      ${theme.typography.body2_500};
+      color: ${theme.colors.grey2};
+
+      > a {
+        color: ${theme.colors.brand1};
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
   }
 `;

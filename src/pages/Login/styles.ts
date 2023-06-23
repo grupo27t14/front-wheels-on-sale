@@ -11,17 +11,6 @@ export const LoginStyled = styled.main`
   /* Estilizações apenas para login */
   form {
     > {
-      .forgot {
-        ${theme.typography.body2_500};
-        color: ${theme.colors.grey2};
-        text-align: end;
-        width: 100%;
-        margin: 8px 0;
-        text-decoration: none;
-        :hover {
-          text-decoration: underline;
-        }
-      }
       .toRegister {
         display: flex;
         flex-direction: row;
