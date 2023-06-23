@@ -45,7 +45,7 @@ export const Login = () => {
         {errors.password && (
           <ErrorMessage>{errors.password.message}</ErrorMessage>
         )}
-        <a href="#" className="forgot">
+        <a href="recovery" className="forgot">
           Esqueci minha senha
         </a>
         <StyledButton
