@@ -55,6 +55,7 @@ const Card = ({ car }: ICarProps) => {
         <Title>
           {car.brand} - {car.model}
         </Title>
+        <h4>{car.spec}</h4>
         <Text className="card__info--text">{car.description}</Text>
         <Flex className="card__info--advertiser">
           <Avatar className="avatar" $bg={car.user?.avatar_bg}>
