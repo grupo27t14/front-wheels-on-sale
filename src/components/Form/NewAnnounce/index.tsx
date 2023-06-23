@@ -1,5 +1,5 @@
 import { Input } from "../../Input";
-import { announceData } from "./schema";
+import { announceData, announceSchema } from "./schema";
 import { api } from "../../../services/api";
 import { CarContext } from "../../../contexts/CarContext";
 import { useContext } from "react";
@@ -52,6 +52,15 @@ export const NewAnnounce = ({
     const image = newData.image as File[];
     Reflect.deleteProperty(newData, "image");
     setIsModalOpen(!isModalOpen);
+
+    // Formatar Marca/Modelo/Spec
+    newData.brand =
+      newData.brand.split("")[0].toUpperCase() + newData.brand.substring(1);
+    newData.spec =
+      newData.model.split("")[0].toUpperCase() + newData.model.substring(1);
+    newData.model =
+      newData.model.split(" ")[0].split("")[0].toUpperCase() +
+      newData.model.split(" ")[0].substring(1);
 
     try {
       const carData = await createCar(newData);

@@ -15,6 +15,7 @@ export interface CarProviderValues {
 export interface iCarReq {
   brand: string;
   model: string;
+  spec: string;
   year: string;
   fuel: string;
   km: number;
