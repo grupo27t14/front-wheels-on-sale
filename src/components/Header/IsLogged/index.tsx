@@ -1,3 +1,4 @@
+import React from "react";
 import { useMedia } from "use-media";
 import { Avatar } from "../../../styles/global";
 import { Link, UnorderedList, ListItem, Flex, Text } from "./styled";
@@ -7,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Modal } from "../../Modal";
 import EditProfile from "../../EditProfile";
+import EditAddress from "../../EditAddress";
 
 export interface IProps {
   open: boolean;
@@ -19,6 +21,7 @@ const IsLogged = ({ open, setOpen, onClick }: IProps): JSX.Element => {
   const { signOut } = useAuth();
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalEditAddress, setIsModalEditAddress] = useState(false);
 
   const isWide = useMedia({ minWidth: "768px" });
 
@@ -27,9 +30,11 @@ const IsLogged = ({ open, setOpen, onClick }: IProps): JSX.Element => {
       setIsModalOpen(!isModalOpen);
       setOpen(!open);
     } else if (page == "endereco") {
-      console.log("endereco");
+      setIsModalEditAddress(!isModalEditAddress);
+      setOpen(!open);
     } else if (page == "anuncio") {
       navigate(`/profile/${user?.id}`);
+      setOpen(!open);
     } else if (page == "sair") {
       signOut();
       setOpen(!open);
@@ -60,13 +65,26 @@ const IsLogged = ({ open, setOpen, onClick }: IProps): JSX.Element => {
     setIsModalOpen(!isModalOpen);
   };
 
+  const handleEditAddress = () => {
+    setIsModalEditAddress(!isModalEditAddress);
+  };
+
   return (
-    <>
+    <React.Fragment>
       {isModalOpen && (
         <Modal toggleModal={handleOpenModal}>
           <EditProfile
             isModalOpen={isModalOpen}
             setIsModalOpen={setIsModalOpen}
+          />
+        </Modal>
+      )}
+
+      {isModalEditAddress && (
+        <Modal toggleModal={handleEditAddress}>
+          <EditAddress
+            isModalEditAddress={isModalEditAddress}
+            setIsModalEditAddress={setIsModalEditAddress}
           />
         </Modal>
       )}
@@ -97,7 +115,7 @@ const IsLogged = ({ open, setOpen, onClick }: IProps): JSX.Element => {
           </ListItem>
         </UnorderedList>
       )}
-    </>
+    </React.Fragment>
   );
 };
 

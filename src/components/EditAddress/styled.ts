@@ -12,14 +12,24 @@ export const FormControl = styled.section`
   }
 `;
 
-export const HStack = styled.div`
+export const Flex = styled.div`
+  width: 100%;
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: space-between;
+  gap: 1rem;
+`;
+
+export const HStack = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end !important;
+  gap: 1rem;
 
   ${theme.typography.button_big_text}
 
   & > button {
-    padding: 0;
+    width: unset;
   }
 `;

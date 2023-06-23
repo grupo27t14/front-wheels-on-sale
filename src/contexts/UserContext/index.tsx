@@ -61,11 +61,15 @@ export const UserContextProvider = ({ children }: UserProviderProps) => {
   };
 
   const userEdit = async (data: Partial<tRegisterReq>, userId: string) => {
+    console.log();
     try {
       await api
         .patch<iUser>(`user/${userId}`, editSchemaRequest.parse(data))
         .then((res) => {
-          toast.success("Usuário editado com sucesso!");
+          data.name
+            ? toast.success("Usuário editado com sucesso!")
+            : toast.success("Endereço editado com sucesso!");
+
           setUser(res.data);
         })
         .catch((err) => {
