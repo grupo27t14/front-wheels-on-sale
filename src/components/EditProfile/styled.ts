@@ -3,7 +3,6 @@ import { theme } from "../../styles/theme";
 
 export const FormControl = styled.section`
   width: 100%;
-  background-color: pink;
 
   & > form {
     width: 100%;
