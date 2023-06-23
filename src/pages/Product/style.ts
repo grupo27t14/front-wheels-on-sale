@@ -223,5 +223,6 @@ export const CommentTextarea = styled.div`
 `;
 
 export const ModalImg = styled.img`
+  padding-top: 4rem;
   width: 100%;
 `;
