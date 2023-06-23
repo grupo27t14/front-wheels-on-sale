@@ -54,10 +54,21 @@ export const registerSchemaRequest = z.object({
   password: z.string().nonempty("Senha é obrigatória."),
 });
 
+export const forgotPasswordSchema = z
+  .object({
+    password: z.string().nonempty("Senha é obrigatória."),
+    confirm: z.string().nonempty("Repita a senha."),
+  })
+  .refine((data) => data.password === data.confirm, {
+    message: "As senhas não coincidem",
+    path: ["confirm"],
+  });
+
 export const editSchemaRequest = registerSchemaRequest.partial();
 
 export type tRegister = z.infer<typeof registerSchema>;
 export type tRegisterReq = z.infer<typeof registerSchemaRequest>;
+export type tforgotPasswordReq = z.infer<typeof forgotPasswordSchema>;
 
 export interface iCep {
   cep: string;

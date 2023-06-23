@@ -166,6 +166,25 @@ export const StyledButton = styled.button<buttonProps>`
             background: ${theme.colors.brand4};
           }
         `;
+
+      case "forgot_password_btn":
+        return css`
+          width: unset;
+          height: unset;
+          padding: 0 !important;
+          margin: 0 !important;
+
+          ${theme.typography.body2_500};
+          color: ${theme.colors.grey2};
+          background: transparent;
+          border: 2px solid transparent;
+          align-self: flex-end;
+
+          &:hover {
+            color: ${theme.colors.brand1};
+            text-decoration: underline;
+          }
+        `;
       default:
         return;
     }

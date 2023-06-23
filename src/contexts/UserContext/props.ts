@@ -8,6 +8,7 @@ export interface UserProviderProps {
 export interface UserProviderValues {
   userRegister: (data: tRegisterReq) => void;
   reqLoading: boolean;
+  setReqLoading: React.Dispatch<React.SetStateAction<boolean>>;
   setUser: React.Dispatch<React.SetStateAction<iUser | null>>;
   user: iUser | null;
   userEdit: (data: Partial<tRegisterReq>, userId: string) => Promise<void>;

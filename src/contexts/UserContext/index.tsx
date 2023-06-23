@@ -61,7 +61,6 @@ export const UserContextProvider = ({ children }: UserProviderProps) => {
   };
 
   const userEdit = async (data: Partial<tRegisterReq>, userId: string) => {
-    console.log();
     try {
       await api
         .patch<iUser>(`user/${userId}`, editSchemaRequest.parse(data))
@@ -100,6 +99,7 @@ export const UserContextProvider = ({ children }: UserProviderProps) => {
       value={{
         userRegister,
         reqLoading,
+        setReqLoading,
         user,
         setUser,
         userEdit,
