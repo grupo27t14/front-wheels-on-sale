@@ -4,7 +4,7 @@ import { theme } from "../../styles/theme";
 export const FormControl = styled.section`
   width: 100%;
 
-  & > form {
+  > form {
     width: 100%;
     margin: 0;
     padding: 0;
