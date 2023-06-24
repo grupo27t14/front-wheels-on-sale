@@ -45,6 +45,9 @@ export const StyledForm = styled.form<iStFormProps>`
     width: 100%;
     gap: 1rem;
   }
+  .flex_end {
+    justify-content: end;
+  }
 
   button {
     border-radius: 4px;
@@ -74,6 +77,7 @@ export const StyledForm = styled.form<iStFormProps>`
   }
 
   select {
+    position: relative;
     width: 100%;
     padding: 12px 16px;
     gap: 10px;
@@ -100,13 +104,15 @@ export const StyledForm = styled.form<iStFormProps>`
 
 export const ErrorMessage = styled.h5`
   all: unset;
-  display: block;
   width: 100%;
-  ${theme.typography.input_placeholder}
   font-size: 1.4rem;
+  position: absolute;
+  bottom: -20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   animation: blinding 0.5s forwards;
   animation-iteration-count: 2;
-  transform: translateY(-6px) translateX(2px);
   @keyframes blinding {
     from {
       color: ${theme.colors.alert1};

@@ -8,4 +8,5 @@ export interface iInputProps extends InputHTMLAttributes<HTMLInputElement> {
   pattern?: string;
   value?: string;
   defaultValue?: string;
+  errorMessage?: string;
 }

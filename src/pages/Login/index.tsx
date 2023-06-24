@@ -5,7 +5,6 @@ import { StyledButton } from "../../styles/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { loginSchema, tLogin } from "./schemas";
-import { ErrorMessage } from "../../components/Form/styles";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { LoadingRing } from "../../styles/LoadingRing";
@@ -48,20 +47,20 @@ export const Login = () => {
           placeholder="Digitar email"
           type="email"
           className={errors.email ? "err" : ""}
+          errorMessage={errors.email?.message}
           {...register("email")}
+          required
         />
-        {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
         <Input
           id="password"
           label="Senha"
           placeholder="Digitar senha"
           type="password"
           className={errors.password ? "err" : ""}
+          errorMessage={errors.password?.message}
           {...register("password")}
+          required
         />
-        {errors.password && (
-          <ErrorMessage>{errors.password.message}</ErrorMessage>
-        )}
 
         <StyledButton
           buttonstyle="forgot_password_btn"

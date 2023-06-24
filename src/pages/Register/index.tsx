@@ -2,7 +2,6 @@ import { RegisterStyled } from "./styles";
 import { Form } from "../../components/Form";
 import { Input } from "../../components/Input";
 import { StyledButton } from "../../styles/button";
-import { ErrorMessage } from "../../components/Form/styles";
 import { useCep } from "./useCep";
 import { useUsers } from "../../hooks/useUser";
 import { registerSchemaRequest, tRegister } from "./schemas";
@@ -31,42 +30,40 @@ export const Register = () => {
           placeholder="Ex: Samuel Leão"
           type="text"
           className={errors.name ? "err" : ""}
+          errorMessage={errors.name?.message}
           {...register("name")}
+          required
         />
-        {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
         <Input
           id="email"
           label="Email"
           placeholder="Ex: samuel@kenzie.com.br"
           type="email"
           className={errors.email ? "err" : ""}
+          errorMessage={errors.email?.message}
           {...register("email")}
+          required
         />
-        {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
         <Input
           id="cpf"
           label="CPF"
           placeholder="000.000.000-00"
           type="text"
           className={errors.personalInformation?.cpf ? "err" : ""}
+          errorMessage={errors.personalInformation?.cpf?.message}
           {...register("personalInformation.cpf")}
+          required
         />
-        {errors.personalInformation?.cpf && (
-          <ErrorMessage>{errors.personalInformation.cpf.message}</ErrorMessage>
-        )}
         <Input
           id="phone"
           label="Celular"
           placeholder="(DDD) 90000-0000"
           type="text"
           className={errors.personalInformation?.phone ? "err" : ""}
+          errorMessage={errors.personalInformation?.phone?.message}
           {...register("personalInformation.phone")}
+          required
         />
-        {errors.personalInformation?.phone && (
-          <ErrorMessage>
-            {errors.personalInformation.phone.message}
-          </ErrorMessage>
-        )}
         <Input
           id="birth_date"
           label="Data de nascimento"
@@ -74,13 +71,10 @@ export const Register = () => {
           type="date"
           pattern="\d{4}-\d{2}-\d{2}"
           className={errors.personalInformation?.birth_date ? "err" : ""}
+          errorMessage={errors.personalInformation?.birth_date?.message}
           {...register("personalInformation.birth_date")}
+          required
         />
-        {errors.personalInformation?.birth_date && (
-          <ErrorMessage>
-            {errors.personalInformation?.birth_date.message}
-          </ErrorMessage>
-        )}
         <label htmlFor="description">Descrição</label>
         <textarea
           id="description"
@@ -96,11 +90,10 @@ export const Register = () => {
           type="text"
           maxLength={9}
           className={errors.addressInformation?.cep ? "err" : ""}
+          errorMessage={errors.addressInformation?.cep?.message}
           {...register("addressInformation.cep")}
+          required
         />
-        {errors.addressInformation?.cep && (
-          <ErrorMessage>{errors.addressInformation?.cep.message}</ErrorMessage>
-        )}
         <div>
           <Input
             id="state"
@@ -108,7 +101,9 @@ export const Register = () => {
             placeholder="Digitar Estado"
             type="text"
             className={errors.addressInformation?.state ? "err" : ""}
+            errorMessage={errors.addressInformation?.state?.message}
             {...register("addressInformation.state")}
+            required
           />
           <Input
             id="city"
@@ -116,7 +111,9 @@ export const Register = () => {
             placeholder="Digitar cidade"
             type="text"
             className={errors.addressInformation?.city ? "err" : ""}
+            errorMessage={errors.addressInformation?.city?.message}
             {...register("addressInformation.city")}
+            required
           />
         </div>
         <Input
@@ -125,13 +122,10 @@ export const Register = () => {
           placeholder="Digitar rua"
           type="text"
           className={errors.addressInformation?.city ? "err" : ""}
+          errorMessage={errors.addressInformation?.street?.message}
           {...register("addressInformation.street")}
+          required
         />
-        {errors.addressInformation?.street && (
-          <ErrorMessage>
-            {errors.addressInformation?.street.message}
-          </ErrorMessage>
-        )}
         <div>
           <Input
             id="number"
@@ -139,7 +133,9 @@ export const Register = () => {
             placeholder="Digitar número"
             type="text"
             className={errors.addressInformation?.number ? "err" : ""}
+            errorMessage={errors.addressInformation?.number?.message}
             {...register("addressInformation.number")}
+            required
           />
           <Input
             id="complement"
@@ -147,6 +143,7 @@ export const Register = () => {
             placeholder="Ex: apart 307"
             type="text"
             className={errors.addressInformation?.complement ? "err" : ""}
+            errorMessage={errors.addressInformation?.complement?.message}
             {...register("addressInformation.complement")}
           />
         </div>
@@ -172,22 +169,20 @@ export const Register = () => {
           placeholder="Digitar senha"
           type="password"
           className={errors.password ? "err" : ""}
+          errorMessage={errors.password?.message}
           {...register("password")}
+          required
         />
-        {errors.password && (
-          <ErrorMessage>{errors.password.message}</ErrorMessage>
-        )}
         <Input
           id="confirm"
           label="Confirmar Senha"
           placeholder="Digitar senha"
           type="password"
           className={errors.confirm ? "err" : ""}
+          errorMessage={errors.confirm?.message}
           {...register("confirm")}
+          required
         />
-        {errors.confirm && (
-          <ErrorMessage>{errors.confirm.message}</ErrorMessage>
-        )}
         <StyledButton buttonstyle="brand1" type="submit" disabled={reqLoading}>
           {reqLoading ? (
             <LoadingRing color={theme.colors.whiteFixed} />

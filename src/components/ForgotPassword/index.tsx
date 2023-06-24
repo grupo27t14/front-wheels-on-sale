@@ -4,18 +4,13 @@ import { LoadingRing } from "../../styles/LoadingRing";
 import { StyledButton } from "../../styles/button";
 import { theme } from "../../styles/theme";
 import { Form } from "../Form";
-import { ErrorMessage } from "../Form/styles";
 import { Input } from "../Input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormControl, HStack } from "./styled";
 import { editSchemaRequest, tRegisterReq } from "../../pages/Register/schemas";
 import { api } from "../../services/api";
 import { toast } from "react-toastify";
-
-interface IProps {
-  isModalOpen: boolean;
-  setIsModalOpen: (isModalOpen: boolean) => void;
-}
+import { IProps } from "./schemas";
 
 const ForgotPassword = ({ isModalOpen, setIsModalOpen }: IProps) => {
   const { reqLoading, setReqLoading } = useUsers();
@@ -56,17 +51,15 @@ const ForgotPassword = ({ isModalOpen, setIsModalOpen }: IProps) => {
           Preencha o campo com seu e-mail e receba as instruções necessárias
           para redefinir a sua senha.
         </h4>
-
-        {errors.name && <ErrorMessage>{errors.name?.message}</ErrorMessage>}
         <Input
           id="email"
           label="Email"
           placeholder="Digite seu e-mail"
           type="email"
           className={errors.email ? "err" : ""}
+          errorMessage={errors.email?.message}
           {...register("email")}
         />
-        {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
 
         <HStack>
           <StyledButton

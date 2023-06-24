@@ -41,12 +41,6 @@ export const StyledInputsAside = styled.form`
     width: 100%;
 
     input {
-      ::-webkit-outer-spin-button,
-      ::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-      }
-
       margin-bottom: 20px;
       padding: 20px 0;
       border-radius: 4px;

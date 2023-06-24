@@ -1,12 +1,29 @@
 import { StyledInput } from "./styles";
 import { iInputProps } from "./props";
 import { forwardRef } from "react";
+import { ErrorMessage } from "../Form/styles";
 
 export const Input = forwardRef<HTMLInputElement, iInputProps>(
-  ({ type, label, id, placeholder, value, pattern, ...rest }, ref) => {
+  (
+    {
+      type,
+      label,
+      id,
+      placeholder,
+      value,
+      pattern,
+      errorMessage,
+      required,
+      ...rest
+    },
+    ref
+  ) => {
     return (
       <StyledInput>
-        <label htmlFor={id}>{label}</label>
+        <label htmlFor={id}>
+          {label}
+          {required && <i>*</i>}
+        </label>
         <input
           type={type}
           id={id}
@@ -16,6 +33,7 @@ export const Input = forwardRef<HTMLInputElement, iInputProps>(
           pattern={pattern}
           defaultValue={value}
         />
+        <ErrorMessage>{errorMessage}</ErrorMessage>
       </StyledInput>
     );
   }

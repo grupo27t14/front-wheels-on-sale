@@ -52,6 +52,7 @@ export const ListItem = styled.li`
     justify-content: center;
     border-radius: 4px;
     border: 2px solid transparent;
+    transition: all 0.3s;
 
     &.header__signUp--login {
       color: ${theme.colors.grey2};

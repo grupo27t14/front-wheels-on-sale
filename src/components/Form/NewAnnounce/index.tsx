@@ -1,15 +1,15 @@
 import { Input } from "../../Input";
-import { announceData, announceSchema } from "./schema";
+import { announceData } from "./schema";
 import { api } from "../../../services/api";
 import { CarContext } from "../../../contexts/CarContext";
 import { useContext } from "react";
-import { ErrorMessage } from "../styles";
 import { StyledButton } from "../../../styles/button";
 import { useParams } from "react-router-dom";
 import { useUsers } from "../../../hooks/useUser";
 import { Form } from "..";
 import { useAnnounce } from "./useAnnounce";
 import { modalProps } from "./props";
+import { iCarRes } from "../../../contexts/CarContext/props";
 
 export const NewAnnounce = ({
   setIsModalOpen,
@@ -63,7 +63,7 @@ export const NewAnnounce = ({
       newData.model.split(" ")[0].substring(1);
 
     try {
-      const carData = await createCar(newData);
+      const carData = (await createCar(newData)) as iCarRes;
       await uploadImage(carData.id, image);
 
       if (id) {
@@ -101,7 +101,6 @@ export const NewAnnounce = ({
             </option>
           ))}
       </select>
-
       <label>Modelo</label>
       <select
         className={errors.model ? "err" : ""}
@@ -122,7 +121,6 @@ export const NewAnnounce = ({
             );
           })}
       </select>
-
       <div>
         <Input
           id="year"
@@ -130,20 +128,16 @@ export const NewAnnounce = ({
           placeholder="Qual o Ano?"
           type="text"
           readOnly={carModel ? true : false}
-          className={errors.year ? "err" : ""}
           {...register("year")}
         />
-        {/* {errors.year && <ErrorMessage>{errors.year.message}</ErrorMessage>} */}
         <Input
           id="fuel"
           label="Combustível"
           placeholder="Qual o tipo de combustível?"
           type="text"
           readOnly={carModel ? true : false}
-          className={errors.fuel ? "err" : ""}
           {...register("fuel")}
         />
-        {/* {errors.fuel && <ErrorMessage>{errors.fuel.message}</ErrorMessage>} */}
       </div>
       <div>
         <Input
@@ -152,18 +146,20 @@ export const NewAnnounce = ({
           placeholder="Qual a Quilometragem?"
           type="number"
           className={errors.km ? "err" : ""}
+          errorMessage={errors.km?.message}
           {...register("km")}
+          required
         />
-        {/* {errors.km && <ErrorMessage>{errors.km.message}</ErrorMessage>} */}
         <Input
           id="color"
           label="Cor"
           placeholder="Qual a Cor?"
           type="text"
           className={errors.color ? "err" : ""}
+          errorMessage={errors.color?.message}
           {...register("color")}
+          required
         />
-        {/* {errors.color && <ErrorMessage>{errors.color.message}</ErrorMessage>} */}
       </div>
       <div>
         <Input
@@ -172,19 +168,18 @@ export const NewAnnounce = ({
           placeholder="Qual o valor Fipe?"
           type="text"
           readOnly={carModel ? true : false}
-          className={errors.fipe ? "err" : ""}
           {...register("fipe")}
         />
-        {/* {errors.fipe && <ErrorMessage>{errors.fipe.message}</ErrorMessage>} */}
         <Input
           id="price"
           label="Preço"
           placeholder="Deseja vender por quanto?"
           type="number"
           className={errors.price ? "err" : ""}
+          errorMessage={errors.price?.message}
           {...register("price")}
+          required
         />
-        {/* {errors.price && <ErrorMessage>{errors.price.message}</ErrorMessage>} */}
       </div>
 
       <label>Descrição</label>
@@ -193,9 +188,6 @@ export const NewAnnounce = ({
         placeholder="Faça uma breve descrição do veículo"
         {...register("description")}
       />
-      {/* {errors.description && (
-        <ErrorMessage>{errors.description.message}</ErrorMessage>
-      )} */}
 
       <Input
         id="image"
@@ -204,10 +196,13 @@ export const NewAnnounce = ({
         type="file"
         {...register("image")}
       />
-      {/* {errors.image && <ErrorMessage>{errors.image.message}</ErrorMessage>} */}
 
-      <div className="form__buttons">
-        <StyledButton buttonsize="big" buttonstyle="negative">
+      <div className="flex_end">
+        <StyledButton
+          buttonsize="big"
+          buttonstyle="negative"
+          onClick={() => setIsModalOpen(!isModalOpen)}
+        >
           Cancelar
         </StyledButton>
         <StyledButton buttonsize="form" buttonstyle="brand1" type="submit">
