@@ -1,16 +1,6 @@
 import styled from "styled-components";
 import { theme } from "../../styles/theme";
 
-export const FormControl = styled.section`
-  width: 100%;
-
-  > form {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-  }
-`;
-
 export const HStack = styled.div`
   display: flex;
   align-items: center;

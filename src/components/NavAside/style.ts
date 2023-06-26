@@ -40,7 +40,7 @@ export const StyledKeySection = styled.div`
 
   ul {
     margin-bottom: 20px;
-    max-height: 120px;
+    max-height: 125px;
     overflow-y: hidden;
     transition: 1s;
 

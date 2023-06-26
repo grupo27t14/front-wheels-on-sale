@@ -127,7 +127,7 @@ export const Aside: React.FC<AsideProps> = ({ onClick }) => {
               </li>
             ))}
           </ul>
-          {[...new Set(value)].length > 4 && (
+          {[...new Set(value)].length > 5 && (
             <button
               onClick={() =>
                 !showAllList.includes(key)

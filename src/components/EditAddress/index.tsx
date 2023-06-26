@@ -1,34 +1,28 @@
-import { useForm } from "react-hook-form";
 import { useUsers } from "../../hooks/useUser";
 import { LoadingRing } from "../../styles/LoadingRing";
 import { StyledButton } from "../../styles/button";
 import { theme } from "../../styles/theme";
 import { Form } from "../Form";
-import { ErrorMessage } from "../Form/styles";
 import { Input } from "../Input";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { FormControl, Flex, HStack } from "./styled";
+import { HStack } from "./styled";
 import { editSchemaRequest, tRegisterReq } from "../../pages/Register/schemas";
+import { useEditAi } from "./useEditAi";
 
-interface IProps {
+interface iEditAiProps {
   isModalEditAddress: boolean;
   setIsModalEditAddress: (isModalEditAddress: boolean) => void;
 }
 
-const EditAddress = ({ isModalEditAddress, setIsModalEditAddress }: IProps) => {
+const EditAddress = ({
+  isModalEditAddress,
+  setIsModalEditAddress,
+}: iEditAiProps) => {
   const { user, userEdit, reqLoading } = useUsers();
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<tRegisterReq>({
-    resolver: zodResolver(editSchemaRequest),
-  });
+  const { errors, handleSubmit, register } = useEditAi();
 
   const handleRegisterSubmit = (data: tRegisterReq) => {
     const parsedData = editSchemaRequest.parse(data);
-    userEdit(parsedData, user!.id);
+    if (user) userEdit(parsedData, user.id);
     setIsModalEditAddress(!isModalEditAddress);
   };
 
@@ -37,102 +31,108 @@ const EditAddress = ({ isModalEditAddress, setIsModalEditAddress }: IProps) => {
   };
 
   return (
-    <FormControl>
-      <Form
-        title="Editar endereço"
-        onSubmit={handleSubmit(handleRegisterSubmit)}
-      >
-        <h4>Informações de endereço</h4>
+    <Form
+      title="Editar endereço"
+      onSubmit={handleSubmit(handleRegisterSubmit)}
+      margin="0"
+      padding="6px"
+      width="100%"
+    >
+      <h4>Informações de endereço</h4>
+      <Input
+        id="cep"
+        label="CEP"
+        placeholder="000000.000"
+        value={user?.addressInformation.cep}
+        type="text"
+        maxLength={9}
+        className={errors.addressInformation?.cep ? "err" : ""}
+        errorMessage={errors.addressInformation?.cep?.message}
+        {...register("addressInformation.cep")}
+        required
+      />
+      <div>
         <Input
-          id="cep"
-          label="CEP"
-          placeholder="000000.000"
-          value={user?.addressInformation.cep}
+          id="state"
+          label="Estado"
+          placeholder="Digitar Estado"
+          value={user?.addressInformation.state}
           type="text"
-          maxLength={9}
-          className={errors.addressInformation?.cep ? "err" : ""}
-          {...register("addressInformation.cep")}
+          className={errors.addressInformation?.state ? "err" : ""}
+          errorMessage={errors.addressInformation?.state?.message}
+          {...register("addressInformation.state")}
+          required
         />
-        {errors.addressInformation?.cep && (
-          <ErrorMessage>{errors.addressInformation?.cep.message}</ErrorMessage>
-        )}
-        <Flex>
-          <Input
-            id="state"
-            label="Estado"
-            placeholder="Digitar Estado"
-            value={user?.addressInformation.state}
-            type="text"
-            className={errors.addressInformation?.state ? "err" : ""}
-            {...register("addressInformation.state")}
-          />
-          <Input
-            id="city"
-            label="Cidade"
-            placeholder="Digitar cidade"
-            value={user?.addressInformation.city}
-            type="text"
-            className={errors.addressInformation?.city ? "err" : ""}
-            {...register("addressInformation.city")}
-          />
-        </Flex>
         <Input
-          id="street"
-          label="Rua"
-          placeholder="Digitar rua"
-          value={user?.addressInformation.street}
+          id="city"
+          label="Cidade"
+          placeholder="Digitar cidade"
+          value={user?.addressInformation.city}
           type="text"
           className={errors.addressInformation?.city ? "err" : ""}
-          {...register("addressInformation.street")}
+          errorMessage={errors.addressInformation?.city?.message}
+          {...register("addressInformation.city")}
+          required
         />
-        {errors.addressInformation?.street && (
-          <ErrorMessage>
-            {errors.addressInformation?.street.message}
-          </ErrorMessage>
-        )}
-        <Flex>
-          <Input
-            id="number"
-            label="Número"
-            placeholder="Digitar número"
-            value={user?.addressInformation.number}
-            type="text"
-            className={errors.addressInformation?.number ? "err" : ""}
-            {...register("addressInformation.number")}
-          />
-          <Input
-            id="complement"
-            label="Complemento"
-            placeholder="Ex: apart 307"
-            value={user?.addressInformation.complement}
-            type="text"
-            className={errors.addressInformation?.complement ? "err" : ""}
-            {...register("addressInformation.complement")}
-          />
-        </Flex>
-        <HStack>
-          <StyledButton
-            buttonstyle="negative"
-            type="button"
-            onClick={cancelEditUser}
-          >
-            Cancelar
-          </StyledButton>
+      </div>
+      <Input
+        id="street"
+        label="Rua"
+        placeholder="Digitar rua"
+        value={user?.addressInformation.street}
+        type="text"
+        className={errors.addressInformation?.street ? "err" : ""}
+        errorMessage={errors.addressInformation?.street?.message}
+        {...register("addressInformation.street")}
+        required
+      />
+      <div>
+        <Input
+          id="number"
+          label="Número"
+          placeholder="Digitar número"
+          value={user?.addressInformation.number}
+          type="text"
+          className={errors.addressInformation?.number ? "err" : ""}
+          errorMessage={errors.addressInformation?.number?.message}
+          {...register("addressInformation.number")}
+          required
+        />
+        <Input
+          id="complement"
+          label="Complemento"
+          placeholder="Ex: apart 307"
+          value={user?.addressInformation.complement}
+          type="text"
+          className={errors.addressInformation?.complement ? "err" : ""}
+          errorMessage={errors.addressInformation?.complement?.message}
+          {...register("addressInformation.complement")}
+        />
+      </div>
+      <HStack>
+        <StyledButton
+          buttonstyle="negative"
+          type="button"
+          onClick={cancelEditUser}
+          buttonsize="big"
+        >
+          Cancelar
+        </StyledButton>
 
-          <StyledButton
-            buttonstyle="brand1"
-            type="submit"
-            disabled={reqLoading}
-          >
-            {reqLoading ? (
-              <LoadingRing color={theme.colors.whiteFixed} />
-            ) : (
-              "Salvar alterações"
-            )}
-          </StyledButton>
-        </HStack>
-      </Form>
-    </FormControl>
+        <StyledButton
+          buttonstyle="brand1"
+          type="submit"
+          disabled={reqLoading}
+          buttonsize="big"
+        >
+          {reqLoading ? (
+            <LoadingRing color={theme.colors.whiteFixed} />
+          ) : (
+            "Salvar alterações"
+          )}
+        </StyledButton>
+      </HStack>
+    </Form>
   );
 };
 
