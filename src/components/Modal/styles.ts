@@ -27,6 +27,19 @@ export const Container = styled.div`
     margin: 5rem auto 3rem auto;
     overflow-y: auto;
 
+    animation: down 0.5s ease-in-out;
+
+    @keyframes down {
+      from {
+        opacity: 90%;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 100%;
+        transform: translateY(0);
+      }
+    }
+
     @media (width <= 545px) {
       width: 95%;
     }
