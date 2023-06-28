@@ -155,12 +155,15 @@ export const Tag = styled.span`
 `;
 
 export const CommentsList = styled.li`
+  margin-bottom: 4.4rem;
+
   div {
     margin-bottom: 1.2rem;
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 1rem;
+    justify-content: space-between;
 
     .commentUsername {
       ${theme.typography.body2_500};
@@ -170,6 +173,12 @@ export const CommentsList = styled.li`
     .commentTime {
       ${theme.typography.body2_500};
       color: ${theme.colors.grey3};
+    }
+
+    div + div {
+      svg {
+        font-size: 20px;
+      }
     }
   }
 `;

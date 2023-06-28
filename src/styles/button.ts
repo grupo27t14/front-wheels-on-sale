@@ -40,6 +40,10 @@ export const StyledButton = styled.button<buttonProps>`
           width: fit-content;
           height: 48px;
         `;
+      case "default":
+        return css`
+          ${theme.typography.button_big_text};
+        `;
       case "form":
         return css`
           ${theme.typography.button_big_text};
@@ -84,6 +88,32 @@ export const StyledButton = styled.button<buttonProps>`
             background-color: ${theme.colors.grey5};
             border: 1px solid ${theme.colors.grey5};
             color: ${theme.colors.whiteFixed};
+          }
+        `;
+      case "comment_btn":
+        return css`
+          background: ${theme.colors.grey5};
+          color: ${theme.colors.whiteFixed};
+          border: 1.5px solid ${theme.colors.grey6};
+        `;
+
+      case "comment_delete_btn":
+        return css`
+          background: transparent;
+          color: ${theme.colors.grey4};
+          border: none;
+          &:hover {
+            color: ${theme.colors.alert1};
+          }
+        `;
+
+      case "comment_edit_btn":
+        return css`
+          background: transparent;
+          color: ${theme.colors.grey4};
+          border: none;
+          &:hover {
+            color: ${theme.colors.sucess1};
           }
         `;
       case "brand1":
