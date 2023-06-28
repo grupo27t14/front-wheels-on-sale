@@ -1,5 +1,4 @@
 import { Avatar, StyledContainer } from "../../styles/global";
-import { theme } from "../../styles/theme";
 import { StyledButton } from "../../styles/button";
 import {
   PageContainer,
@@ -8,7 +7,6 @@ import {
   Tag,
   GalleryGrid,
   CommentsList,
-  CommentTextarea,
   ModalImg,
   PageStyled,
 } from "./style";
@@ -17,57 +15,139 @@ import { useEffect, useState } from "react";
 import { useCar } from "../../hooks/useCar";
 import { iCarRes } from "../../contexts/CarContext/props";
 import { Modal } from "../../components/Modal";
+import { useUsers } from "../../hooks/useUser";
+import { tcommentResponse, tnewComment } from "./schemas";
+import { api } from "../../services/api";
+import { FaRegEdit, FaTrashAlt } from "react-icons/fa";
+import UpdateComment from "../../components/Comment/UpdateComment";
+import DeleteComment from "../../components/Comment/DeleteComment";
+import Comment from "../../components/Comment/CreateComment";
 
 const Products = () => {
   const { id } = useParams();
   const { getCar } = useCar();
-  const [curCar, setCurCar] = useState<iCarRes | undefined>();
+  const { user } = useUsers();
+  const [singleCar, setSingleCar] = useState<iCarRes | undefined>();
   const [isOpen, setIsOpen] = useState(false);
   const [modalImg, setModalImg] = useState("");
+  const [comment, setComment] = useState<tcommentResponse>(
+    [] as tcommentResponse
+  );
+  const [oneComment, setOneComment] = useState<tnewComment>({} as tnewComment);
+  const [isModalEditOpen, setIsModalEditOpen] = useState(false);
+  const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
 
-  const nameSub = curCar?.user.name
-    .split(" ")
-    .map((letter: string, index: number) => {
-      if (index === 0 || index === curCar.user?.name.split(" ").length - 1) {
-        return letter[0].toUpperCase();
-      }
-    })
-    .join("");
+  useEffect(() => {
+    const getCurCar = async () => {
+      const car: iCarRes | undefined = await getCar(id);
+      setSingleCar(car);
+
+      const { data } = await api.get<tcommentResponse>(`comments/${id}`);
+      setComment(data.reverse());
+    };
+
+    getCurCar();
+  }, []);
+
+  const nameSub = (nameSurname: string) => {
+    return nameSurname
+      .split(" ")
+      .map((letter: string, index: number) => {
+        if (index === 0 || index === nameSurname.split(" ").length - 1) {
+          return letter[0].toUpperCase();
+        }
+      })
+      .join("");
+  };
 
   const openModal = (img: string) => {
     setIsOpen(true);
     setModalImg(img);
   };
 
-  useEffect(() => {
-    const getCurCar = async () => {
-      const car: iCarRes | undefined = await getCar(id);
-      setCurCar(car);
-    };
+  const handleDeleteOpenModal = () => {
+    setIsModalDeleteOpen(!isModalDeleteOpen);
+  };
 
-    getCurCar();
-  }, []);
+  const handleEditOpenModal = () => {
+    setIsModalEditOpen(!isModalEditOpen);
+  };
+
+  const modalDeleteComment = (data: tnewComment) => {
+    setOneComment(data);
+    setIsModalDeleteOpen(!isModalDeleteOpen);
+  };
+
+  const modalEditComment = (data: tnewComment) => {
+    setOneComment(data);
+    setIsModalEditOpen(!isModalEditOpen);
+  };
+
+  const newDate = (date: string) => {
+    const dataAtual = new Date();
+    const dataInformada = new Date(date);
+
+    const milissegundosPorDia = 1000 * 24 * 60 * 60;
+
+    const diferencaEmDias = Math.floor(
+      (dataAtual.getTime() - dataInformada.getTime()) / milissegundosPorDia
+    );
+
+    const mesesPassados = Math.floor(diferencaEmDias / 30);
+
+    if (diferencaEmDias < 30) {
+      if (diferencaEmDias === 0) {
+        return "hoje";
+      }
+      return "há " + diferencaEmDias + " dias";
+    }
+
+    return "há " + mesesPassados + " mês";
+  };
 
   return (
     <PageStyled>
+      {isModalDeleteOpen && (
+        <Modal toggleModal={handleDeleteOpenModal}>
+          <DeleteComment
+            oneComment={oneComment}
+            isModalDeleteOpen={isModalDeleteOpen}
+            setIsModalDeleteOpen={setIsModalDeleteOpen}
+            comment={comment}
+            setComment={setComment}
+          />
+        </Modal>
+      )}
+
+      {isModalEditOpen && (
+        <Modal toggleModal={handleEditOpenModal}>
+          <UpdateComment
+            oneComment={oneComment}
+            isModalEditOpen={isModalEditOpen}
+            setIsModalEditOpen={setIsModalEditOpen}
+            setComment={setComment}
+          />
+        </Modal>
+      )}
+
       <StyledContainer className="container">
         <PageContainer>
           <div>
             <SectionsContainer className="container__img">
-              <img src={curCar?.images[0].url} />
+              <img src={singleCar?.images[0].url} />
             </SectionsContainer>
             <SectionsContainer>
               <CarInfoContainer>
                 <h6 className="heading6">
-                  {curCar?.brand} - {curCar?.model}{" "}
+                  {singleCar?.brand} - {singleCar?.model}
                 </h6>
                 <div className="carInfos">
                   <div>
-                    <Tag>{curCar?.year}</Tag>
-                    <Tag>{curCar?.km}km</Tag>
+                    <Tag>{singleCar?.year}</Tag>
+                    <Tag>{singleCar?.km}km</Tag>
                   </div>
                   <h6 className="heading7">
-                    {Number(curCar?.price).toLocaleString("pt-BR", {
+                    {Number(singleCar?.price).toLocaleString("pt-BR", {
                       style: "currency",
                       currency: "BRL",
                     })}
@@ -80,7 +160,7 @@ const Products = () => {
             </SectionsContainer>
             <SectionsContainer>
               <h6 className="heading6">Descrição</h6>
-              <p>{curCar?.description}</p>
+              <p>{singleCar?.description}</p>
             </SectionsContainer>
           </div>
           <aside className="containerSticky">
@@ -88,7 +168,7 @@ const Products = () => {
               <div>
                 <h6 className="heading6">Fotos</h6>
                 <GalleryGrid>
-                  {curCar?.images.map((img) => (
+                  {singleCar?.images.map((img) => (
                     <li
                       className="imgContainer"
                       key={img.id}
@@ -101,13 +181,16 @@ const Products = () => {
               </div>
             </SectionsContainer>
             <SectionsContainer>
-              <Avatar className="avatarProfileBig" $bg={curCar?.user.avatar_bg}>
-                {nameSub}
+              <Avatar
+                className="avatarProfileBig"
+                $bg={singleCar?.user.avatar_bg}
+              >
+                {singleCar && `${nameSub(singleCar.user?.name)}`}
               </Avatar>
               <div className="sellerInfos">
-                <h6 className="heading6">{curCar?.user.name}</h6>
-                <p>{curCar?.user.personalInformation?.description}</p>
-                <Link to={`/profile/${curCar?.user.id}`}>
+                <h6 className="heading6">{singleCar?.user.name}</h6>
+                <p>{singleCar?.user.personalInformation?.description}</p>
+                <Link to={`/profile/${singleCar?.user.id}`}>
                   Ver todos anúncios
                 </Link>
               </div>
@@ -117,40 +200,51 @@ const Products = () => {
             <SectionsContainer>
               <h6 className="heading6">Comentários</h6>
               <ul>
-                <CommentsList>
-                  <div>
-                    <Avatar className="avatar" $bg={curCar?.user.avatar_bg}>
-                      GL
-                    </Avatar>
-                    <p className="commentUsername">Gustavo Lima</p>
-                    <span className="commentTime">•</span>
-                    <p className="commentTime">há 3 dias</p>
-                  </div>
-                  <p className="">
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book.
-                  </p>
-                </CommentsList>
+                {comment.map((el) => (
+                  <CommentsList key={el.id}>
+                    <div>
+                      <div>
+                        <Avatar className="avatar" $bg={el.user.avatar_bg}>
+                          {nameSub(el.user.name)}
+                        </Avatar>
+                        <p className="commentUsername">{el.user.name}</p>
+                        <span className="commentTime">•</span>
+                        <p className="commentTime">
+                          {newDate(`${el.create_date}`)}
+                        </p>
+                      </div>
+
+                      {user && el.user.id === user.id && (
+                        <div>
+                          <StyledButton
+                            buttonstyle="comment_delete_btn"
+                            buttonsize="default"
+                            onClick={() => modalDeleteComment(el)}
+                          >
+                            <FaTrashAlt />
+                          </StyledButton>
+
+                          <StyledButton
+                            buttonstyle="comment_edit_btn"
+                            buttonsize="default"
+                            onClick={() => modalEditComment(el)}
+                          >
+                            <FaRegEdit />
+                          </StyledButton>
+                        </div>
+                      )}
+                    </div>
+                    <p className="">{el.description}</p>
+                  </CommentsList>
+                ))}
               </ul>
-              <CommentTextarea>
-                <div>
-                  <Avatar className="avatar" $bg={theme.colors.random1}>
-                    GL
-                  </Avatar>
-                  <p className="commentUsername">Gustavo Lima</p>
-                </div>
-                <form className="textContainer">
-                  <textarea name="comment" id="comment" rows={10}></textarea>
-                  <StyledButton buttonstyle="brand1" buttonsize="fit">
-                    Comentar
-                  </StyledButton>
-                </form>
-              </CommentTextarea>
+            </SectionsContainer>
+
+            <SectionsContainer>
+              <Comment comment={comment} setComment={setComment} />
             </SectionsContainer>
           </div>
+
           {isOpen ? (
             <Modal toggleModal={() => setIsOpen(false)}>
               <ModalImg src={modalImg} alt="Imagem do carro" />
