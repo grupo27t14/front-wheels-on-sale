@@ -8,9 +8,12 @@ import { useEffect, useState } from "react";
 import { iCarRes, iPaginationCars } from "../../contexts/CarContext/props";
 import { useParams } from "react-router-dom";
 import { useUsers } from "../../hooks/useUser";
-import { HStack } from "./styled";
+import { EditCarImages, HStack } from "./styled";
 import { RadioButtonDivStyles } from "../RadioButton/styles";
 import { RadioButton } from "../RadioButton";
+import { AiOutlineMinus, AiOutlineUndo } from "react-icons/ai";
+import { api } from "../../services/api";
+import { LoadingRing } from "../../styles/LoadingRing";
 
 interface IProps {
   isModalOpen: boolean;
@@ -25,12 +28,15 @@ const EditCar = ({ isModalOpen, setIsModalOpen, carId, setCars }: IProps) => {
   const { editCar, deleteCar, getCar } = useCar();
   const [car, setCar] = useState<iCarRes>();
   const { id } = useParams();
-  const { getUserCars } = useUsers();
+  const { getUserCars, reqLoading, setReqLoading } = useUsers();
+  const [removeImages, setRemoveImages] = useState<string[]>([]);
 
   const { brands, carModel, errors, handleSubmit, models, register, setValue } =
     useAnnounce();
 
   const refreshUserCars = async () => {
+    const res = await getCar(carId);
+    setCar(res);
     if (id) {
       const cars = await getUserCars(id);
       setCars(cars);
@@ -41,8 +47,12 @@ const EditCar = ({ isModalOpen, setIsModalOpen, carId, setCars }: IProps) => {
     (async () => {
       const res = await getCar(carId);
       setCar(res);
+      if (id) {
+        const cars = await getUserCars(id);
+        setCars(cars);
+      }
     })();
-  }, [carId, getCar]);
+  }, [carId, getCar, id, getUserCars, setCars]);
 
   useEffect(() => {
     if (car) {
@@ -59,13 +69,39 @@ const EditCar = ({ isModalOpen, setIsModalOpen, carId, setCars }: IProps) => {
     }
   }, [car, setValue]);
 
+  const uploadImage = async (carID: string, imageFile: File) => {
+    const formData = new FormData();
+    formData.append("image", imageFile);
+
+    await api.post(`/image/${carID}`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+  };
+
   const handleCarDelete = async () => {
     await deleteCar(carId);
     await refreshUserCars();
     setIsModalOpen(!isModalOpen);
   };
 
+  const handleDeleteImages = (imgId: string) => {
+    if (!removeImages.includes(imgId)) {
+      setRemoveImages([...removeImages, imgId]);
+    }
+    if (removeImages.includes(imgId)) {
+      const array = [...removeImages];
+      array.splice(array.indexOf(imgId), 1);
+      setRemoveImages(array);
+    }
+  };
+
   const onSubmit = async (newData: announceData) => {
+    setReqLoading(true);
+    const image = newData.image as File[];
+    Reflect.deleteProperty(newData, "image");
+
     try {
       // Formatar Marca/Modelo/Spec
       newData.brand =
@@ -77,11 +113,22 @@ const EditCar = ({ isModalOpen, setIsModalOpen, carId, setCars }: IProps) => {
         newData.model.split(" ")[0].substring(1);
 
       await editCar(newData, carId);
-      await refreshUserCars();
+
+      if (car) {
+        removeImages.forEach(async (imgId) => {
+          await api.delete(`image/${imgId}/car/${car.id}`);
+        });
+        const res = Array.from(image).map(async (img) => {
+          await uploadImage(car.id, img);
+        });
+        await Promise.all(res);
+        await refreshUserCars();
+      }
     } catch (err) {
       console.log(err);
     } finally {
       setIsModalOpen(!isModalOpen);
+      setReqLoading(false);
     }
   };
 
@@ -211,7 +258,35 @@ const EditCar = ({ isModalOpen, setIsModalOpen, carId, setCars }: IProps) => {
         />
       </RadioButtonDivStyles>
 
-      {/* Imagem */}
+      {car?.images.length ? <h4>Remover Imagens</h4> : ""}
+      <EditCarImages>
+        {car?.images.length
+          ? car.images.map((img) => (
+              <div key={img.id}>
+                <button
+                  type="button"
+                  onClick={() => handleDeleteImages(img.id)}
+                >
+                  {removeImages.includes(img.id) ? (
+                    <AiOutlineUndo />
+                  ) : (
+                    <AiOutlineMinus />
+                  )}
+                </button>
+                <img src={img.url} alt="Imagem de carro" />
+              </div>
+            ))
+          : ""}
+      </EditCarImages>
+
+      <Input
+        id="image"
+        label="Adicionar Imagens"
+        placeholder="Adicione uma imágem aqui"
+        type="file"
+        multiple
+        {...register("image")}
+      />
 
       <HStack>
         <StyledButton
@@ -223,7 +298,7 @@ const EditCar = ({ isModalOpen, setIsModalOpen, carId, setCars }: IProps) => {
           Excluir anúncio
         </StyledButton>
         <StyledButton buttonsize="form" buttonstyle="brand1" type="submit">
-          Salvar alterações
+          {reqLoading ? <LoadingRing /> : "Salvar alterações"}
         </StyledButton>
       </HStack>
     </Form>
