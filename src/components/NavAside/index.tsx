@@ -91,10 +91,12 @@ export const Aside: React.FC<AsideProps> = ({ onClick }) => {
     };
 
     allCars?.results.map((car) => {
-      thisKeys.brand.push(car.brand);
-      thisKeys.model.push(car.model);
-      thisKeys.color.push(car.color);
-      thisKeys.year.push(car.year);
+      if (car.is_published) {
+        thisKeys.brand.push(car.brand);
+        thisKeys.model.push(car.model);
+        thisKeys.color.push(car.color);
+        thisKeys.year.push(car.year);
+      }
     });
     setKeys(thisKeys);
   }, [allCars]);
