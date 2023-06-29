@@ -64,7 +64,7 @@ export const useAnnounce = () => {
     (async () => {
       if (carBrand) {
         const { data } = await fipe.get<iKenzieCars[]>(
-          `/cars?brand=${carBrand}`
+          `/cars?brand=${carBrand.toLowerCase()}`
         );
         setModels(data);
       }

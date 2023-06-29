@@ -12,6 +12,7 @@ import { modalProps } from "./props";
 import { iCarRes } from "../../contexts/CarContext/props";
 import { RadioButtonDivStyles } from "../RadioButton/styles";
 import { RadioButton } from "../RadioButton";
+import { LoadingRing } from "../../styles/LoadingRing";
 
 export const NewAnnounce = ({
   setIsModalOpen,
@@ -20,7 +21,7 @@ export const NewAnnounce = ({
 }: modalProps): JSX.Element => {
   const { createCar } = useContext(CarContext);
 
-  const { getUserCars } = useUsers();
+  const { getUserCars, reqLoading, setReqLoading } = useUsers();
 
   const { id } = useParams();
 
@@ -35,10 +36,10 @@ export const NewAnnounce = ({
     carBrand,
   } = useAnnounce();
 
-  const uploadImage = async (carID: string, imageFile: File[]) => {
+  const uploadImage = async (carID: string, imageFile: File) => {
     try {
       const formData = new FormData();
-      formData.append("image", imageFile[0]);
+      formData.append("image", imageFile);
 
       await api.post(`/image/${carID}`, formData, {
         headers: {
@@ -51,11 +52,9 @@ export const NewAnnounce = ({
   };
 
   const onSubmit = async (newData: announceData) => {
+    setReqLoading(true);
     const image = newData.image as File[];
     Reflect.deleteProperty(newData, "image");
-    setIsModalOpen(!isModalOpen);
-
-    console.log(newData);
 
     // Formatar Marca/Modelo/Spec
     newData.brand =
@@ -68,16 +67,20 @@ export const NewAnnounce = ({
 
     try {
       const carData = (await createCar(newData)) as iCarRes;
-      console.log(carData);
 
-      await uploadImage(carData.id, image);
-
+      const res = Array.from(image).map(async (img) => {
+        await uploadImage(carData.id, img);
+      });
+      await Promise.all(res);
       if (id) {
         const cars = await getUserCars(id);
         setCars(cars);
       }
     } catch (err) {
       console.log(err);
+    } finally {
+      setReqLoading(false);
+      setIsModalOpen(!isModalOpen);
     }
   };
 
@@ -217,6 +220,7 @@ export const NewAnnounce = ({
         label="Imagem da capa"
         placeholder="Adicione uma imágem aqui"
         type="file"
+        multiple
         {...register("image")}
       />
 
@@ -229,7 +233,7 @@ export const NewAnnounce = ({
           Cancelar
         </StyledButton>
         <StyledButton buttonsize="form" buttonstyle="brand1" type="submit">
-          Criar anúncio
+          {reqLoading ? <LoadingRing /> : "Criar anúncio"}
         </StyledButton>
       </div>
     </Form>
