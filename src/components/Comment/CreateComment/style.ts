@@ -2,11 +2,12 @@ import styled from "styled-components";
 import { theme } from "../../../styles/theme";
 
 export const CommentArea = styled.div`
-  max-width: 100%;
-  margin-top: 4rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 
   div {
-    margin-bottom: 1.2rem;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -30,16 +31,21 @@ export const CommentArea = styled.div`
     resize: none;
     width: 100%;
 
-    padding: 2rem;
+    padding: 2rem 16.4rem 2rem 2rem;
+    text-align: justify;
 
     border-radius: 0.4rem;
     border: 0.2rem solid ${theme.colors.grey7};
     background-color: ${theme.colors.grey10};
     outline: none;
-    color: ${theme.colors.grey2};
+    color: ${theme.colors.grey1};
     ${theme.typography.Heading7_500}
 
     font-family: 'Inter', sans-serif;
+
+    ::placeholder {
+      color: ${theme.colors.grey3};
+    }
   }
 
   button {
@@ -81,4 +87,25 @@ export const SubTitle = styled.h4`
 
 export const Text = styled.p`
   ${theme.typography.body2_500};
+`;
+
+export const ButtonGroup = styled.div`
+  display: flex !important;
+  align-items: center !important;
+  flex-direction: unset !important;
+  gap: 0.8rem !important;
+
+  button {
+    position: unset;
+    padding: 0px 12px;
+    color: ${theme.colors.grey3};
+    background-color: ${theme.colors.grey7};
+    border-color: ${theme.colors.grey7};
+    border-radius: 24px;
+
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+  }
 `;
