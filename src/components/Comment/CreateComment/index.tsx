@@ -1,6 +1,6 @@
 import { Avatar } from "../../../styles/global";
 import { StyledButton } from "../../../styles/button";
-import { CommentArea } from "./style";
+import { ButtonGroup, CommentArea } from "./style";
 import { useParams } from "react-router-dom";
 import { useUsers } from "../../../hooks/useUser";
 import { useForm } from "react-hook-form";
@@ -15,11 +15,11 @@ import {
 } from "../../../pages/Product/schemas";
 
 interface IComment {
-  comment: tcommentResponse;
-  setComment: (comment: tcommentResponse) => void;
+  comments: tcommentResponse;
+  setComments: (comment: tcommentResponse) => void;
 }
 
-const Comment = ({ comment, setComment }: IComment) => {
+const CreateComment = ({ comments, setComments }: IComment) => {
   const { id } = useParams();
   const { user, reqLoading } = useUsers();
 
@@ -41,7 +41,7 @@ const Comment = ({ comment, setComment }: IComment) => {
   const handleComment = async (body: tcomment) => {
     try {
       const { data } = await api.post(`comments/${id}`, body);
-      setComment([data, ...comment]);
+      setComments([data, ...comments]);
       reset();
     } catch (err) {
       console.error(err);
@@ -84,8 +84,21 @@ const Comment = ({ comment, setComment }: IComment) => {
           </StyledButton>
         )}
       </form>
+      {user && (
+        <ButtonGroup>
+          <StyledButton buttonstyle="comment_btn" buttonsize="default">
+            Gostei muito!
+          </StyledButton>
+          <StyledButton buttonstyle="comment_btn" buttonsize="default">
+            Incrível!
+          </StyledButton>
+          <StyledButton buttonstyle="comment_btn" buttonsize="default">
+            Recomendarei para meus amigos!!
+          </StyledButton>
+        </ButtonGroup>
+      )}
     </CommentArea>
   );
 };
 
-export default Comment;
+export default CreateComment;
