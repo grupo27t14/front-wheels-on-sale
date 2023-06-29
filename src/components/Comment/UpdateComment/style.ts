@@ -48,4 +48,21 @@ export const Textarea = styled.textarea`
   max-height: 300px;
   resize: vertical;
   padding: 20px;
+
+  ${theme.typography.Heading7_500}
+  color: ${theme.colors.grey1};
+  background-color: ${theme.colors.grey10};
+
+  border-radius: 0.4rem;
+  border: 0.2rem solid ${theme.colors.grey7};
+
+  font-family: "Inter", sans-serif;
+
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+
+  ::placeholder {
+    color: ${theme.colors.grey3};
+  }
 `;
