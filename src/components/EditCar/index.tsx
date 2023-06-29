@@ -9,6 +9,8 @@ import { iCarRes, iPaginationCars } from "../../contexts/CarContext/props";
 import { useParams } from "react-router-dom";
 import { useUsers } from "../../hooks/useUser";
 import { HStack } from "./styled";
+import { RadioButtonDivStyles } from "../RadioButton/styles";
+import { RadioButton } from "../RadioButton";
 
 interface IProps {
   isModalOpen: boolean;
@@ -191,7 +193,25 @@ const EditCar = ({ isModalOpen, setIsModalOpen, carId, setCars }: IProps) => {
         {...register("description")}
       />
 
-      {/* Publicado/Imagem */}
+      <h4>Publicado</h4>
+      <RadioButtonDivStyles>
+        <RadioButton
+          id="published"
+          label="Sim"
+          value={1}
+          defaultChecked={car?.is_published}
+          {...register("is_published")}
+        />
+        <RadioButton
+          id="not_published"
+          label="Não"
+          value={0}
+          defaultChecked={!car?.is_published}
+          {...register("is_published")}
+        />
+      </RadioButtonDivStyles>
+
+      {/* Imagem */}
 
       <HStack>
         <StyledButton

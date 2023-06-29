@@ -10,6 +10,8 @@ import { Form } from "../Form";
 import { useAnnounce } from "./useAnnounce";
 import { modalProps } from "./props";
 import { iCarRes } from "../../contexts/CarContext/props";
+import { RadioButtonDivStyles } from "../RadioButton/styles";
+import { RadioButton } from "../RadioButton";
 
 export const NewAnnounce = ({
   setIsModalOpen,
@@ -53,6 +55,8 @@ export const NewAnnounce = ({
     Reflect.deleteProperty(newData, "image");
     setIsModalOpen(!isModalOpen);
 
+    console.log(newData);
+
     // Formatar Marca/Modelo/Spec
     newData.brand =
       newData.brand.split("")[0].toUpperCase() + newData.brand.substring(1);
@@ -64,6 +68,8 @@ export const NewAnnounce = ({
 
     try {
       const carData = (await createCar(newData)) as iCarRes;
+      console.log(carData);
+
       await uploadImage(carData.id, image);
 
       if (id) {
@@ -188,6 +194,23 @@ export const NewAnnounce = ({
         placeholder="Faça uma breve descrição do veículo"
         {...register("description")}
       />
+
+      <h4>Publicado</h4>
+      <RadioButtonDivStyles>
+        <RadioButton
+          id="published"
+          label="Sim"
+          value={1}
+          defaultChecked
+          {...register("is_published")}
+        />
+        <RadioButton
+          id="not_published"
+          label="Não"
+          value={0}
+          {...register("is_published")}
+        />
+      </RadioButtonDivStyles>
 
       <Input
         id="image"

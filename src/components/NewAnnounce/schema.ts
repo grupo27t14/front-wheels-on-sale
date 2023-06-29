@@ -11,6 +11,7 @@ export const announceSchema = z
     color: z.string().nonempty("Valor obrigatório."),
     fipe: z.string().nonempty(),
     price: z.any().transform((data) => Number(data)),
+    is_published: z.string().transform((data) => Boolean(Number(data))),
     description: z.string(),
     image: z.unknown(),
   })

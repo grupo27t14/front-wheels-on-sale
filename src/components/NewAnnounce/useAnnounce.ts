@@ -21,13 +21,6 @@ export const useAnnounce = () => {
 
   const carModel = watch("model");
   const carBrand = watch("brand");
-  const carKm = watch("km");
-  const carPrice = watch("price");
-
-  useEffect(() => {
-    if (carKm) setValue("km", Number(carKm));
-    if (carPrice) setValue("price", Number(carPrice));
-  }, [carKm, carPrice, setValue]);
 
   useEffect(() => {
     (async () => {
