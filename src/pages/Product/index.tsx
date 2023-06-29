@@ -71,6 +71,18 @@ const Products = () => {
     setIsModalEditOpen(!isModalEditOpen);
   };
 
+  const handleClickWhatsapp = () => {
+    const userData = {
+      whatsappNumber: singleCar?.user?.personalInformation?.phone,
+    };
+    
+    if (userData.whatsappNumber) {
+      const whatsappLink = `https://api.whatsapp.com/send?phone=+55${userData.whatsappNumber}&text=Ol%C3%A1%20me%20interessei%20pelo%20seu%20ve%C3%ADculo%20e%20gostaria%20de%20compr%C3%A1-lo`;
+  
+      window.open(whatsappLink, "_blank");
+    }
+  };
+
   return (
     <PageStyled>
       {isModalDeleteOpen && (
@@ -119,7 +131,7 @@ const Products = () => {
                     })}
                   </h6>
                 </div>
-                <StyledButton buttonstyle="brand1" buttonsize="fit">
+                <StyledButton buttonstyle="brand1" buttonsize="fit" onClick={handleClickWhatsapp}>
                   Compar
                 </StyledButton>
               </CarInfoContainer>
