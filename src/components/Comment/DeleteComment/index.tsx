@@ -7,22 +7,22 @@ interface IDeleteComment {
   oneComment: tnewComment;
   isModalDeleteOpen: boolean;
   setIsModalDeleteOpen: (isModalDeleteOpen: boolean) => void;
-  comment: tcommentResponse;
-  setComment: (data: tcommentResponse) => void;
+  comments: tcommentResponse;
+  setComments: (data: tcommentResponse) => void;
 }
 
 const DeleteComment = ({
   oneComment,
   isModalDeleteOpen,
   setIsModalDeleteOpen,
-  comment,
-  setComment,
+  comments,
+  setComments,
 }: IDeleteComment): JSX.Element => {
   const commentDelete = async (id: string) => {
     try {
       await api.delete(`comments/${id}`);
-      const filt = comment.filter((el) => el.id !== id);
-      setComment(filt);
+      const filt = comments.filter((el) => el.id !== id);
+      setComments(filt);
       setIsModalDeleteOpen(!isModalDeleteOpen);
     } catch (err) {
       console.error(err);

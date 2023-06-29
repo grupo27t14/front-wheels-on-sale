@@ -17,14 +17,14 @@ interface IUpdateComment {
   oneComment: tnewComment;
   isModalEditOpen: boolean;
   setIsModalEditOpen: (isModalEditOpen: boolean) => void;
-  setComment: (data: tcommentResponse) => void;
+  setComments: (data: tcommentResponse) => void;
 }
 
 const UpdateComment = ({
   oneComment,
   isModalEditOpen,
   setIsModalEditOpen,
-  setComment,
+  setComments,
 }: IUpdateComment): JSX.Element => {
   const { reqLoading } = useUsers();
   const { register, handleSubmit } = useForm<tcomment>({
@@ -38,7 +38,7 @@ const UpdateComment = ({
       const { data } = await api.get<tcommentResponse>(
         `comments/${oneComment.car.id}`
       );
-      setComment(data.reverse());
+      setComments(data.reverse());
 
       setIsModalEditOpen(!isModalEditOpen);
     } catch (err) {

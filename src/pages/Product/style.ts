@@ -39,7 +39,7 @@ export const SectionsContainer = styled.div`
   border-radius: 0.4rem;
   display: flex;
   flex-direction: column;
-  padding: 4rem;
+  padding: 3.5rem;
   gap: 3.2rem;
   margin-bottom: 2rem;
 
@@ -144,6 +144,12 @@ export const CarInfoContainer = styled.div`
   }
 `;
 
+export const UnorderedList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 4.4rem;
+`;
+
 export const Tag = styled.span`
   text-transform: uppercase;
   ${theme.typography.body2_500};
@@ -152,83 +158,6 @@ export const Tag = styled.span`
 
   color: ${theme.colors.brand1};
   background-color: ${theme.colors.brand4};
-`;
-
-export const CommentsList = styled.li`
-  margin-bottom: 4.4rem;
-
-  div {
-    margin-bottom: 1.2rem;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 1rem;
-    justify-content: space-between;
-
-    .commentUsername {
-      ${theme.typography.body2_500};
-      color: ${theme.colors.grey1};
-    }
-
-    .commentTime {
-      ${theme.typography.body2_500};
-      color: ${theme.colors.grey3};
-    }
-
-    div + div {
-      svg {
-        font-size: 20px;
-      }
-    }
-  }
-`;
-
-export const CommentTextarea = styled.div`
-  max-width: 100%;
-  margin-top: 4rem;
-
-  div {
-    margin-bottom: 1.2rem;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 1rem;
-
-    .commentUsername {
-      ${theme.typography.body2_500};
-      color: ${theme.colors.grey1};
-    }
-  }
-
-  .textContainer {
-    width: 100%;
-    position: relative;
-  }
-
-  textarea {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    resize: none;
-    width: 100%;
-
-    padding: 2rem;
-
-    border-radius: 0.4rem;
-    border: 0.2rem solid ${theme.colors.grey7};
-    background-color: ${theme.colors.grey10};
-    outline: none;
-    color: ${theme.colors.grey2};
-    ${theme.typography.Heading7_500}
-
-    font-family: 'Inter', sans-serif;
-  }
-
-  button {
-    position: absolute;
-    bottom: 2rem;
-    right: 2rem;
-  }
 `;
 
 export const ModalImg = styled.img`
