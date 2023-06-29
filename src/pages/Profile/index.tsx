@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { iPaginationCars } from "../../contexts/CarContext/props";
 import Card from "../../components/Card";
 import { Modal } from "../../components/Modal";
-import { NewAnnounce } from "../../components/Form/NewAnnounce";
+import { NewAnnounce } from "../../components/NewAnnounce";
 
 export const Profile = () => {
   const { id } = useParams();
@@ -22,7 +22,7 @@ export const Profile = () => {
         setCars(cars);
       }
     })();
-  }, [id]);
+  }, [id, getUserCars]);
 
   const name =
     user?.is_seller && user.id === id ? user.name : cars?.results[0].user?.name;
@@ -88,7 +88,7 @@ export const Profile = () => {
           <ul className="productsGrid">
             {cars?.results.map((car) => (
               <li className="productsGrid__item" key={car.id}>
-                <Card car={car} />
+                <Card car={car} setCars={setCars} />
               </li>
             ))}
           </ul>
