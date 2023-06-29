@@ -1,4 +1,4 @@
-import { iPaginationCars } from "../../../contexts/CarContext/props";
+import { iPaginationCars } from "../../contexts/CarContext/props";
 
 export interface modalProps {
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;

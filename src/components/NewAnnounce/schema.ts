@@ -7,16 +7,10 @@ export const announceSchema = z
     spec: z.string().default(""),
     year: z.string().nonempty("Valor obrigatório.").min(4, "Mínimo 4 números."),
     fuel: z.string().nonempty(),
-    km: z
-      .string()
-      .nonempty("Valor obrigatório.")
-      .transform((value) => Number(value)),
+    km: z.any().transform((data) => Number(data)),
     color: z.string().nonempty("Valor obrigatório."),
     fipe: z.string().nonempty(),
-    price: z
-      .string()
-      .nonempty("Valor obrigatório.")
-      .transform((value) => Number(value)),
+    price: z.any().transform((data) => Number(data)),
     description: z.string(),
     image: z.unknown(),
   })

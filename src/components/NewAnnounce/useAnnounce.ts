@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useCallback, useEffect, useState } from "react";
 import { announceData, announceSchema } from "./schema";
-import { fipe } from "../../../services/api";
+import { fipe } from "../../services/api";
 import { iKenzieBrands, iKenzieCars } from "./props";
 
 export const useAnnounce = () => {
@@ -21,6 +21,13 @@ export const useAnnounce = () => {
 
   const carModel = watch("model");
   const carBrand = watch("brand");
+  const carKm = watch("km");
+  const carPrice = watch("price");
+
+  useEffect(() => {
+    if (carKm) setValue("km", Number(carKm));
+    if (carPrice) setValue("price", Number(carPrice));
+  }, [carKm, carPrice, setValue]);
 
   useEffect(() => {
     (async () => {
@@ -60,17 +67,16 @@ export const useAnnounce = () => {
     [handleSetData]
   );
 
-  const handleBrand = useCallback(
-    async (carBrand: string) => {
+  useEffect(() => {
+    (async () => {
       if (carBrand) {
         const { data } = await fipe.get<iKenzieCars[]>(
           `/cars?brand=${carBrand}`
         );
         setModels(data);
       }
-    },
-    [setModels]
-  );
+    })();
+  }, [carBrand]);
 
   useEffect(() => {
     setValue("model", carModel);
@@ -79,11 +85,7 @@ export const useAnnounce = () => {
     if (carModel) {
       handleCarList(models, carModel);
     }
-
-    if (carBrand) {
-      handleBrand(carBrand);
-    }
-  }, [carModel, handleCarList, models, setValue, carBrand, handleBrand]);
+  }, [carModel, handleCarList, models, setValue, carBrand]);
 
   return {
     errors,

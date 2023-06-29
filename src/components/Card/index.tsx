@@ -1,16 +1,23 @@
 import { Link, useLocation, useParams } from "react-router-dom";
-import { iCarRes } from "../../contexts/CarContext/props";
+import { iCarRes, iPaginationCars } from "../../contexts/CarContext/props";
 import { useUsers } from "../../hooks/useUser";
 import { Avatar } from "../../styles/global";
 import { Section, Box, Img, Title, Text, Flex, VStack } from "./styled";
 import { BsCurrencyDollar } from "react-icons/bs";
 import { StyledButton } from "../../styles/button";
+import { useState } from "react";
+import { Modal } from "../Modal";
+import EditCar from "../EditCar";
 
 interface ICarProps {
   car: iCarRes;
+  setCars: React.Dispatch<
+    React.SetStateAction<iPaginationCars | null | undefined>
+  >;
 }
 
-const Card = ({ car }: ICarProps) => {
+const Card = ({ car, setCars }: ICarProps) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { pathname } = useLocation();
   const { user } = useUsers();
   const { id } = useParams();
@@ -79,13 +86,32 @@ const Card = ({ car }: ICarProps) => {
 
         {user && user?.is_seller && user?.id === id && (
           <VStack className="card__btn">
-            <StyledButton buttonstyle="medium">Editar</StyledButton>
+            <StyledButton
+              buttonstyle="medium"
+              onClick={() => setIsModalOpen(!isModalOpen)}
+            >
+              Editar
+            </StyledButton>
             <StyledButton buttonstyle="medium">
               <Link to={`/product/${car.id}`}>Ver detalhes</Link>
             </StyledButton>
           </VStack>
         )}
       </Box>
+      {isModalOpen && (
+        <Modal
+          toggleModal={() => {
+            setIsModalOpen(!isModalOpen);
+          }}
+        >
+          <EditCar
+            setIsModalOpen={setIsModalOpen}
+            isModalOpen={isModalOpen}
+            carId={car.id}
+            setCars={setCars}
+          />
+        </Modal>
+      )}
     </Section>
   );
 };

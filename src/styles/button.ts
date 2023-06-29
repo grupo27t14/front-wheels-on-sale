@@ -16,6 +16,8 @@ export const StyledButton = styled.button<buttonProps>`
   border-radius: 4px;
   transition: 0.4s;
   cursor: pointer;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 
   ${({ buttonsize }: buttonProps) => {
     switch (buttonsize) {
