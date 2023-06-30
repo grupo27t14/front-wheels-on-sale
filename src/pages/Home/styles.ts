@@ -29,7 +29,7 @@ export const Flex = styled.div`
     width: 100%;
     height: 100%;
     flex-direction: column;
-    justify-content: center;
+    padding-top: 150px;
     gap: 10px;
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.29) 0%, #000000 100%);
 
@@ -168,4 +168,3 @@ export const Title = styled.h1`
     ${theme.typography.Heading3_500}
   }
 `;
-
