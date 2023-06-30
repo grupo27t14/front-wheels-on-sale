@@ -6,7 +6,11 @@ export interface UserProviderProps {
 }
 
 export interface UserProviderValues {
-  userRegister: (data: tRegisterReq) => void;
+  userRegister: (
+    data: tRegisterReq,
+    successRecordModal: boolean,
+    setSuccessRecordModal: (successRecordModal: boolean) => void
+  ) => void;
   reqLoading: boolean;
   setReqLoading: React.Dispatch<React.SetStateAction<boolean>>;
   setUser: React.Dispatch<React.SetStateAction<iUser | null>>;

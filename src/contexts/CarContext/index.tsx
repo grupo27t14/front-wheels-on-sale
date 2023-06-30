@@ -48,7 +48,6 @@ export const CarContextProvider = ({ children }: CarProviderProps) => {
   const createCar = async (newData: iCarReq) => {
     try {
       const { data } = await api.post<iCarRes | undefined>("car", newData);
-      toast.success("Carro cadastrado com sucesso!");
       return data;
     } catch (err) {
       toast.error("Não foi possível cadastrar o carro.");

@@ -53,7 +53,7 @@ const DeleteComment = ({
           buttonsize="fit"
           onClick={() => commentDelete(oneComment.id)}
         >
-          Sim, excluir anúncio
+          Sim, excluir comentário
         </StyledButton>
       </HStack>
     </VStack>

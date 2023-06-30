@@ -19,13 +19,20 @@ interface IProps {
   isModalOpen: boolean;
   setIsModalOpen: (isModalOpen: boolean) => void;
   carId: string;
-  setCars: React.Dispatch<
+  setCars?: React.Dispatch<
     React.SetStateAction<iPaginationCars | null | undefined>
   >;
+  openOrCloseModalOfDeleteAd: () => void;
 }
 
-const EditCar = ({ isModalOpen, setIsModalOpen, carId, setCars }: IProps) => {
-  const { editCar, deleteCar, getCar } = useCar();
+const EditCar = ({
+  isModalOpen,
+  setIsModalOpen,
+  carId,
+  setCars,
+  openOrCloseModalOfDeleteAd,
+}: IProps) => {
+  const { editCar, getCar } = useCar();
   const [car, setCar] = useState<iCarRes>();
   const { id } = useParams();
   const { getUserCars, reqLoading, setReqLoading } = useUsers();
@@ -39,7 +46,9 @@ const EditCar = ({ isModalOpen, setIsModalOpen, carId, setCars }: IProps) => {
     setCar(res);
     if (id) {
       const cars = await getUserCars(id);
-      setCars(cars);
+      if (setCars) {
+        setCars(cars);
+      }
     }
   };
 
@@ -49,7 +58,9 @@ const EditCar = ({ isModalOpen, setIsModalOpen, carId, setCars }: IProps) => {
       setCar(res);
       if (id) {
         const cars = await getUserCars(id);
-        setCars(cars);
+        if (setCars) {
+          setCars(cars);
+        }
       }
     })();
   }, [carId, getCar, id, getUserCars, setCars]);
@@ -78,12 +89,6 @@ const EditCar = ({ isModalOpen, setIsModalOpen, carId, setCars }: IProps) => {
         "Content-Type": "multipart/form-data",
       },
     });
-  };
-
-  const handleCarDelete = async () => {
-    await deleteCar(carId);
-    await refreshUserCars();
-    setIsModalOpen(!isModalOpen);
   };
 
   const handleDeleteImages = (imgId: string) => {
@@ -292,7 +297,7 @@ const EditCar = ({ isModalOpen, setIsModalOpen, carId, setCars }: IProps) => {
         <StyledButton
           buttonsize="big"
           buttonstyle="negative"
-          onClick={handleCarDelete}
+          onClick={openOrCloseModalOfDeleteAd}
           type="button"
         >
           Excluir anúncio

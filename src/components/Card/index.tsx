@@ -8,19 +8,24 @@ import { StyledButton } from "../../styles/button";
 import { useState } from "react";
 import { Modal } from "../Modal";
 import EditCar from "../EditCar";
+import ConfirmDeletion from "../Modal/ConfirmDeletion";
+import { useCar } from "../../hooks/useCar";
 
 interface ICarProps {
   car: iCarRes;
-  setCars: React.Dispatch<
+  setCars?: React.Dispatch<
     React.SetStateAction<iPaginationCars | null | undefined>
   >;
 }
 
-const Card = ({ car, setCars }: ICarProps) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const { pathname } = useLocation();
-  const { user } = useUsers();
+const Card = ({ car, setCars }: ICarProps): JSX.Element => {
   const { id } = useParams();
+  const { deleteCar } = useCar();
+  const { pathname } = useLocation();
+  const { user, getUserCars } = useUsers();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalDeleteAnuncioOpen, setIsModalDeleteAnuncioOpen] =
+    useState(false);
 
   const path = pathname.substring(1, 8);
 
@@ -33,8 +38,42 @@ const Card = ({ car, setCars }: ICarProps) => {
     })
     .join("");
 
+  const handleCarDelete = async () => {
+    await deleteCar(car.id);
+    if (id) {
+      const cars = await getUserCars(id);
+      if (setCars) {
+        setCars(cars);
+      }
+    }
+    setIsModalDeleteAnuncioOpen(!isModalDeleteAnuncioOpen);
+  };
+
+  const handleDeleteAnuncioOpenModal = () => {
+    setIsModalDeleteAnuncioOpen(!isModalDeleteAnuncioOpen);
+  };
+
+  const openOrCloseModalOfDeleteAd = () => {
+    setIsModalDeleteAnuncioOpen(!isModalDeleteAnuncioOpen);
+    setIsModalOpen(!isModalOpen);
+  };
+
   return (
     <Section>
+      {isModalDeleteAnuncioOpen && (
+        <Modal toggleModal={handleDeleteAnuncioOpenModal}>
+          <ConfirmDeletion
+            title="Excluir anúncio"
+            subtitulo="Tem certeza que deseja remover este anúncio?"
+            text="Essa ação não pode ser desfeita. Isso excluirá permanentemente sua conta e removerá seus dados de nossos servidores."
+            text_btn_1="Cancelar"
+            text_btn_2="Sim, excluir anúncio"
+            onClick1={handleDeleteAnuncioOpenModal}
+            onClick2={handleCarDelete}
+          />
+        </Modal>
+      )}
+
       <Box className="card__img">
         {user && user?.is_seller && path === "profile" && (
           <Box>
@@ -109,6 +148,7 @@ const Card = ({ car, setCars }: ICarProps) => {
             isModalOpen={isModalOpen}
             carId={car.id}
             setCars={setCars}
+            openOrCloseModalOfDeleteAd={openOrCloseModalOfDeleteAd}
           />
         </Modal>
       )}

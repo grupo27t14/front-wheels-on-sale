@@ -9,7 +9,7 @@ interface iCGS {
 export const GlobalStyleGray = createGlobalStyle<iCGS>`
  body {
     background: ${theme.colors.grey8};
-  
+
 
   }
 `;

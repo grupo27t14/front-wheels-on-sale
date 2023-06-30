@@ -9,19 +9,51 @@ import { RadioButton } from "../../components/RadioButton";
 import { RadioButtonDivStyles } from "../../components/RadioButton/styles";
 import { LoadingRing } from "../../styles/LoadingRing";
 import { theme } from "../../styles/theme";
+import { useState } from "react";
+import ConfirmDeletion from "../../components/Modal/ConfirmDeletion";
+import { Modal } from "../../components/Modal";
+import { useNavigate } from "react-router-dom";
 
 export const Register = () => {
   const { errors, handleSubmit, register } = useCep();
 
   const { userRegister, reqLoading } = useUsers();
 
+  const [successRecordModal, setSuccessRecordModal] = useState(false);
+
+  const navigate = useNavigate();
+
   const handleRegisterSubmit = (data: tRegister) => {
     const parsedData = registerSchemaRequest.parse(data);
-    userRegister(parsedData);
+    userRegister(parsedData, successRecordModal, setSuccessRecordModal);
+  };
+
+  const handleOpenModal = () => {
+    setSuccessRecordModal(!successRecordModal);
+  };
+
+  const navigatePageLogin = () => {
+    navigate("/login");
   };
 
   return (
     <RegisterStyled>
+      {successRecordModal && (
+        <Modal toggleModal={handleOpenModal}>
+          <ConfirmDeletion
+            title="Sucesso!"
+            subtitulo="Sua conta foi criada com sucesso!"
+            text="Agora você poderá ver seus negócios crescendo em grande escala"
+            text_btn_0="Ir para login"
+            onClick0={navigatePageLogin}
+            visible="sim"
+            color={`${theme.colors.sucess1}`}
+            browse="/login"
+            handleOpenModal={handleOpenModal}
+          />
+        </Modal>
+      )}
+
       <Form title="Registro" onSubmit={handleSubmit(handleRegisterSubmit)}>
         <h4>Informações pessoais</h4>
         <Input

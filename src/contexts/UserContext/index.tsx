@@ -17,14 +17,19 @@ export const UserContextProvider = ({ children }: UserProviderProps) => {
   const [reqLoading, setReqLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  const userRegister = async (data: tRegisterReq) => {
+  const userRegister = async (
+    data: tRegisterReq,
+    successRecordModal: boolean,
+    setSuccessRecordModal: (successRecordModal: boolean) => void
+  ) => {
     try {
       setReqLoading(true);
       await api
         .post("user", { ...data, avatar_bg: randomColor() })
         .then(() => {
-          toast.success("Usuário cadastrado com sucesso!");
-          navigate("/login");
+          setSuccessRecordModal(!successRecordModal);
+          // toast.success("Usuário cadastrado com sucesso!");
+          // navigate("/login");
         })
         .catch((err) => {
           if (err.response.status == 409) {
