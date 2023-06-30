@@ -6,6 +6,10 @@ export interface modalProps {
   setCars: React.Dispatch<
     React.SetStateAction<iPaginationCars | null | undefined>
   >;
+  modalSuccessfullyRegistered: boolean;
+  setIsModalSuccessfullyRegistered: (
+    modalSuccessfullyRegistered: boolean
+  ) => void;
 }
 
 export interface iKenzieCars {
