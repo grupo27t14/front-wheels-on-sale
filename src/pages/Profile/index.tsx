@@ -8,6 +8,8 @@ import { iPaginationCars } from "../../contexts/CarContext/props";
 import Card from "../../components/Card";
 import { Modal } from "../../components/Modal";
 import { NewAnnounce } from "../../components/NewAnnounce";
+import ConfirmDeletion from "../../components/Modal/ConfirmDeletion";
+import { theme } from "../../styles/theme";
 
 export const Profile = () => {
   const { id } = useParams();
@@ -44,8 +46,28 @@ export const Profile = () => {
     setIsModalOpen(!isModalOpen);
   };
 
+  const [modalSuccessfullyRegistered, setIsModalSuccessfullyRegistered] =
+    useState(false);
+
+  const handleSuccessfullyRegisteredOpenModal = () => {
+    setIsModalSuccessfullyRegistered(!modalSuccessfullyRegistered);
+  };
+
   return (
     <Main>
+      {modalSuccessfullyRegistered && (
+        <Modal toggleModal={handleSuccessfullyRegisteredOpenModal}>
+          <ConfirmDeletion
+            title="Sucesso!"
+            subtitulo="Seu anúncio foi criado com sucesso!"
+            text="Agora você poderá ver seus negócios crescendo em grande escala"
+            visible="sim"
+            color={`${theme.colors.sucess1}`}
+            handleOpenModal={handleSuccessfullyRegisteredOpenModal}
+          />
+        </Modal>
+      )}
+
       <StyledContainer className="main container">
         <ProfileContainer>
           <Avatar
@@ -101,6 +123,8 @@ export const Profile = () => {
             setIsModalOpen={setIsModalOpen}
             isModalOpen={isModalOpen}
             setCars={setCars}
+            modalSuccessfullyRegistered={modalSuccessfullyRegistered}
+            setIsModalSuccessfullyRegistered={setIsModalSuccessfullyRegistered}
           />
         </Modal>
       )}
