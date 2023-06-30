@@ -28,7 +28,6 @@ export const RoutesMain = () => {
         <Route element={<LoadUser />}>
           <Route path="/login" element={backgroundGray(<Login />)} />
           <Route path="/register" element={backgroundGray(<Register />)} />
-          <Route path="/aboutus" element={backgroundGray(<AboutUs />)} />
         </Route>
         <Route path="/product/:id" element={backgroundGray(<Products />)} />
         <Route path="/profile/:id" element={backgroundGray(<Profile />)} />
@@ -36,6 +35,7 @@ export const RoutesMain = () => {
           path="/resetPassword/:token"
           element={backgroundGray(<PasswordRecoveryPage />)}
         />
+        <Route path="/aboutus" element={backgroundGray(<AboutUs />)} />
       </Route>
       <Route path="/404" element={<ErrorPage />} />
       <Route path="*" element={<Navigate to={"/404"} />} />
