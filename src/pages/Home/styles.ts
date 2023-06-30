@@ -91,7 +91,7 @@ export const Flex = styled.div`
       cursor: pointer;
       :hover {
         color: ${theme.colors.random5};
-        transition: .3s;
+        transition: 0.3s;
       }
     }
 
@@ -168,3 +168,4 @@ export const Title = styled.h1`
     ${theme.typography.Heading3_500}
   }
 `;
+
