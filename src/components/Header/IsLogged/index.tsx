@@ -41,16 +41,14 @@ const IsLogged = ({ open, setOpen, onClick }: IProps): JSX.Element => {
     }
   };
 
-  useEffect(() => {
-    const handleClick = (event: MouseEvent) => {
-      const tag = event.target as HTMLTextAreaElement;
-      if (tag.nodeName !== "A" && open) {
-        setOpen(!open);
-      }
-    };
+  const handleClick = (event: MouseEvent) => {
+    const tag = event.target as HTMLTextAreaElement;
+    if (tag.nodeName !== "A" && open) {
+      setOpen(!open);
+    }
+  };
 
-    window.addEventListener("mousedown", handleClick);
-  }, []);
+  window.addEventListener("mousedown", handleClick);
 
   const nomeESobrenome = user?.name
     .split(" ")
