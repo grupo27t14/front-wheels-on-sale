@@ -27,7 +27,11 @@ export const Footer = styled.footer`
   }
 `;
 
-export const Box = styled.div``;
+export const Box = styled.div`
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+`;
 
 export const Img = styled.img`
   width: 180px;

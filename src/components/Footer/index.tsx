@@ -3,6 +3,7 @@ import { Footer as FooterContainer, Box, Img, Text, Link } from "./styled";
 import React from "react";
 import logo from "../../assets/logo-white.svg";
 import { FaAngleUp } from "react-icons/fa";
+import AnimatedLogo from "../AnimatedLogo";
 
 const Footer = () => {
   return (
@@ -15,9 +16,15 @@ const Footer = () => {
           <Box>
             <Text>© 2022 - Todos os direitos reservados.</Text>
           </Box>
-          <Link href={"#home"}>
-            <FaAngleUp />
-          </Link>
+
+          <Box className="animatedLogo">
+            <a href="/aboutus">
+              <AnimatedLogo />
+            </a>
+            <Link href={"#home"}>
+              <FaAngleUp />
+            </Link>
+          </Box>
         </StyledContainer>
       </FooterContainer>
     </React.Fragment>

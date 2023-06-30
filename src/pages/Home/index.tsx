@@ -27,7 +27,7 @@ const Home = () => {
     if (url) {
       url = url.split("/")[1];
       const { data } = await api.get<iPaginationCars>(url);
-      window.scrollTo({top: 100, behavior: "smooth"})
+      window.scrollTo({ top: 100, behavior: "smooth" });
       setCars(data);
     }
   };
@@ -39,7 +39,6 @@ const Home = () => {
       setOpen(false);
     }
   }, [isWide]);
-
 
   return (
     <Main>
@@ -54,9 +53,7 @@ const Home = () => {
       <StyledContainer className="main container">
         <Flex className="leftSide">
           {isWide ? (
-            open && (
-              <Aside onClick={() => setOpen(!open)} />
-            )
+            open && <Aside onClick={() => setOpen(!open)} />
           ) : (
             <Aside />
           )}
@@ -108,3 +105,4 @@ const Home = () => {
 };
 
 export default Home;
+
