@@ -18,6 +18,8 @@ export const NewAnnounce = ({
   setIsModalOpen,
   isModalOpen,
   setCars,
+  modalSuccessfullyRegistered,
+  setIsModalSuccessfullyRegistered,
 }: modalProps): JSX.Element => {
   const { createCar } = useContext(CarContext);
 
@@ -81,6 +83,7 @@ export const NewAnnounce = ({
     } finally {
       setReqLoading(false);
       setIsModalOpen(!isModalOpen);
+      setIsModalSuccessfullyRegistered(!modalSuccessfullyRegistered);
     }
   };
 
