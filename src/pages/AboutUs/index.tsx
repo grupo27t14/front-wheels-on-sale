@@ -5,7 +5,7 @@ import { BsPersonVcardFill } from "react-icons/bs";
 const AboutUs = () => {
   return (
     <AboutUsMain id="aboutus">
-      <h2 className="about__title">About Us</h2>
+      <h2 className="about__title">Sobre Nós</h2>
       <div className="about__text">
         <p>
           Olá, representamos o Grupo27 do módulo 6 de Junho de 2023. Somos{" "}

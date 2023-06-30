@@ -2,12 +2,16 @@ import styled from "styled-components";
 import { theme } from "../../styles/theme";
 
 export const AboutUsMain = styled.main`
+  padding: 80px 0;
+  max-width: 1400px;
   width: 100%;
+  margin: 0 auto;
   min-height: calc(100vh - 80px - 140px);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  gap: 40px;
 
   .about__title {
     padding: 2rem;
@@ -43,8 +47,15 @@ export const AboutUsMain = styled.main`
   }
 
   .DevsMainCards {
-    display: flex;
-    gap: 2rem;
+    max-width: 1300px;
+    padding: 2rem;
+    margin: 0 auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(220px, 1fr));
+    grid-column-gap: 10px;
+    grid-row-gap: 20px;
+    justify-items: center;
   }
 
   @keyframes puffInCenter {
@@ -71,9 +82,9 @@ export const AboutUsMain = styled.main`
     gap: 1rem;
 
     background-color: ${theme.colors.grey8};
-    border-radius: 30%;
+    border-radius: .8rem;
     margin-bottom: 16px;
-    box-shadow: 0 0 10px rgba(0, 0, 255, 0.3);
+    border: 2px solid ${theme.colors.grey6};
   }
 
   .card h4 {
