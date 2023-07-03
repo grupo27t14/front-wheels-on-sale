@@ -13,7 +13,7 @@ export const AnimatedStyle = styled.div`
     position: absolute;
     width: 60px;
     height: 60px;
-    background: url(aboutus.png);
+    background: url(/aboutus.png);
     background-size: cover;
     border-radius: 50%;
     /* filter: brightness(1.5) contrast(1.5); */

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { theme } from "../../styles/theme";
-import car from "../../../public/Photo_car.png";
+import car from "/Photo_car.png";
 
 export const Main = styled.main`
   width: 100%;
