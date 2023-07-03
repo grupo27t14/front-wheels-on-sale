@@ -107,13 +107,17 @@ export const Profile = () => {
         <ProductsContainer>
           <h5 className="heading5">Anúncios</h5>
 
-          <ul className="productsGrid">
-            {cars?.results.map((car) => (
-              <li className="productsGrid__item" key={car.id}>
-                <Card car={car} setCars={setCars} />
-              </li>
-            ))}
-          </ul>
+          {cars?.results.length === 0 ? (
+            <p>Ainda não possui anúncios</p>
+          ) : (
+            <ul className="productsGrid">
+              {cars?.results.map((car) => (
+                <li className="productsGrid__item" key={car.id}>
+                  <Card car={car} setCars={setCars} />
+                </li>
+              ))}
+            </ul>
+          )}
         </ProductsContainer>
       </StyledContainer>
 
