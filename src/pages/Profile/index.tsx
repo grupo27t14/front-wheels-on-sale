@@ -26,8 +26,7 @@ export const Profile = () => {
     })();
   }, [id, getUserCars]);
 
-  const name =
-    user?.is_seller && user.id === id ? user.name : cars?.results[0].user?.name;
+  const name = user?.is_seller && user.id === id ? user.name : cars?.results[0]?.user?.name;
 
   let nomeESobrenome = "";
 
@@ -75,7 +74,7 @@ export const Profile = () => {
             $bg={
               user?.is_seller && user.id === id
                 ? user.avatar_bg
-                : cars?.results[0].user.avatar_bg
+                : cars?.results[0]?.user?.avatar_bg
             }
           >
             {nomeESobrenome}
@@ -84,14 +83,14 @@ export const Profile = () => {
             <h6 className="heading6">
               {user?.is_seller && user.id === id
                 ? user.name
-                : cars?.results[0].user.name}
+                : cars?.results[0]?.user?.name}
             </h6>
             <span className="sellerTag">Anunciante</span>
           </div>
           <p>
             {user?.is_seller && user.id === id
               ? user.personalInformation.description
-              : cars?.results[0].user.personalInformation?.description}
+              : cars?.results[0]?.user?.personalInformation?.description}
           </p>
 
           {user?.is_seller && user.id === id && (
