@@ -1,4 +1,4 @@
-import { StyledForm } from "./styles";
+import { StyledForm } from "./styled";
 import { iFormProps } from "./props";
 
 export function Form({

@@ -10,7 +10,7 @@ import { Form } from "../Form";
 import { useAnnounce } from "./useAnnounce";
 import { modalProps } from "./props";
 import { iCarRes } from "../../contexts/CarContext/props";
-import { RadioButtonDivStyles } from "../RadioButton/styles";
+import { RadioButtonDivStyles } from "../RadioButton/styled";
 import { RadioButton } from "../RadioButton";
 import { LoadingRing } from "../../styles/LoadingRing";
 
