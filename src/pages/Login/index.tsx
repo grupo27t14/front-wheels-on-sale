@@ -1,4 +1,4 @@
-import { LoginStyled } from "./styles";
+import { LoginStyled } from "./styled";
 import { Form } from "../../components/Form";
 import { Input } from "../../components/Input";
 import { StyledButton } from "../../styles/button";

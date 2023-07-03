@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ContainerNotFound, DivImage, DivText } from "./style";
+import { ContainerNotFound, DivImage, DivText } from "./styled";
 import pneu from "../../assets/pneu.png";
 
 const ErrorPage = () => {

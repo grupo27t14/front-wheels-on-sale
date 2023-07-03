@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { StyledInputsAside } from "./styles";
+import { StyledInputsAside } from "./styled";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";

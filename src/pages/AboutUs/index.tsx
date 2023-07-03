@@ -1,5 +1,5 @@
 import { FaGithub, FaLinkedin, FaMailBulk } from "react-icons/fa";
-import { AboutUsMain } from "./styles";
+import { AboutUsMain } from "./styled";
 import { BsPersonVcardFill } from "react-icons/bs";
 
 const AboutUs = () => {
@@ -16,7 +16,8 @@ const AboutUs = () => {
           <span>
             <strong>Kenzie Academy Brasil</strong>
           </span>
-          , e com muita alegria nos tornarmos reconhecidos pelos nossos trabalhos como{" "}
+          , e com muita alegria nos tornarmos reconhecidos pelos nossos
+          trabalhos como{" "}
           <span>
             <strong>Desenvolvedores Fullstack</strong>.
           </span>
@@ -240,4 +241,3 @@ const AboutUs = () => {
 };
 
 export default AboutUs;
-

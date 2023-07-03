@@ -1,5 +1,5 @@
 import { createPortal } from "react-dom";
-import { Container } from "./styles";
+import { Container } from "./styled";
 import { ReactNode, useEffect, useRef } from "react";
 import { MdClose } from "react-icons/md";
 

@@ -9,7 +9,7 @@ import {
   ModalImg,
   PageStyled,
   UnorderedList,
-} from "./style";
+} from "./styled";
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useCar } from "../../hooks/useCar";
@@ -45,7 +45,7 @@ const Products = () => {
     };
 
     getCurCar();
-  }, []);
+  }, [getCar, id]);
 
   const nameSub = (nameSurname: string) => {
     return nameSurname
@@ -75,10 +75,10 @@ const Products = () => {
     const userData = {
       whatsappNumber: singleCar?.user?.personalInformation?.phone,
     };
-    
+
     if (userData.whatsappNumber) {
       const whatsappLink = `https://api.whatsapp.com/send?phone=+55${userData.whatsappNumber}&text=Ol%C3%A1%20me%20interessei%20pelo%20seu%20ve%C3%ADculo%20e%20gostaria%20de%20compr%C3%A1-lo`;
-  
+
       window.open(whatsappLink, "_blank");
     }
   };
@@ -131,7 +131,11 @@ const Products = () => {
                     })}
                   </h6>
                 </div>
-                <StyledButton buttonstyle="brand1" buttonsize="fit" onClick={handleClickWhatsapp}>
+                <StyledButton
+                  buttonstyle="brand1"
+                  buttonsize="fit"
+                  onClick={handleClickWhatsapp}
+                >
                   Compar
                 </StyledButton>
               </CarInfoContainer>

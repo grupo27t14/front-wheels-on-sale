@@ -2,7 +2,7 @@ import { useUsers } from "../../../hooks/useUser";
 import { tnewComment } from "../../../pages/Product/schemas";
 import { StyledButton } from "../../../styles/button";
 import { Avatar } from "../../../styles/global";
-import { CommentsList } from "./style";
+import { CommentsList } from "./styled";
 import { FaRegEdit, FaTrashAlt } from "react-icons/fa";
 
 interface ICardComment {

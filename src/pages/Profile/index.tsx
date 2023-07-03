@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { StyledButton } from "../../styles/button";
 import { Avatar, StyledContainer } from "../../styles/global";
-import { Main, ProductsContainer, ProfileContainer } from "./style";
+import { Main, ProductsContainer, ProfileContainer } from "./styled";
 import { useUsers } from "../../hooks/useUser";
 import { useEffect, useState } from "react";
 import { iPaginationCars } from "../../contexts/CarContext/props";
@@ -26,7 +26,8 @@ export const Profile = () => {
     })();
   }, [id, getUserCars]);
 
-  const name = user?.is_seller && user.id === id ? user.name : cars?.results[0]?.user?.name;
+  const name =
+    user?.is_seller && user.id === id ? user.name : cars?.results[0].user?.name;
 
   let nomeESobrenome = "";
 
@@ -74,7 +75,7 @@ export const Profile = () => {
             $bg={
               user?.is_seller && user.id === id
                 ? user.avatar_bg
-                : cars?.results[0]?.user?.avatar_bg
+                : cars?.results[0].user.avatar_bg
             }
           >
             {nomeESobrenome}
@@ -83,14 +84,14 @@ export const Profile = () => {
             <h6 className="heading6">
               {user?.is_seller && user.id === id
                 ? user.name
-                : cars?.results[0]?.user?.name}
+                : cars?.results[0].user.name}
             </h6>
             <span className="sellerTag">Anunciante</span>
           </div>
           <p>
             {user?.is_seller && user.id === id
               ? user.personalInformation.description
-              : cars?.results[0]?.user?.personalInformation?.description}
+              : cars?.results[0].user.personalInformation?.description}
           </p>
 
           {user?.is_seller && user.id === id && (
@@ -106,17 +107,13 @@ export const Profile = () => {
         <ProductsContainer>
           <h5 className="heading5">Anúncios</h5>
 
-          {cars?.results.length === 0 ? (
-            <p>Ainda não possui anúncios</p>
-          ) : (
-            <ul className="productsGrid">
-              {cars?.results.map((car) => (
-                <li className="productsGrid__item" key={car.id}>
-                  <Card car={car} setCars={setCars} />
-                </li>
-              ))}
-            </ul>
-          )}
+          <ul className="productsGrid">
+            {cars?.results.map((car) => (
+              <li className="productsGrid__item" key={car.id}>
+                <Card car={car} setCars={setCars} />
+              </li>
+            ))}
+          </ul>
         </ProductsContainer>
       </StyledContainer>
 
