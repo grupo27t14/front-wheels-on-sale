@@ -12,7 +12,7 @@ export const LoadUser = () => {
     async () => {
       await refreshUser();
     };
-  }, []);
+  }, [refreshUser]);
 
   if (user) navigate("");
 

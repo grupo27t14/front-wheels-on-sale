@@ -1,6 +1,6 @@
 import { StyledButton } from "../../../styles/button";
 import { tcommentResponse, tnewComment } from "../../../pages/Product/schemas";
-import { Box, HStack, SubTitle, Title, Text, VStack } from "./style";
+import { Box, HStack, SubTitle, Title, Text, VStack } from "./styled";
 import { api } from "../../../services/api";
 
 interface IDeleteComment {

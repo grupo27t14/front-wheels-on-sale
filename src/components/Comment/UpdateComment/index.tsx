@@ -9,7 +9,7 @@ import {
   tcommentResponse,
   tnewComment,
 } from "../../../pages/Product/schemas";
-import { Box, HStack, Title, VStack, Form, Textarea } from "./style";
+import { Box, HStack, Title, VStack, Form, Textarea } from "./styled";
 import { useUsers } from "../../../hooks/useUser";
 import { api } from "../../../services/api";
 

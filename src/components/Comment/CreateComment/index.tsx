@@ -1,6 +1,6 @@
 import { Avatar } from "../../../styles/global";
 import { StyledButton } from "../../../styles/button";
-import { ButtonGroup, CommentArea } from "./style";
+import { ButtonGroup, CommentArea } from "./styled";
 import { useParams } from "react-router-dom";
 import { useUsers } from "../../../hooks/useUser";
 import { useForm } from "react-hook-form";

@@ -5,7 +5,7 @@ import { ErrorMessage } from "../../components/Form/styled";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "../../components/Form";
 import { StyledButton } from "../../styles/button";
-import { PasswordStyled } from "./style";
+import { PasswordStyled } from "./styled";
 import { api } from "../../services/api";
 import { toast } from "react-toastify";
 import { forgotPasswordSchema, tforgotPasswordReq } from "../Register/schemas";

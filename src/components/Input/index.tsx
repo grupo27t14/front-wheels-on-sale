@@ -1,4 +1,4 @@
-import { StyledInput } from "./styles";
+import { StyledInput } from "./styled";
 import { iInputProps } from "./props";
 import { forwardRef } from "react";
 import { ErrorMessage } from "../Form/styled";

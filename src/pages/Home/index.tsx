@@ -11,7 +11,7 @@ import {
   HStack,
   UnorderedList,
   ListItem,
-} from "./styles";
+} from "./styled";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import useMedia from "use-media";
 import { StyledButton } from "../../styles/button";
@@ -105,4 +105,3 @@ const Home = () => {
 };
 
 export default Home;
-

@@ -9,7 +9,7 @@ import {
   Text,
   ButtonGroup,
   Span,
-} from "./style";
+} from "./styled";
 import { useNavigate } from "react-router-dom";
 
 interface IConfirmDeletion {
