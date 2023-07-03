@@ -21,7 +21,7 @@ const Header = () => {
     if (isWide && !user) {
       setOpen(false);
     }
-  }, [isWide]);
+  }, [isWide, user]);
 
   return (
     <React.Fragment>

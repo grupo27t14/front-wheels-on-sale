@@ -1,7 +1,7 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Input } from "../../components/Input";
-import { ErrorMessage } from "../../components/Form/styles";
+import { ErrorMessage } from "../../components/Form/styled";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "../../components/Form";
 import { StyledButton } from "../../styles/button";

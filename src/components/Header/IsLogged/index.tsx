@@ -5,14 +5,14 @@ import { Link, UnorderedList, ListItem, Flex, Text } from "./styled";
 import { useUsers } from "../../../hooks/useUser";
 import { useAuth } from "../../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Modal } from "../../Modal";
 import EditProfile from "../../EditProfile";
 import EditAddress from "../../EditAddress";
 
 export interface IProps {
   open: boolean;
-  setOpen: any;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   onClick: () => void;
 }
 

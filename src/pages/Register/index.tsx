@@ -6,7 +6,7 @@ import { useCep } from "./useCep";
 import { useUsers } from "../../hooks/useUser";
 import { registerSchemaRequest, tRegister } from "./schemas";
 import { RadioButton } from "../../components/RadioButton";
-import { RadioButtonDivStyles } from "../../components/RadioButton/styles";
+import { RadioButtonDivStyles } from "../../components/RadioButton/styled";
 import { LoadingRing } from "../../styles/LoadingRing";
 import { theme } from "../../styles/theme";
 import { useState } from "react";

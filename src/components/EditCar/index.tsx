@@ -9,7 +9,7 @@ import { iCarRes, iPaginationCars } from "../../contexts/CarContext/props";
 import { useParams } from "react-router-dom";
 import { useUsers } from "../../hooks/useUser";
 import { EditCarImages, HStack } from "./styled";
-import { RadioButtonDivStyles } from "../RadioButton/styles";
+import { RadioButtonDivStyles } from "../RadioButton/styled";
 import { RadioButton } from "../RadioButton";
 import { AiOutlineMinus, AiOutlineUndo } from "react-icons/ai";
 import { api } from "../../services/api";

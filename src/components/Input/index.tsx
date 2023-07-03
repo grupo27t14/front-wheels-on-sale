@@ -1,7 +1,7 @@
 import { StyledInput } from "./styles";
 import { iInputProps } from "./props";
 import { forwardRef } from "react";
-import { ErrorMessage } from "../Form/styles";
+import { ErrorMessage } from "../Form/styled";
 
 export const Input = forwardRef<HTMLInputElement, iInputProps>(
   (
