@@ -94,7 +94,7 @@ const Card = ({ car, setCars }: ICarProps): JSX.Element => {
               : { cursor: "pointer" }
           }
         >
-          <Img src={car.images[0]?.url} alt={car.brand} />
+          <Img src={car.images.length > 0 ? car.images[0]?.url : "/pneu.png"} alt={car.brand} />
         </Link>
       </Box>
       <Box className="card__info">

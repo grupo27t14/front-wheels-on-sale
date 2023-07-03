@@ -70,6 +70,13 @@ export const ProductsContainer = styled.section`
 
   padding-top: 7.4rem;
 
+  p {
+    display: flexbox;
+    align-items: center;
+    justify-content: center;
+    ${theme.typography.Heading7_600}
+  }
+
   .heading5 {
     ${theme.typography.Heading5_600};
   }
