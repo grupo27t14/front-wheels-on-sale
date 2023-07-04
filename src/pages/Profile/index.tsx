@@ -1,7 +1,13 @@
 import { useParams } from "react-router-dom";
 import { StyledButton } from "../../styles/button";
 import { Avatar, StyledContainer } from "../../styles/global";
-import { Main, ProductsContainer, ProfileContainer } from "./styled";
+import {
+  HStack,
+  Main,
+  PageButton,
+  ProductsContainer,
+  ProfileContainer,
+} from "./styled";
 import { useUsers } from "../../hooks/useUser";
 import { useEffect, useState } from "react";
 import { iPaginationCars } from "../../contexts/CarContext/props";
@@ -10,21 +16,20 @@ import { Modal } from "../../components/Modal";
 import { NewAnnounce } from "../../components/NewAnnounce";
 import ConfirmDeletion from "../../components/Modal/ConfirmDeletion";
 import { theme } from "../../styles/theme";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
+import { api } from "../../services/api";
 
 export const Profile = () => {
   const { id } = useParams();
   const { user, getUserCars } = useUsers();
-  const [cars, setCars] = useState<iPaginationCars | null>();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [cars, setCars] = useState<iPaginationCars | null>();
 
   useEffect(() => {
     (async () => {
-      if (id) {
-        const cars = await getUserCars(id);
-        setCars(cars);
-      }
+      if (id) setCars(await getUserCars(id));
     })();
-  }, [id, getUserCars]);
+  }, [id, setCars, getUserCars]);
 
   const name =
     user?.is_seller && user.id === id ? user.name : cars?.results[0].user?.name;
@@ -51,6 +56,19 @@ export const Profile = () => {
 
   const handleSuccessfullyRegisteredOpenModal = () => {
     setIsModalSuccessfullyRegistered(!modalSuccessfullyRegistered);
+  };
+
+  const handlePagination = async (page: string) => {
+    const url = page === "next" ? cars?.next : cars?.previous;
+
+    if (url) {
+      const splitedUrl = url.split("/");
+      splitedUrl.shift();
+      const req = splitedUrl.join("/");
+      const { data } = await api.get<iPaginationCars>(req);
+      window.scrollTo({ top: 100, behavior: "smooth" });
+      setCars(data);
+    }
   };
 
   return (
@@ -115,6 +133,25 @@ export const Profile = () => {
             ))}
           </ul>
         </ProductsContainer>
+        <PageButton>
+          <button
+            onClick={() => handlePagination("previous")}
+            style={{ visibility: cars?.previous ? "visible" : "hidden" }}
+          >
+            <FaAngleLeft /> Anterior
+          </button>
+          <HStack
+            style={{ visibility: cars?.totalCount ? "visible" : "hidden" }}
+          >
+            {cars?.currentPage} de {cars?.totalPages}
+          </HStack>
+          <button
+            onClick={() => handlePagination("next")}
+            style={{ visibility: cars?.next ? "visible" : "hidden" }}
+          >
+            Seguinte <FaAngleRight />
+          </button>
+        </PageButton>
       </StyledContainer>
 
       {isModalOpen && (

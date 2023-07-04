@@ -96,3 +96,36 @@ export const ProductsContainer = styled.section`
     }
   }
 `;
+
+export const PageButton = styled.div`
+  display: flex;
+  height: 30px;
+  margin: 26px 0px 50px 0px;
+  justify-content: center;
+  gap: 40px;
+
+  > button {
+    all: unset;
+    color: ${theme.colors.random4};
+    ${theme.typography.Heading6_600};
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    :hover {
+      color: ${theme.colors.random5};
+      transition: 0.3s;
+    }
+  }
+
+  & svg {
+    font-size: 20px;
+    color: ${theme.colors.random4};
+  }
+`;
+
+export const HStack = styled.div`
+  display: flex;
+  align-items: center;
+`;

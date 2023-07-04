@@ -1,5 +1,5 @@
 import { StyledContainer } from "../../styles/global";
-import { Footer as FooterContainer, Box, Img, Text, Link } from "./styled";
+import { Footer as FooterContainer, Box, Img, Text, ELink } from "./styled";
 import React from "react";
 import logo from "../../assets/logo-white.svg";
 import { FaAngleUp } from "react-icons/fa";
@@ -18,14 +18,14 @@ const Footer = () => {
           </Box>
 
           <Box className="animatedLogo">
-            <a href="/aboutus">
+            <ELink to="/aboutus">
               <AnimatedLogo />
-            </a>
-            <Link href={"#home"}>
-              <FaAngleUp />
-            </Link>
+            </ELink>
           </Box>
         </StyledContainer>
+        <a href={"#"}>
+          <FaAngleUp />
+        </a>
       </FooterContainer>
     </React.Fragment>
   );

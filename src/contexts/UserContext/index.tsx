@@ -28,8 +28,6 @@ export const UserContextProvider = ({ children }: UserProviderProps) => {
         .post("user", { ...data, avatar_bg: randomColor() })
         .then(() => {
           setSuccessRecordModal(!successRecordModal);
-          // toast.success("Usuário cadastrado com sucesso!");
-          // navigate("/login");
         })
         .catch((err) => {
           if (err.response.status == 409) {

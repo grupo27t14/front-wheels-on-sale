@@ -263,10 +263,11 @@ const EditCar = ({
         />
       </RadioButtonDivStyles>
 
-      {car?.images.length ? <h4>Remover Imagens</h4> : ""}
-      <EditCarImages>
-        {car?.images.length
-          ? car.images.map((img) => (
+      {car?.images.length ? (
+        <>
+          <h4>Remover Imagens</h4>
+          <EditCarImages>
+            {car.images.map((img) => (
               <div key={img.id}>
                 <button
                   type="button"
@@ -280,14 +281,17 @@ const EditCar = ({
                 </button>
                 <img src={img.url} alt="Imagem de carro" />
               </div>
-            ))
-          : ""}
-      </EditCarImages>
+            ))}
+          </EditCarImages>
+        </>
+      ) : (
+        ""
+      )}
 
       <Input
         id="image"
         label="Adicionar Imagens"
-        placeholder="Adicione uma imágem aqui"
+        placeholder="Adicione uma imagem aqui"
         type="file"
         multiple
         {...register("image")}

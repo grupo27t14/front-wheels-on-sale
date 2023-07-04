@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { theme } from "../../styles/theme";
+import { Link } from "react-router-dom";
 
 export const Footer = styled.footer`
   width: 100%;
@@ -7,6 +8,7 @@ export const Footer = styled.footer`
   display: flex;
   align-items: center;
   background-color: ${theme.colors.grey0};
+  position: relative;
 
   & .footer {
     display: flex;
@@ -14,7 +16,21 @@ export const Footer = styled.footer`
     justify-content: space-between;
   }
 
-  & .footer__Button {
+  > a {
+    position: absolute;
+    top: -25px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    border: 2px solid ${theme.colors.whiteFixed};
+    color: ${theme.colors.whiteFixed};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: ${theme.colors.blackFixed};
   }
 
   @media (max-width: 768px) {
@@ -44,8 +60,8 @@ export const Text = styled.p`
   color: ${theme.colors.grey3};
 `;
 
-export const Link = styled.a`
-  width: 53px;
+export const ELink = styled(Link)`
+  width: 50px;
   height: 50px;
   display: flex;
   align-items: center;
