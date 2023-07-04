@@ -26,9 +26,9 @@ export const StyledInputsAside = styled.form`
     width: max-content;
     cursor: pointer;
     font-weight: 500;
-    color: black;
+    color: ${(props) => props.theme.pallete.greyScale.grey1};
     :hover {
-      color: gray;
+      color: ${(props) => props.theme.pallete.greyScale.grey3};
     }
   }
 

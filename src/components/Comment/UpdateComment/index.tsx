@@ -69,7 +69,7 @@ const UpdateComment = ({
             </StyledButton>
             <StyledButton type="submit" buttonstyle="brand1" buttonsize="fit">
               {reqLoading ? (
-                <LoadingRing color={theme.colors.whiteFixed} />
+                <LoadingRing color={"#FFF"} />
               ) : (
                 "Editar"
               )}

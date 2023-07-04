@@ -181,19 +181,26 @@ const Products = () => {
           <div>
             <SectionsContainer>
               <h6 className="heading6">Comentários</h6>
-              <UnorderedList>
-                {comments.map((comment) => (
-                  <CardComment
-                    key={comment.id}
-                    comment={comment}
-                    setOneComment={setOneComment}
-                    isModalEditOpen={isModalEditOpen}
-                    setIsModalEditOpen={setIsModalEditOpen}
-                    isModalDeleteOpen={isModalDeleteOpen}
-                    setIsModalDeleteOpen={setIsModalDeleteOpen}
-                  />
-                ))}
-              </UnorderedList>
+              {
+                comments.length > 0 ? (
+                  <UnorderedList>
+                    {comments.map((comment) => (
+                      <CardComment
+                        key={comment.id}
+                        comment={comment}
+                        setOneComment={setOneComment}
+                        isModalEditOpen={isModalEditOpen}
+                        setIsModalEditOpen={setIsModalEditOpen}
+                        isModalDeleteOpen={isModalDeleteOpen}
+                        setIsModalDeleteOpen={setIsModalDeleteOpen}
+                      />
+                    ))}
+                  </UnorderedList>
+                ) : 
+                <p>
+                  Nenhum comentário.
+                </p>
+              }
             </SectionsContainer>
 
             <SectionsContainer>

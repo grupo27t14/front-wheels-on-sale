@@ -126,7 +126,7 @@ const EditAddress = ({
           buttonsize="big"
         >
           {reqLoading ? (
-            <LoadingRing color={theme.colors.whiteFixed} />
+            <LoadingRing color={"#FFF"} />
           ) : (
             "Salvar alterações"
           )}

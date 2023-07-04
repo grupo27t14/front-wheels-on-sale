@@ -5,6 +5,7 @@ export const UnorderedList = styled.ul`
   width: 100%;
   height: 100%;
   display: flex;
+  gap: 10px;
   list-style: none;
   align-items: center;
   justify-content: space-between;
@@ -22,6 +23,7 @@ export const UnorderedList = styled.ul`
     z-index: 100;
     border-left: none;
     padding: 32px 12px;
+    
 
     box-shadow: 0px 4px 40px -10px rgba(0, 0, 0, 0.25);
   }
