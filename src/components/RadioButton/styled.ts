@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { theme } from "../../styles/theme";
+ 
 
 export const RadioButtonDivStyles = styled.div`
   > {
@@ -8,7 +8,7 @@ export const RadioButtonDivStyles = styled.div`
       position: absolute;
     }
     label {
-      ${theme.typography.button_big_text}
+      ${(props) => props.theme.typography.button_big_text}
       border-radius: 4px;
       display: flex;
       justify-content: center;
@@ -17,13 +17,13 @@ export const RadioButtonDivStyles = styled.div`
       height: 48px;
       cursor: pointer;
       background-color: transparent;
-      color: ${theme.colors.grey0};
-      border: 1.5px solid ${theme.colors.grey4};
+      color: ${(props) => props.theme.pallete.greyScale.grey0};
+      border: 1.5px solid ${(props) => props.theme.pallete.greyScale.grey4};
     }
     [type="radio"]:checked + label {
-      background-color: ${theme.colors.brand1};
-      color: ${theme.colors.whiteFixed};
-      border: 1.5px solid ${theme.colors.brand1};
+      background-color: ${(props) => props.theme.pallete.main.brand1};
+      color: ${(props) => props.theme.pallete.greyScale.grey10};
+      border: 1.5px solid ${(props) => props.theme.pallete.main.brand1};
       transition: 0.3s;
     }
   }

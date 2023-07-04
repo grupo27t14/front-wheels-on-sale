@@ -6,7 +6,6 @@ import { useUsers } from "../../../hooks/useUser";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoadingRing } from "../../../styles/LoadingRing";
-import { theme } from "../../../styles/theme";
 import { api } from "../../../services/api";
 import {
   commentSchema,

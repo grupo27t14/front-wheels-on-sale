@@ -9,7 +9,7 @@ import Card from "../../components/Card";
 import { Modal } from "../../components/Modal";
 import { NewAnnounce } from "../../components/NewAnnounce";
 import ConfirmDeletion from "../../components/Modal/ConfirmDeletion";
-import { theme } from "../../styles/theme";
+import { light } from "../../styles/theme";
 
 export const Profile = () => {
   const { id } = useParams();
@@ -62,7 +62,7 @@ export const Profile = () => {
             subtitulo="Seu anúncio foi criado com sucesso!"
             text="Agora você poderá ver seus negócios crescendo em grande escala"
             visible="sim"
-            color={`${theme.colors.sucess1}`}
+            color={`${light.pallete.feedback.sucess1}`}
             handleOpenModal={handleSuccessfullyRegisteredOpenModal}
           />
         </Modal>

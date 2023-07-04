@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 import { forgotPasswordSchema, tforgotPasswordReq } from "../Register/schemas";
 import { useUsers } from "../../hooks/useUser";
 import { LoadingRing } from "../../styles/LoadingRing";
-import { theme } from "../../styles/theme";
+ 
 
 const PasswordRecoveryPage = () => {
   const { reqLoading, setReqLoading } = useUsers();

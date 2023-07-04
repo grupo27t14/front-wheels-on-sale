@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { theme } from "../../../styles/theme";
 
 export const CommentsList = styled.li`
   div {
@@ -11,13 +10,13 @@ export const CommentsList = styled.li`
     justify-content: space-between;
 
     .commentUsername {
-      ${theme.typography.body2_500};
-      color: ${theme.colors.grey1};
+      ${(props) => props.theme.typography.body2_500};
+      color: ${(props) => props.theme.pallete.greyScale.grey1};
     }
 
     .commentTime {
-      ${theme.typography.body2_500};
-      color: ${theme.colors.grey3};
+      ${(props) => props.theme.typography.body2_500};
+      color: ${(props) => props.theme.pallete.greyScale.grey3};
     }
 
     div + div {
