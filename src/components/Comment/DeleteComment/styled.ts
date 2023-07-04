@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { theme } from "../../../styles/theme";
 
 export const VStack = styled.div`
   display: flex;
@@ -21,16 +20,16 @@ export const Box = styled.div`
 `;
 
 export const Title = styled.h4`
-  ${theme.typography.Heading7_500};
-  color: ${theme.colors.grey1};
+  ${(props) => props.theme.typography.heading7_500};
+  color: ${(props) => props.theme.pallete.greyScale.grey1};
 `;
 
 export const SubTitle = styled.h4`
-  ${theme.typography.Heading7_500};
-  color: ${theme.colors.grey1};
+  ${(props) => props.theme.typography.heading7_500};
+  color: ${(props) => props.theme.pallete.greyScale.grey1};
   margin-bottom: 2.5rem;
 `;
 
 export const Text = styled.p`
-  ${theme.typography.body2_500};
+  ${(props) => props.theme.typography.body2_500};
 `;

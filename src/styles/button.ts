@@ -41,6 +41,12 @@ export const StyledButton = styled.button<buttonProps>`
           width: fit-content;
           height: 48px;
         `;
+      case "icon":
+        return css`
+          ${(props) => props.theme.typography.button_big_text};
+          padding: 12px 20px;
+          height: 48px;
+        `;
       case "default":
         return css`
           ${(props) => props.theme.typography.button_big_text};
@@ -69,10 +75,10 @@ export const StyledButton = styled.button<buttonProps>`
         return css`
           background: ${(props) => props.theme.pallete.greyScale.grey0};
           border: 1.5px solid ${(props) => props.theme.pallete.greyScale.grey0};
-          color: ${(props) => props.theme.pallete.greyScale.whiteFixed};
+          color: ${(props) => props.theme.pallete.greyScale.grey10};
           &:hover {
             background-color: ${(props) => props.theme.pallete.greyScale.grey1};
-            color: ${(props) => props.theme.pallete.greyScale.whiteFixed};
+            color: ${(props) => props.theme.pallete.greyScale.grey9};
           }
         `;
       case "negative":
@@ -88,13 +94,13 @@ export const StyledButton = styled.button<buttonProps>`
           &:disabled {
             background-color: ${(props) => props.theme.pallete.greyScale.grey5};
             border: 1px solid ${(props) => props.theme.pallete.greyScale.grey5};
-            color: ${(props) => props.theme.pallete.greyScale.whiteFixed};
+            color: ${(props) => props.theme.pallete.greyScale.grey10};
           }
         `;
       case "comment_btn":
         return css`
           background: ${(props) => props.theme.pallete.greyScale.grey5};
-          color: ${(props) => props.theme.pallete.greyScale.whiteFixed};
+          color: ${(props) => props.theme.pallete.greyScale.grey10};
           border: 1.5px solid ${(props) => props.theme.pallete.greyScale.grey6};
         `;
 
@@ -120,11 +126,11 @@ export const StyledButton = styled.button<buttonProps>`
       case "brand1":
         return css`
           background: ${(props) => props.theme.pallete.main.brand1};
-          color: ${(props) => props.theme.pallete.greyScale.whiteFixed};
+          color: ${(props) => props.theme.pallete.greyScale.grey10};
           border: 1px solid ${(props) => props.theme.pallete.main.brand1};
           &:hover {
             background-color: ${(props) => props.theme.pallete.main.brand2};
-            color: ${(props) => props.theme.pallete.greyScale.whiteFixed};
+            color: ${(props) => props.theme.pallete.greyScale.grey10};
             border: 1px solid ${(props) => props.theme.pallete.main.brand2};
           }
           &:disabled {

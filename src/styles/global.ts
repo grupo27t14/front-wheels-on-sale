@@ -12,16 +12,26 @@ export const GlobalStyleGray = createGlobalStyle<iCGS>`
 `;
 
 export const GlobalStyle = createGlobalStyle<iCGS>`
-:root {
-  font-family: 'Inter';
-  font-size: 60%;
-}
-
-@media (min-width: 700px) {
-    :root {
-      font-size: 62.5%;
-    }
+  :root {
+    font-family: 'Inter';
+    font-size: 60%;
   }
+
+  body {
+    background: ${(props) => props.theme.pallete.greyScale.grey9 };   
+    padding-top: 80px;
+  }
+
+  a {
+    text-decoration: none;
+    color: ${(props) => props.theme.pallete.greyScale.grey1 }
+  }
+
+  @media (min-width: 700px) {
+      :root {
+        font-size: 62.5%;
+      }
+    }
   
   * {
     margin:0;
@@ -148,7 +158,7 @@ export const Avatar = styled.span<{ $bg?: string }>`
     width: 3.2rem;
     height: 3.2rem;
     border-radius: 100%;
-    color: ${(props) => props.theme.pallete.greyScale.grey1};
+    color: ${(props) => props.theme.pallete.greyScale.whiteFixed};
     background-color: ${(props) => props.$bg};
     ${(props) => props.theme.typography.avatar_profile};
   }

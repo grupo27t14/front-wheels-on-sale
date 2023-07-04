@@ -126,12 +126,12 @@ const Card = ({ car, setCars }: ICarProps): JSX.Element => {
         {user && user?.is_seller && user?.id === id && (
           <VStack className="card__btn">
             <StyledButton
-              buttonstyle="medium"
+              buttonstyle="outline_brand"
               onClick={() => setIsModalOpen(!isModalOpen)}
             >
               Editar
             </StyledButton>
-            <StyledButton buttonstyle="medium">
+            <StyledButton buttonstyle="outline_brand">
               <Link to={`/product/${car.id}`}>Ver detalhes</Link>
             </StyledButton>
           </VStack>

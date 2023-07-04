@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { theme } from "../../../styles/theme";
 
 export const Flex = styled.div`
   height: 100%;
@@ -15,7 +14,7 @@ export const Flex = styled.div`
 `;
 
 export const Text = styled.p`
-  ${theme.typography.body1_400}
+  ${(props) => props.theme.typography.body1_400};
 `;
 
 export const UnorderedList = styled.ul`
@@ -29,7 +28,7 @@ export const UnorderedList = styled.ul`
   top: 65px;
   right: 10px;
   z-index: 10;
-  background-color: ${theme.colors.grey10};
+  background-color: ${(props) => props.theme.pallete.greyScale.grey10};
   box-shadow: 0px 4px 40px -10px rgba(0, 0, 0, 0.25);
 
   @media (max-width: 375px) {
@@ -47,7 +46,7 @@ export const ListItem = styled.li`
   position: relative;
 
   &:hover {
-    color: ${theme.colors.whiteFixed};
+    color:${(props) => props.theme.pallete.greyScale.grey10};
   }
 
   &::before {
@@ -56,7 +55,7 @@ export const ListItem = styled.li`
     left: 0px;
     width: 0px;
     height: 100%;
-    background-color: ${theme.colors.random4};
+    background-color: ${(props) => props.theme.pallete.randomColors.random4};
     z-index: -1;
     transition: all 0.5s;
     border-top-right-radius: 8px;
@@ -75,5 +74,5 @@ export const ListItem = styled.li`
 export const Link = styled.a`
   width: 100%;
   display: inline-block;
-  ${theme.typography.body1_400}
+  ${(props) => props.theme.typography.body1_400};
 `;
