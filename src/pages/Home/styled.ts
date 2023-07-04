@@ -1,5 +1,5 @@
+
 import styled from "styled-components";
-import { theme } from "../../styles/theme";
 import car from "../../../public/Photo_car.png";
 
 export const Main = styled.main`
@@ -35,8 +35,8 @@ export const Flex = styled.div`
 
     & .main__title {
       text-align: center;
-      color: ${theme.colors.whiteFixed};
-      ${theme.typography.Heading2_600}
+      color: ${(props) => props.theme.pallete.greyScale.grey1};
+      ${(props) => props.theme.typography.heading2_600};
     }
 
     @media (max-width: 640px) {
@@ -44,7 +44,7 @@ export const Flex = styled.div`
 
       & .main__title {
         display: flexbox;
-        ${theme.typography.Heading5_500}
+        ${(props) => props.theme.typography.heading5_500};
       }
     }
   }
@@ -82,22 +82,22 @@ export const Flex = styled.div`
 
     > button {
       all: unset;
-      color: ${theme.colors.random4};
-      ${theme.typography.Heading6_600};
+      color: ${(props) => props.theme.pallete.randomColors.random4};
+      ${(props) => props.theme.typography.heading6_600};
       text-decoration: none;
       display: flex;
       align-items: center;
       gap: 4px;
       cursor: pointer;
       :hover {
-        color: ${theme.colors.random5};
+        color: ${(props) => props.theme.pallete.randomColors.random5};
         transition: 0.3s;
       }
     }
 
     & svg {
       font-size: 20px;
-      color: ${theme.colors.random4};
+      color: ${(props) => props.theme.pallete.randomColors.random4};
     }
   }
 `;
@@ -152,19 +152,19 @@ export const UnorderedList = styled.ul`
 export const ListItem = styled.li``;
 
 export const Text = styled.p`
-  color: ${theme.colors.random4};
-  ${theme.typography.Heading6_600};
+  color: ${(props) => props.theme.pallete.randomColors.random4};
+  ${(props) => props.theme.typography.heading6_600};
 `;
 
 export const pagButton = styled.button``;
 
 export const Title = styled.h1`
-  text-align: center;
-  color: ${theme.colors.whiteFixed};
-  ${theme.typography.Heading2_600}
-
-  & .main__title {
-    display: flexbox;
-    ${theme.typography.Heading3_500}
-  }
+  color: ${(props) => props.theme.pallete.greyScale.whiteFixed};
+  ${(props) => props.theme.typography.heading2_600};
 `;
+
+export const Subtitle = styled.h2`
+  color: ${(props) => props.theme.pallete.greyScale.whiteFixed};
+  ${(props) => props.theme.typography.heading3_500};
+  text-align: center;
+`

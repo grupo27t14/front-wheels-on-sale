@@ -1,15 +1,15 @@
+
 import styled from "styled-components";
-import { theme } from "../../styles/theme";
 
 export const PageStyled = styled.main`
   width: 100vw;
   background: linear-gradient(
     180deg,
-    ${theme.colors.brand1} 574px,
-    ${theme.colors.grey8} 574px,
-    ${theme.colors.grey8} 100%
+    ${(props) => props.theme.pallete.main.brand1} 574px,
+    ${(props) => props.theme.pallete.greyScale.grey8} 574px,
+    ${(props) => props.theme.pallete.greyScale.grey8} 100%
   );
-  color: ${theme.colors.grey1};
+  color: ${(props) => props.theme.pallete.greyScale.grey1};
 `;
 
 export const PageContainer = styled.div`
@@ -35,7 +35,7 @@ export const PageContainer = styled.div`
 `;
 
 export const SectionsContainer = styled.div`
-  background-color: ${theme.colors.grey10};
+  background-color: ${(props) => props.theme.pallete.greyScale.grey10};
   border-radius: 0.4rem;
   display: flex;
   flex-direction: column;
@@ -61,16 +61,16 @@ export const SectionsContainer = styled.div`
   }
 
   .heading6 {
-    ${theme.typography.Heading6_600};
+    ${(props) => props.theme.typography.heading6_600};
   }
 
   .heading7 {
-    ${theme.typography.Heading7_500};
+    ${(props) => props.theme.typography.heading7_500};
   }
 
   p {
-    ${theme.typography.body1_400};
-    color: ${theme.colors.grey2};
+    ${(props) => props.theme.typography.body1_400};
+    color: ${(props) => props.theme.pallete.greyScale.grey2};
   }
 
   .sellerInfos {
@@ -83,14 +83,14 @@ export const SectionsContainer = styled.div`
 
     & > a {
       text-decoration: none;
-      background-color: ${theme.colors.grey0};
+      background-color: ${(props) => props.theme.pallete.greyScale.grey0};
       padding: 2.4rem 2.8rem;
       border-radius: 0.4rem;
       transition: 0.4s;
-      color: ${theme.colors.whiteFixed};
-      ${theme.typography.button_big_text}
+      color: ${(props) => props.theme.pallete.greyScale.grey10};
+      ${(props) => props.theme.typography.button_big_text};
       &:hover {
-        background-color: ${theme.colors.grey1};
+        background-color: ${(props) => props.theme.pallete.greyScale.grey1};
       }
     }
   }
@@ -106,9 +106,10 @@ export const GalleryGrid = styled.div`
     cursor: pointer;
     width: 9rem;
     height: 9rem;
-    background-color: ${theme.colors.grey7};
+    background-color: ${(props) => props.theme.pallete.greyScale.grey7};
     padding: 10px;
     margin-top: 30px;
+    border-radius: .4rem;
 
     display: flex;
     justify-content: center;
@@ -151,12 +152,12 @@ export const UnorderedList = styled.ul`
 
 export const Tag = styled.span`
   text-transform: uppercase;
-  ${theme.typography.body2_500};
+  ${(props) => props.theme.typography.body2_500};
   padding: 0.4rem 0.8rem;
   border-radius: 0.4rem;
 
-  color: ${theme.colors.brand1};
-  background-color: ${theme.colors.brand4};
+  color: ${(props) => props.theme.pallete.main.brand1};
+  background-color: ${(props) => props.theme.pallete.main.brand4};
 `;
 
 export const ModalImg = styled.img`

@@ -6,11 +6,11 @@ import {
   Box,
   Flex,
   Main,
-  Title,
-  Text,
   HStack,
   UnorderedList,
   ListItem,
+  Title,
+  Subtitle,
 } from "./styled";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import useMedia from "use-media";
@@ -45,9 +45,9 @@ const Home = () => {
       <Box className="main__car">
         <Flex className="main__linear--gradient">
           <Title>Motors Shop</Title>
-          <Text className="main__title">
+          <Subtitle>
             A melhor plataforma de anúncios de carros do país
-          </Text>
+          </Subtitle>
         </Flex>
       </Box>
       <StyledContainer className="main container">

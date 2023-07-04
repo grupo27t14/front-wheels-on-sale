@@ -1,6 +1,5 @@
 import { createGlobalStyle } from "styled-components";
 import styled from "styled-components";
-import { theme } from "./theme";
 
 interface iCGS {
   bodyBackground?: string;
@@ -8,23 +7,31 @@ interface iCGS {
 
 export const GlobalStyleGray = createGlobalStyle<iCGS>`
  body {
-    background: ${theme.colors.grey8};
-
-
+    background: ${(props) => props.theme.pallete.greyScale.grey8 };
   }
 `;
 
 export const GlobalStyle = createGlobalStyle<iCGS>`
-:root {
-  font-family: 'Inter';
-  font-size: 60%;
-}
-
-@media (min-width: 700px) {
-    :root {
-      font-size: 62.5%;
-    }
+  :root {
+    font-family: 'Inter';
+    font-size: 60%;
   }
+
+  body {
+    background: ${(props) => props.theme.pallete.greyScale.grey9 };   
+    padding-top: 80px;
+  }
+
+  a {
+    text-decoration: none;
+    color: ${(props) => props.theme.pallete.greyScale.grey1};
+  }
+
+  @media (min-width: 700px) {
+      :root {
+        font-size: 62.5%;
+      }
+    }
   
   * {
     margin:0;
@@ -45,7 +52,7 @@ export const GlobalStyle = createGlobalStyle<iCGS>`
   /* Firefox */
   * {
     scrollbar-width: none;
-    scrollbar-color: ${theme.colors.brand1} ${theme.colors.grey5};
+    scrollbar-color: ${(props) => props.theme.pallete.main.brand1} ${(props) => props.theme.pallete.greyScale.grey5 };
   }
 
   /* Chrome, Edge, and Safari */
@@ -54,13 +61,13 @@ export const GlobalStyle = createGlobalStyle<iCGS>`
   }
 
   *::-webkit-scrollbar-track {
-    background: ${theme.colors.grey5};
+    background: ${(props) => props.theme.pallete.greyScale.grey5 };
   }
 
   *::-webkit-scrollbar-thumb {
-    background-color: ${theme.colors.brand1};
+    background-color: ${(props) => props.theme.pallete.main.brand1};
     border-radius: 4px;
-    border: 1px solid ${theme.colors.grey5};
+    border: 1px solid ${(props) => props.theme.pallete.greyScale.grey5 };
   }
 
   body,html{
@@ -71,7 +78,7 @@ export const GlobalStyle = createGlobalStyle<iCGS>`
   body {
     background: ${(props) =>
       props.bodyBackground ? "white" : props.bodyBackground};
-    color: ${theme.colors.grey1};
+    color: ${(props) => props.theme.pallete.greyScale.grey1};
     -webkit-font-smoothing: antialiased;
 
     overflow-x: hidden;
@@ -142,26 +149,26 @@ export const Avatar = styled.span<{ $bg?: string }>`
     width: 3.2rem;
     height: 3.2rem;
     border-radius: 100%;
-    color: ${theme.colors.whiteFixed};
+    color: ${(props) => props.theme.pallete.greyScale.whiteFixed};
     background-color: ${(props) => props.$bg};
-    ${theme.typography.avatar};
+    ${(props) => props.theme.typography.avatar};
   }
 
   &.avatarProfile {
     width: 3.2rem;
     height: 3.2rem;
     border-radius: 100%;
-    color: ${theme.colors.whiteFixed};
+    color: ${(props) => props.theme.pallete.greyScale.whiteFixed};
     background-color: ${(props) => props.$bg};
-    ${theme.typography.avatar_profile};
+    ${(props) => props.theme.typography.avatar_profile};
   }
 
   &.avatarProfileBig {
     width: 10.4rem;
     height: 10.4rem;
     border-radius: 100%;
-    color: ${theme.colors.whiteFixed};
+    color: ${(props) => props.theme.pallete.greyScale.whiteFixed};
     background-color: ${(props) => props.$bg};
-    ${theme.typography.avatar_big};
+    ${(props) => props.theme.typography.avatar_big}
   }
 `;

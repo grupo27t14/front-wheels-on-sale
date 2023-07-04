@@ -1,14 +1,14 @@
+
 import styled from "styled-components";
-import { theme } from "../../../styles/theme";
 
 export const StyledInputsAside = styled.form`
   display: flex;
   flex-direction: column;
 
   h2 {
-    ${theme.typography.Heading4_600};
+    ${(props) => props.theme.typography.heading4_600};
 
-    color: ${theme.colors.grey1};
+    color: ${(props) => props.theme.pallete.greyScale.grey1};
     margin-bottom: 20px;
     width: 100%;
   }
@@ -36,23 +36,22 @@ export const StyledInputsAside = styled.form`
     display: flex;
     gap: 20px;
     margin-bottom: 20px;
-    height: 37px;
     justify-content: center;
     width: 100%;
 
     input {
       margin-bottom: 20px;
-      padding: 20px 0;
+      padding: 10px 0;
       border-radius: 4px;
-      border: 1px solid ${theme.colors.grey5};
-      background-color: ${theme.colors.grey5};
-      color: ${theme.colors.blackFixed};
+      border: 1px solid ${(props) => props.theme.pallete.greyScale.grey5};
+      background-color: ${(props) => props.theme.pallete.greyScale.grey5};
+      color: ${(props) => props.theme.pallete.greyScale.grey1};
       text-align: center;
       width: 142px;
     }
     input::placeholder {
-      ${theme.typography.Heading7_600};
-      color: ${theme.colors.grey3};
+      ${(props) => props.theme.typography.heading7_600};
+      color: ${(props) => props.theme.pallete.greyScale.grey3};
     }
   }
 `;

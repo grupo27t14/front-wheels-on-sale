@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { theme } from "../../styles/theme";
 
 export const AboutUsMain = styled.main`
   padding: 80px 0;
@@ -15,8 +14,8 @@ export const AboutUsMain = styled.main`
 
   .about__title {
     padding: 2rem;
-    ${theme.typography.Heading1_700}
-    color: ${theme.colors.grey2};
+    ${(props) => props.theme.typography.heading1_700};
+    color: ${(props) => props.theme.pallete.greyScale.grey2};
   }
 
   .about__text {
@@ -26,8 +25,8 @@ export const AboutUsMain = styled.main`
     width: 80%;
     text-align: start;
     text-justify: auto;
-    ${theme.typography.Heading7_500}
-    color: ${theme.colors.grey3};
+    ${(props) => props.theme.typography.heading7_500};
+    color: ${(props) => props.theme.pallete.greyScale.grey3};
   }
 
   .userAvatar {
@@ -81,10 +80,10 @@ export const AboutUsMain = styled.main`
     justify-content: center;
     gap: 1rem;
 
-    background-color: ${theme.colors.grey8};
+    background-color: ${(props) => props.theme.pallete.greyScale.grey8};
     border-radius: .8rem;
     margin-bottom: 16px;
-    border: 2px solid ${theme.colors.grey6};
+    border: 2px solid ${(props) => props.theme.pallete.greyScale.grey6};
   }
 
   .card h4 {
@@ -99,7 +98,7 @@ export const AboutUsMain = styled.main`
   }
 
   .card:hover h4 {
-    color: ${theme.colors.grey1};
+    color: ${(props) => props.theme.pallete.greyScale.grey1};
     transform: translateY(-100%);
     transition: color 0.3s ease, transform 0.3s ease;
   }
@@ -123,7 +122,7 @@ export const AboutUsMain = styled.main`
   }
 
   .card ul li a {
-    color: ${theme.colors.brand1};
+    color: ${(props) => props.theme.pallete.main.brand1};
     text-decoration: none;
     font-size: 2rem;
   }
@@ -132,4 +131,3 @@ export const AboutUsMain = styled.main`
     text-decoration: none;
   }
 `;
-
