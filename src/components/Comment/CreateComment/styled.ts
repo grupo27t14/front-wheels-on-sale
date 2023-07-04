@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { theme } from "../../../styles/theme";
 
 export const CommentArea = styled.div`
   width: 100%;
@@ -13,8 +14,8 @@ export const CommentArea = styled.div`
     gap: 1rem;
 
     .commentUsername {
-      ${(props) => props.theme.typography.body2_500};
-      color: ${(props) => props.theme.pallete.greyScale.grey1};
+      ${theme.typography.body2_500};
+      color: ${theme.colors.grey1};
     }
   }
 
@@ -34,16 +35,16 @@ export const CommentArea = styled.div`
     text-align: justify;
 
     border-radius: 0.4rem;
-    border: 0.2rem solid ${(props) => props.theme.pallete.greyScale.grey7};
-    background-color: ${(props) => props.theme.pallete.greyScale.grey10};
+    border: 0.2rem solid ${theme.colors.grey7};
+    background-color: ${theme.colors.grey10};
     outline: none;
-    color: ${(props) => props.theme.pallete.greyScale.grey1};
-    ${(props) => props.theme.typography.heading7_500};
+    color: ${theme.colors.grey1};
+    ${theme.typography.Heading7_500}
 
     font-family: 'Inter', sans-serif;
 
     ::placeholder {
-      color: ${(props) => props.theme.pallete.greyScale.grey3};
+      color: ${theme.colors.grey3};
     }
   }
 
@@ -74,18 +75,18 @@ export const Box = styled.div`
 `;
 
 export const Title = styled.h4`
-${(props) => props.theme.typography.heading7_500};
-  color: ${(props) => props.theme.pallete.greyScale.grey1};
+  ${theme.typography.Heading7_500};
+  color: ${theme.colors.grey1};
 `;
 
 export const SubTitle = styled.h4`
-${(props) => props.theme.typography.heading7_500};
-  color: ${(props) => props.theme.pallete.greyScale.grey1};
+  ${theme.typography.Heading7_500};
+  color: ${theme.colors.grey1};
   margin-bottom: 2.5rem;
 `;
 
 export const Text = styled.p`
-  ${(props) => props.theme.typography.body2_500};
+  ${theme.typography.body2_500};
 `;
 
 export const ButtonGroup = styled.div`
@@ -97,9 +98,9 @@ export const ButtonGroup = styled.div`
   button {
     position: unset;
     padding: 0px 12px;
-    color: ${(props) => props.theme.pallete.greyScale.grey3};
-    background-color: ${(props) => props.theme.pallete.greyScale.grey7};
-    border-color: ${(props) => props.theme.pallete.greyScale.grey7};
+    color: ${theme.colors.grey3};
+    background-color: ${theme.colors.grey7};
+    border-color: ${theme.colors.grey7};
     border-radius: 24px;
 
     font-size: 12px;

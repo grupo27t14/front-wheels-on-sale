@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { useUsers } from "../../hooks/useUser";
 import { LoadingRing } from "../../styles/LoadingRing";
 import { StyledButton } from "../../styles/button";
+import { theme } from "../../styles/theme";
 import { Form } from "../Form";
 import { Input } from "../Input";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -75,7 +76,7 @@ const ForgotPassword = ({ isModalOpen, setIsModalOpen }: IProps) => {
             disabled={reqLoading ? true : false}
           >
             {reqLoading ? (
-              <LoadingRing color={"#FFF"} />
+              <LoadingRing color={theme.colors.whiteFixed} />
             ) : (
               "Redefinir Senha"
             )}

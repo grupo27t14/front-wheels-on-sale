@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { theme } from "../../styles/theme";
 
 export const Section = styled.div`
   max-width: 312px;
@@ -38,11 +39,11 @@ export const VStack = styled.div`
 
     & > button {
       border-radius: 4px;
-      border: 2px solid ${(props) => props.theme.pallete.greyScale.grey0};
+      border: 2px solid ${theme.colors.grey0};
 
       & > a {
         text-decoration: none;
-        color: ${(props) => props.theme.pallete.greyScale.grey0};
+        color: ${theme.colors.grey0};
       }
     }
   }
@@ -60,18 +61,18 @@ export const Box = styled.div`
       top: 0rem;
       right: 0rem;
 
-      color: ${(props) => props.theme.pallete.greyScale.grey10};
-      background-color:${(props) => props.theme.pallete.randomColors.random7};
+      color: ${theme.colors.whiteFixed};
+      background-color: ${theme.colors.random7};
       border-radius: 0.2rem;
-      border: 0.2rem solid ${(props) => props.theme.pallete.main.currencyDollar};
+      border: 0.2rem solid ${theme.colors.currencyDollar};
       z-index: 10;
     }
 
     & .card__published--Active,
     & .card__published--Inactive {
       padding: 0px 8px;
-      color: ${(props) => props.theme.pallete.greyScale.grey10};
-      ${(props) => props.theme.typography.body2_500};
+      color: ${theme.colors.whiteFixed};
+      ${theme.typography.body2_500}
       border-radius: 4px;
       position: absolute;
       top: 8px;
@@ -79,11 +80,11 @@ export const Box = styled.div`
     }
 
     & .card__published--Active {
-      background-color: ${(props) => props.theme.pallete.main.brand1};
+      background-color: ${theme.colors.brand1};
     }
 
     & .card__published--Inactive {
-      background-color: ${(props) => props.theme.pallete.greyScale.grey4};
+      background-color: ${theme.colors.grey4};
     }
   }
 
@@ -96,29 +97,29 @@ export const Box = styled.div`
   &.card__info--subTag {
     padding: 0.4rem 0.8rem;
     border-radius: 0.4rem;
-    color: ${(props) => props.theme.pallete.main.brand1};
-    background-color: ${(props) => props.theme.pallete.main.brand4};
+    color: ${theme.colors.brand1};
+    background-color: ${theme.colors.brand4};
   }
 `;
 
 export const Img = styled.img`
   width: 100%;
   height: 100%;
-  background-color: ${(props) => props.theme.pallete.greyScale.grey7};
+  background-color: ${theme.colors.grey7};
   object-fit: cover;
 `;
 
 export const Title = styled.h3`
-  color: ${(props) => props.theme.pallete.greyScale.grey1};
+  color: ${theme.colors.grey1};
   font-family: "Lexend";
-  ${(props) => props.theme.typography.heading7_600};
+  ${theme.typography.Heading7_600};
 `;
 
 export const Text = styled.p`
   &.card__info--text {
     height: 48px;
-    color: ${(props) => props.theme.pallete.greyScale.grey2};
-    ${(props) => props.theme.typography.body2_400};
+    color: ${theme.colors.grey2};
+    ${theme.typography.body2_400};
 
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -127,12 +128,12 @@ export const Text = styled.p`
   }
 
   &.card__info--name {
-    color: ${(props) => props.theme.pallete.greyScale.grey1};
-    font-size: ${(props) => props.theme.typography.body2_500};
+    color: ${theme.colors.grey1};
+    font-size: ${theme.typography.body2_500};
   }
 
   &.card__info--price {
-    color: ${(props) => props.theme.pallete.greyScale.grey1};
-    ${(props) => props.theme.typography.heading7_500}
+    color: ${theme.colors.grey1};
+    ${theme.typography.Heading7_500};
   }
 `;

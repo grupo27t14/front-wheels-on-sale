@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { theme } from "../../styles/theme";
 
 interface iStFormProps {
   padding?: string;
@@ -17,23 +18,23 @@ export const StyledForm = styled.form<iStFormProps>`
   height: max-content;
   margin: ${(props) => (props.margin ? props.margin : "3rem")};
 
-  background: ${(props) => props.theme.pallete.greyScale.grey10};
+  background: ${theme.colors.grey10};
   border-radius: 4px;
 
   label {
-    ${(props) => props.theme.typography.input_label};
-    color: ${(props) => props.theme.pallete.greyScale.grey1};
+    ${theme.typography.input_label}
+    color: ${theme.colors.grey1};
   }
 
   h3 {
-    ${(props) => props.theme.typography.heading5_500};
-    color: ${(props) => props.theme.pallete.greyScale.grey1};
+    ${theme.typography.Heading5_500}
+    color: ${theme.colors.blackFixed};
     margin-bottom: 20px;
   }
 
   h4 {
-    ${(props) => props.theme.typography.body2_500};
-    color: ${(props) => props.theme.pallete.greyScale.grey1};
+    ${theme.typography.body2_500}
+    color: ${theme.colors.blackFixed};
     margin: 10px 0;
   }
 
@@ -64,13 +65,13 @@ export const StyledForm = styled.form<iStFormProps>`
     margin-top: 0.75rem;
     word-wrap: break-word;
 
-    border: 1.5px solid ${(props) => props.theme.pallete.greyScale.grey7};
+    border: 1.5px solid ${theme.colors.grey7};
     border-radius: 4px;
     box-shadow: none;
 
     ::placeholder {
-      ${(props) => props.theme.typography.input_placeholder};
-      color: ${(props) => props.theme.pallete.greyScale.grey3};
+      ${theme.typography.input_placeholder}
+      color: ${theme.colors.grey3};
       padding-top: 12px;
     }
   }
@@ -86,17 +87,17 @@ export const StyledForm = styled.form<iStFormProps>`
     -moz-appearance: none;
     appearance: none;
 
-    border: 1.5px solid ${(props) => props.theme.pallete.greyScale.grey7};
+    border: 1.5px solid ${theme.colors.grey7};
     border-radius: 4px;
     box-shadow: none;
 
     :focus {
-      border: 1.5px solid ${(props) => props.theme.pallete.main.brand2};
+      border: 1.5px solid ${theme.colors.brand2};
     }
 
     ::placeholder {
-      ${(props) => props.theme.typography.input_placeholder};
-      color: ${(props) => props.theme.pallete.greyScale.grey3};
+      ${theme.typography.input_placeholder}
+      color: ${theme.colors.grey3};
     }
   }
 `;
@@ -114,13 +115,13 @@ export const ErrorMessage = styled.h5`
   animation-iteration-count: 2;
   @keyframes blinding {
     from {
-      color: ${(props) => props.theme.pallete.feedback.alert1};
+      color: ${theme.colors.alert1};
     }
     50% {
-      color: ${(props) => props.theme.pallete.feedback.alert2};
+      color: ${theme.colors.alert2};
     }
     to {
-      color: ${(props) => props.theme.pallete.feedback.alert1};
+      color: ${theme.colors.alert1};
     }
   }
 `;
