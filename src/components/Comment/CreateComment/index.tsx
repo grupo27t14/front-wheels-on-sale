@@ -6,7 +6,6 @@ import { useUsers } from "../../../hooks/useUser";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoadingRing } from "../../../styles/LoadingRing";
-import { theme } from "../../../styles/theme";
 import { api } from "../../../services/api";
 import {
   commentSchema,
@@ -69,7 +68,7 @@ const CreateComment = ({ comments, setComments }: IComment) => {
         {user ? (
           <StyledButton buttonstyle="brand1" buttonsize="fit">
             {reqLoading ? (
-              <LoadingRing color={theme.colors.whiteFixed} />
+              <LoadingRing color={'#FFF'} />
             ) : (
               "Comentar"
             )}

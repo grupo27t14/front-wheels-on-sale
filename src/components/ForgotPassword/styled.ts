@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { theme } from "../../styles/theme";
 
 export const FormControl = styled.section`
   width: 100%;
@@ -16,7 +15,7 @@ export const HStack = styled.div`
   align-items: center;
   gap: 10px;
 
-  ${theme.typography.button_big_text}
+  ${(props) => props.theme.typography.button_big_text};
 
   & > button {
     padding: 0;

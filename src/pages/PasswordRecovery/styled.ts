@@ -1,33 +1,32 @@
 import styled from "styled-components";
-import { theme } from "../../styles/theme";
 
 export const PasswordStyled = styled.main`
   width: 100vw;
   height: 80vh;
-  color: ${theme.colors.grey1};
+  color: ${(props) => props.theme.pallete.greyScale.grey1};
   display: flex;
   justify-content: center;
   align-items: center;
 
   form {
     button {
-      ${theme.typography.button_big_text}
+      ${(props) => props.theme.typography.button_big_text};
     }
 
     > {
       label {
-        ${theme.typography.input_label}
-        color: ${theme.colors.grey1};
+        ${(props) => props.theme.typography.input_label};
+        color: ${(props) => props.theme.pallete.greyScale.grey1};
         margin: 12px 0;
       }
     }
 
     > p {
-      ${theme.typography.body2_500};
-      color: ${theme.colors.grey2};
+      ${(props) => props.theme.typography.body2_500};
+      color: ${(props) => props.theme.pallete.greyScale.grey2};
 
       > a {
-        color: ${theme.colors.brand1};
+        color: ${(props) => props.theme.pallete.main.brand1};
         text-decoration: none;
 
         &:hover {

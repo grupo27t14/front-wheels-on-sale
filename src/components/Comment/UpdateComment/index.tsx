@@ -2,7 +2,6 @@ import { StyledButton } from "../../../styles/button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoadingRing } from "../../../styles/LoadingRing";
-import { theme } from "../../../styles/theme";
 import {
   tcomment,
   commentSchema,
@@ -69,7 +68,7 @@ const UpdateComment = ({
             </StyledButton>
             <StyledButton type="submit" buttonstyle="brand1" buttonsize="fit">
               {reqLoading ? (
-                <LoadingRing color={theme.colors.whiteFixed} />
+                <LoadingRing color={"#FFF"} />
               ) : (
                 "Editar"
               )}

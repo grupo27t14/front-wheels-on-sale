@@ -1,11 +1,13 @@
 import styled from "styled-components";
-import { theme } from "../../styles/theme";
 
 export const Header = styled.header`
   width: 100%;
   height: 80px;
-  background-color: ${theme.colors.grey10};
-  border-bottom: 2px solid ${theme.colors.grey6};
+  background-color: ${(props) => props.theme.pallete.greyScale.grey10};
+  border-bottom: 2px solid ${(props) => props.theme.pallete.greyScale.grey7};
+  position: fixed;
+  inset: 0;
+  z-index: 999;
 
   & .header {
     height: 100%;
@@ -30,7 +32,8 @@ export const Nav = styled.nav`
   display: flex;
   align-items: center;
   justify-content: end;
-  background-color: ${theme.colors.grey10};
+  gap: 10px;
+  background-color: ${(props) => props.theme.pallete.greyScale.grey10};
 
   @media (max-width: 768px) {
     width: 100%;
@@ -53,9 +56,9 @@ export const Button = styled.button`
   }
 
   &:hover {
-    background-color: ${theme.colors.random4};
+    background-color: ${(props) => props.theme.pallete.randomColors.random4};
     & > svg {
-      color: ${theme.colors.whiteFixed};
+      color: ${(props) => props.theme.pallete.greyScale.grey10};
     }
   }
 `;

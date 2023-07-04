@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { theme } from "../../styles/theme";
 
 export const Container = styled.div`
   width: 100vw;
@@ -11,7 +10,7 @@ export const Container = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
 
   > div {
-    background: ${theme.colors.whiteFixed};
+    background-color: ${(props) => props.theme.pallete.greyScale.grey10};
     border-radius: 8px;
     border: 1px solid rgba(255, 255, 255, 0.18);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
@@ -21,7 +20,7 @@ export const Container = styled.div`
     max-width: 500px;
     max-height: 90vh;
 
-    color: ${theme.colors.grey1};
+    color: ${(props) => props.theme.pallete.greyScale.grey1};
 
     position: relative;
     margin: 5rem auto 3rem auto;
@@ -53,12 +52,12 @@ export const Container = styled.div`
     svg {
       font-size: 3rem;
       transform: scale(1);
-      color: ${theme.colors.grey4};
+      color: ${(props) => props.theme.pallete.greyScale.grey4};
       transition: 0.3s;
     }
     :hover svg {
       transform: scale(1.1);
-      color: ${theme.colors.alert1};
+      color: ${(props) => props.theme.pallete.feedback.alert1};
     }
   }
 `;
