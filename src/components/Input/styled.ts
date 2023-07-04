@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { theme } from "../../styles/theme";
+ 
 
 export const StyledInput = styled.fieldset`
   all: unset;
@@ -11,10 +11,10 @@ export const StyledInput = styled.fieldset`
   position: relative;
 
   label {
-    ${theme.typography.input_label}
-    color: ${theme.colors.grey1};
+    ${(props) => props.theme.typography.input_label}
+    color: ${(props) => props.theme.pallete.greyScale.grey1};
     > i {
-      color: ${theme.colors.alert1};
+      color: ${(props) => props.theme.pallete.feedback.alert1};
     }
   }
 
@@ -23,17 +23,17 @@ export const StyledInput = styled.fieldset`
     padding: 12px 16px;
     gap: 10px;
 
-    border: 1.5px solid ${theme.colors.grey7};
+    border: 1.5px solid ${(props) => props.theme.pallete.greyScale.grey7};
     border-radius: 4px;
     box-shadow: none;
 
     :focus {
-      border: 1.5px solid ${theme.colors.brand2};
+      border: 1.5px solid ${(props) => props.theme.pallete.main.brand2};
     }
 
     ::placeholder {
-      ${theme.typography.input_placeholder}
-      color: ${theme.colors.grey3};
+      ${(props) => props.theme.typography.input_placeholder}
+      color: ${(props) => props.theme.pallete.greyScale.grey3};
     }
 
     :read-only {
@@ -42,6 +42,6 @@ export const StyledInput = styled.fieldset`
   }
 
   input.err {
-    border: 1.5px solid ${theme.colors.alert1};
+    border: 1.5px solid ${(props) => props.theme.pallete.feedback.alert1};
   }
 `;

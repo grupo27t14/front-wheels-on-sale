@@ -8,7 +8,7 @@ import { loginSchema, tLogin } from "./schemas";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { LoadingRing } from "../../styles/LoadingRing";
-import { theme } from "../../styles/theme";
+ 
 import { useState } from "react";
 import { Modal } from "../../components/Modal";
 import ForgotPassword from "../../components/ForgotPassword";
