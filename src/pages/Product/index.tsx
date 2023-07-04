@@ -136,7 +136,7 @@ const Products = () => {
                   buttonsize="fit"
                   onClick={handleClickWhatsapp}
                 >
-                  Compar
+                  Comprar
                 </StyledButton>
               </CarInfoContainer>
             </SectionsContainer>

@@ -12,6 +12,7 @@ import { useState } from "react";
 import ConfirmDeletion from "../../components/Modal/ConfirmDeletion";
 import { Modal } from "../../components/Modal";
 import { useNavigate } from "react-router-dom";
+import { light } from "../../styles/theme";
 
 export const Register = () => {
   const { errors, handleSubmit, register } = useCep();
@@ -46,7 +47,7 @@ export const Register = () => {
             text_btn_0="Ir para login"
             onClick0={navigatePageLogin}
             visible="sim"
-            color={`${theme.colors.sucess1}`}
+            color={`${light.pallete.feedback.sucess1}`}
             browse="/login"
             handleOpenModal={handleOpenModal}
           />

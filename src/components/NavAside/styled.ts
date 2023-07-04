@@ -56,7 +56,7 @@ export const StyledKeySection = styled.div`
         ${(props) => props.theme.typography.heading6_500};
         text-decoration: none;
         color: ${(props) => props.theme.pallete.greyScale.grey3};
-        padding: 0 2rem;
+        padding: 0 1rem;
         cursor: pointer;
         :hover {
           color: ${(props) => props.theme.pallete.greyScale.grey1};

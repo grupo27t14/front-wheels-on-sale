@@ -24,7 +24,7 @@ export const GlobalStyle = createGlobalStyle<iCGS>`
 
   a {
     text-decoration: none;
-    color: ${(props) => props.theme.pallete.greyScale.grey1 }
+    color: ${(props) => props.theme.pallete.greyScale.grey1};
   }
 
   @media (min-width: 700px) {

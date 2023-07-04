@@ -35,13 +35,12 @@ export const StyledInputsAside = styled.form`
     display: flex;
     gap: 20px;
     margin-bottom: 20px;
-    height: 37px;
     justify-content: center;
     width: 100%;
 
     input {
       margin-bottom: 20px;
-      padding: 20px 0;
+      padding: 10px 0;
       border-radius: 4px;
       border: 1px solid ${(props) => props.theme.pallete.greyScale.grey5};
       background-color: ${(props) => props.theme.pallete.greyScale.grey5};

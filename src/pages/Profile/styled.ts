@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { theme } from "../../styles/theme";
 
 export const Main = styled.main`
   width: 100vw;
@@ -7,9 +6,9 @@ export const Main = styled.main`
   height: 100%;
   background: linear-gradient(
     180deg,
-    ${theme.colors.brand1} 277px,
-    ${theme.colors.grey8} 277px,
-    ${theme.colors.grey8} 100%
+    ${(props) => props.theme.pallete.main.brand1} 277px,
+    ${(props) => props.theme.pallete.greyScale.grey8} 277px,
+    ${(props) => props.theme.pallete.greyScale.grey8} 100%
   );
 
   .main {
@@ -19,7 +18,7 @@ export const Main = styled.main`
 `;
 
 export const ProfileContainer = styled.section`
-  background-color: ${theme.colors.grey10};
+  background-color: ${(props) => props.theme.pallete.greyScale.grey10};
 
   max-width: 1240px;
   max-height: 406px;
@@ -35,16 +34,16 @@ export const ProfileContainer = styled.section`
   padding: 4.4rem 7rem 4.1rem 4.1rem;
 
   .heading6 {
-    ${theme.typography.Heading6_600};
+    ${(props) => props.theme.typography.heading6_600};
   }
 
   .heading7 {
-    ${theme.typography.Heading7_500};
+    ${(props) => props.theme.typography.heading7_500};
   }
 
   p {
-    ${theme.typography.body1_400};
-    color: ${theme.colors.grey2};
+    ${(props) => props.theme.typography.body1_400};
+    color: ${(props) => props.theme.pallete.greyScale.grey2};
   }
 
   .profileName {
@@ -56,9 +55,9 @@ export const ProfileContainer = styled.section`
 
   .sellerTag {
     padding: 0.4rem 0.8rem;
-    color: ${theme.colors.brand1};
-    background-color: ${theme.colors.brand4};
-    ${theme.typography.body2_500}
+    color: ${(props) => props.theme.pallete.main.brand1};
+    background-color: ${(props) => props.theme.pallete.main.brand4};
+    ${(props) => props.theme.typography.body2_500};
   }
 `;
 
@@ -71,7 +70,7 @@ export const ProductsContainer = styled.section`
   padding-top: 7.4rem;
 
   .heading5 {
-    ${theme.typography.Heading5_600};
+    ${(props) => props.theme.typography.heading5_600};
   }
 
   .productsGrid {
