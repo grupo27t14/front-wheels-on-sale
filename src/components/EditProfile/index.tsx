@@ -130,7 +130,7 @@ const EditProfile = ({ isModalOpen, setIsModalOpen }: IProps) => {
           disabled={reqLoading}
         >
           {reqLoading ? (
-            <LoadingRing color={theme.colors.whiteFixed} />
+            <LoadingRing color={"#FFF"} />
           ) : (
             "Excluir Perfil"
           )}
@@ -138,7 +138,7 @@ const EditProfile = ({ isModalOpen, setIsModalOpen }: IProps) => {
 
         <StyledButton buttonstyle="brand1" type="submit" disabled={reqLoading}>
           {reqLoading ? (
-            <LoadingRing color={theme.colors.whiteFixed} />
+            <LoadingRing color={"#FFF"} />
           ) : (
             "Salvar alterações"
           )}

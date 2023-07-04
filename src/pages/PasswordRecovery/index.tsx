@@ -76,7 +76,7 @@ const PasswordRecoveryPage = () => {
           disabled={reqLoading ? true : false}
         >
           {reqLoading ? (
-            <LoadingRing color={theme.colors.whiteFixed} />
+            <LoadingRing color={"#FFF"} />
           ) : (
             "Salvar"
           )}

@@ -76,7 +76,7 @@ const ForgotPassword = ({ isModalOpen, setIsModalOpen }: IProps) => {
             disabled={reqLoading ? true : false}
           >
             {reqLoading ? (
-              <LoadingRing color={theme.colors.whiteFixed} />
+              <LoadingRing color={"#FFF"} />
             ) : (
               "Redefinir Senha"
             )}

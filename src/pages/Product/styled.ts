@@ -83,14 +83,14 @@ export const SectionsContainer = styled.div`
 
     & > a {
       text-decoration: none;
-      background-color: ${(props) => props.theme.pallete.greyScale.grey0};
+      background-color: ${(props) => props.theme.pallete.greyScale.grey1};
       padding: 2.4rem 2.8rem;
       border-radius: 0.4rem;
       transition: 0.4s;
       color: ${(props) => props.theme.pallete.greyScale.grey10};
       ${(props) => props.theme.typography.button_big_text};
       &:hover {
-        background-color: ${(props) => props.theme.pallete.greyScale.grey1};
+        background-color: ${(props) => props.theme.pallete.greyScale.grey2};
       }
     }
   }

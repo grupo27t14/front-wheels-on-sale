@@ -68,7 +68,7 @@ const CreateComment = ({ comments, setComments }: IComment) => {
         {user ? (
           <StyledButton buttonstyle="brand1" buttonsize="fit">
             {reqLoading ? (
-              <LoadingRing color={theme.colors.whiteFixed} />
+              <LoadingRing color={"#FFF"} />
             ) : (
               "Comentar"
             )}
