@@ -11,11 +11,6 @@ import { Profile } from "../pages/Profile";
 import PasswordRecoveryPage from "../pages/PasswordRecovery";
 import AboutUs from "../pages/AboutUs";
 
-interface RoutesProps {
-  handleTheme: () => void;
-  isDark: boolean;
-}
-
 const backgroundGray = (element: JSX.Element) => {
   return (
     <>
@@ -25,10 +20,10 @@ const backgroundGray = (element: JSX.Element) => {
   );
 };
 
-export const RoutesMain = ({ handleTheme, isDark }: RoutesProps ) => {
+export const RoutesMain = () => {
   return (
     <Routes>
-      <Route path="/" element={<Header handleTheme={handleTheme} isDark={isDark} />}>
+      <Route path="/" element={<Header />}>
         <Route path="/" element={<Home />} />
         <Route element={<LoadUser />}>
           <Route path="/login" element={backgroundGray(<Login />)} />

@@ -1,3 +1,4 @@
+
 import styled from "styled-components";
 import car from "../../../public/Photo_car.png";
 
@@ -167,4 +168,3 @@ export const Subtitle = styled.h2`
   ${(props) => props.theme.typography.heading3_500};
   text-align: center;
 `
-

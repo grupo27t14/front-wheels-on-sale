@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { theme } from "../../../styles/theme";
 
 export const Box = styled.div`
   width: 100%;
@@ -20,18 +21,18 @@ export const HStack = styled.div`
 `;
 
 export const Title = styled.h4`
-  ${(props) => props.theme.typography.heading7_500};
-  color: ${(props) => props.theme.pallete.greyScale.grey1};
+  ${theme.typography.Heading7_500};
+  color: ${theme.colors.grey1};
 `;
 
 export const SubTitle = styled.h4`
-  ${(props) => props.theme.typography.heading7_500};
-  color: ${(props) => props.theme.pallete.greyScale.grey1};
+  ${theme.typography.Heading7_500};
+  color: ${theme.colors.grey1};
   margin-bottom: 2.5rem;
 `;
 
 export const Text = styled.p`
- ${(props) => props.theme.typography.body2_500};
+  ${theme.typography.body2_500};
 `;
 
 export const Form = styled.form`
@@ -48,12 +49,12 @@ export const Textarea = styled.textarea`
   resize: vertical;
   padding: 20px;
 
-  ${(props) => props.theme.typography.heading7_500};
-  color: ${(props) => props.theme.pallete.greyScale.grey1};
-  background-color: ${(props) => props.theme.pallete.greyScale.grey10};
+  ${theme.typography.Heading7_500}
+  color: ${theme.colors.grey1};
+  background-color: ${theme.colors.grey10};
 
   border-radius: 0.4rem;
-  border: 0.2rem solid ${(props) => props.theme.pallete.greyScale.grey7};;
+  border: 0.2rem solid ${theme.colors.grey7};
 
   font-family: "Inter", sans-serif;
 
@@ -62,6 +63,6 @@ export const Textarea = styled.textarea`
   box-sizing: border-box;
 
   ::placeholder {
-    color: ${(props) => props.theme.pallete.greyScale.grey3};
+    color: ${theme.colors.grey3};
   }
 `;

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { theme } from "../../../styles/theme";
 
 export const UnorderedList = styled.ul`
   width: 100%;
@@ -8,8 +9,8 @@ export const UnorderedList = styled.ul`
   align-items: center;
   justify-content: space-between;
   padding-left: 44px;
-  border-left: 2px solid ${(props) => props.theme.pallete.greyScale.grey6};
-  background-color:${(props) => props.theme.pallete.greyScale.grey10};
+  border-left: 2px solid ${theme.colors.grey6};
+  background-color: ${theme.colors.grey10};
 
   @media (max-width: 768px) {
     width: 250px;
@@ -54,20 +55,20 @@ export const ListItem = styled.li`
     transition: all 0.3s;
 
     &.header__signUp--login {
-      color: ${(props) => props.theme.pallete.greyScale.grey2};
-      ${(props) => props.theme.typography.body1_600};
+      color: ${theme.colors.grey2};
+      ${theme.typography.body1_600};
     }
 
     &.header__signUp--register {
-      color: ${(props) => props.theme.pallete.greyScale.grey0};
-      ${(props) => props.theme.typography.button_big_text};
-      border-color: ${(props) => props.theme.pallete.greyScale.grey6};
+      color: ${theme.colors.grey0};
+      ${theme.typography.button_big_text};
+      border-color: ${theme.colors.grey6};
     }
 
     &:hover {
-      color: ${(props) => props.theme.pallete.greyScale.grey10};
-      background-color: ${(props) => props.theme.pallete.randomColors.random4};
-      border-color: ${(props) => props.theme.pallete.randomColors.random4};
+      color: ${theme.colors.whiteFixed};
+      background-color: ${theme.colors.random4};
+      border-color: ${theme.colors.random4};
     }
 
     @media (max-width: 768px) {

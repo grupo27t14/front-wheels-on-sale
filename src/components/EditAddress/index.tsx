@@ -1,6 +1,7 @@
 import { useUsers } from "../../hooks/useUser";
 import { LoadingRing } from "../../styles/LoadingRing";
 import { StyledButton } from "../../styles/button";
+import { theme } from "../../styles/theme";
 import { Form } from "../Form";
 import { Input } from "../Input";
 import { HStack } from "./styled";
@@ -125,7 +126,7 @@ const EditAddress = ({
           buttonsize="big"
         >
           {reqLoading ? (
-            <LoadingRing color={"#FFF"} />
+            <LoadingRing color={theme.colors.whiteFixed} />
           ) : (
             "Salvar alterações"
           )}
