@@ -1,4 +1,5 @@
 import styled, { keyframes } from "styled-components";
+import { theme } from "../../../styles/theme";
 
 export const VStack = styled.div`
   display: flex;
@@ -31,18 +32,18 @@ export const Box = styled.div`
 `;
 
 export const Title = styled.h4`
-  ${(props) => props.theme.typography.heading7_500}
-  color: ${(props) => props.theme.pallete.greyScale.grey1};
+  ${theme.typography.Heading7_500};
+  color: ${theme.colors.grey1};
 `;
 
 export const Subtitulo = styled.h4`
-  ${(props) => props.theme.typography.heading7_500};
-  color:${(props) => props.theme.pallete.greyScale.grey1};
+  ${theme.typography.Heading7_500};
+  color: ${theme.colors.grey1};
   margin-bottom: 2.5rem;
 `;
 
 export const Text = styled.p`
-  ${(props) => props.theme.typography.body2_500};
+  ${theme.typography.body2_500};
 `;
 
 const count = keyframes`

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { theme } from "../../styles/theme";
 
 export const StyledNav = styled.aside`
   width: 100%;
@@ -30,9 +31,9 @@ export const StyledNav = styled.aside`
 
 export const StyledKeySection = styled.div`
   h2 {
-    ${(props) => props.theme.typography.heading4_600};
+    ${theme.typography.Heading4_600};
 
-    color: ${(props) => props.theme.pallete.greyScale.grey1};
+    color: ${theme.colors.grey1};
     margin-bottom: 20px;
     width: 100%;
   }
@@ -53,13 +54,13 @@ export const StyledKeySection = styled.div`
       align-items: flex-start;
       button {
         all: unset;
-        ${(props) => props.theme.typography.heading6_500};
+        ${theme.typography.Heading6_500};
         text-decoration: none;
-        color: ${(props) => props.theme.pallete.greyScale.grey3};
+        color: ${theme.colors.grey3};
         padding: 0 2rem;
         cursor: pointer;
         :hover {
-          color: ${(props) => props.theme.pallete.greyScale.grey1};
+          color: ${theme.colors.grey1};
         }
       }
     }
@@ -67,13 +68,13 @@ export const StyledKeySection = styled.div`
   > button {
     all: unset;
     margin-bottom: 30px;
-    color: ${(props) => props.theme.pallete.main.brand1};
+    color: ${theme.colors.brand1};
     font-weight: 600;
     cursor: pointer;
 
     :hover {
       text-decoration: underline;
-      color: ${(props) => props.theme.pallete.main.brand2};
+      color: ${theme.colors.brand2};
     }
   }
 `;

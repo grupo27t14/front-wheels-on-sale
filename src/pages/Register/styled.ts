@@ -1,21 +1,22 @@
 import styled from "styled-components";
+import { theme } from "../../styles/theme";
 
 export const RegisterStyled = styled.main`
   width: 100vw;
-  color: ${(props) => props.theme.pallete.greyScale.grey1};
+  color: ${theme.colors.grey1};
   display: flex;
   justify-content: center;
 
   /* Estilizações do form apenas para registro */
   form {
     button {
-      ${(props) => props.theme.typography.button_big_text};
+      ${theme.typography.button_big_text}
     }
 
     > {
       label {
-        ${(props) => props.theme.typography.input_label};
-        color: ${(props) => props.theme.pallete.greyScale.grey1};
+        ${theme.typography.input_label}
+        color: ${theme.colors.grey1};
         margin: 12px 0;
       }
     }

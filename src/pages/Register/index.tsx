@@ -8,6 +8,7 @@ import { registerSchemaRequest, tRegister } from "./schemas";
 import { RadioButton } from "../../components/RadioButton";
 import { RadioButtonDivStyles } from "../../components/RadioButton/styled";
 import { LoadingRing } from "../../styles/LoadingRing";
+import { theme } from "../../styles/theme";
 import { useState } from "react";
 import ConfirmDeletion from "../../components/Modal/ConfirmDeletion";
 import { Modal } from "../../components/Modal";
@@ -216,7 +217,7 @@ export const Register = () => {
         />
         <StyledButton buttonstyle="brand1" type="submit" disabled={reqLoading}>
           {reqLoading ? (
-            <LoadingRing color={"#FFF"} />
+            <LoadingRing color={theme.colors.whiteFixed} />
           ) : (
             "Finalizar Cadastro"
           )}

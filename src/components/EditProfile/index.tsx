@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { useUsers } from "../../hooks/useUser";
 import { LoadingRing } from "../../styles/LoadingRing";
 import { StyledButton } from "../../styles/button";
+import { theme } from "../../styles/theme";
 import { Form } from "../Form";
 import { Input } from "../Input";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -129,7 +130,7 @@ const EditProfile = ({ isModalOpen, setIsModalOpen }: IProps) => {
           disabled={reqLoading}
         >
           {reqLoading ? (
-            <LoadingRing color={"#FFF"} />
+            <LoadingRing color={theme.colors.whiteFixed} />
           ) : (
             "Excluir Perfil"
           )}
@@ -137,7 +138,7 @@ const EditProfile = ({ isModalOpen, setIsModalOpen }: IProps) => {
 
         <StyledButton buttonstyle="brand1" type="submit" disabled={reqLoading}>
           {reqLoading ? (
-            <LoadingRing color={"#FFF"} />
+            <LoadingRing color={theme.colors.whiteFixed} />
           ) : (
             "Salvar alterações"
           )}
