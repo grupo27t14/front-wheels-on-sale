@@ -10,12 +10,27 @@ import { Modal } from "../../components/Modal";
 import { NewAnnounce } from "../../components/NewAnnounce";
 import ConfirmDeletion from "../../components/Modal/ConfirmDeletion";
 import { light } from "../../styles/theme";
+import { api } from "../../services/api";
+import { PaginationButtons } from "../../components/PaginationButtons";
 
 export const Profile = () => {
   const { id } = useParams();
   const { user, getUserCars } = useUsers();
   const [cars, setCars] = useState<iPaginationCars | null>();
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handlePagination = async (page: string) => {
+    const url = page === "next" ? cars?.next : cars?.previous;
+
+    if (url) {
+      const splitedUrl = url.split("/");
+      splitedUrl.shift();
+      const req = splitedUrl.join("/");
+      const { data } = await api.get<iPaginationCars>(req);
+      window.scrollTo({ top: 100, behavior: "smooth" });
+      setCars(data);
+    }
+  };
 
   useEffect(() => {
     (async () => {
@@ -115,6 +130,7 @@ export const Profile = () => {
             ))}
           </ul>
         </ProductsContainer>
+        <PaginationButtons handlePagination={handlePagination} cars={cars!} />
       </StyledContainer>
 
       {isModalOpen && (
