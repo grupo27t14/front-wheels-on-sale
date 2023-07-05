@@ -6,24 +6,26 @@ import {
   Box,
   Flex,
   Main,
-  HStack,
   UnorderedList,
   ListItem,
   Title,
   Subtitle,
 } from "./styled";
-import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import useMedia from "use-media";
 import { StyledButton } from "../../styles/button";
-import { useCar } from "../../hooks/useCar";
 import { api } from "../../services/api";
 import { iPaginationCars } from "../../contexts/CarContext/props";
+import { PaginationButtons } from "../../components/PaginationButtons";
+import { useCar } from "../../hooks/useCar";
 
 const Home = () => {
   const [open, setOpen] = useState(false);
   const isWide = useMedia({ maxWidth: "768px" });
 
-  const handlePagination = async (url: string | null) => {
+  const { cars, setCars, refreshCars } = useCar();
+
+  const handlePagination = async (page: string) => {
+    let url = page === "next" ? cars?.next : cars?.previous;
     if (url) {
       url = url.split("/")[1];
       const { data } = await api.get<iPaginationCars>(url);
@@ -32,7 +34,11 @@ const Home = () => {
     }
   };
 
-  const { cars, setCars } = useCar();
+  useEffect(() => {
+    (async () => {
+      await refreshCars();
+    })();
+  }, []);
 
   useEffect(() => {
     if (!isWide) {
@@ -45,9 +51,7 @@ const Home = () => {
       <Box className="main__car">
         <Flex className="main__linear--gradient">
           <Title>Motors Shop</Title>
-          <Subtitle>
-            A melhor plataforma de anúncios de carros do país
-          </Subtitle>
+          <Subtitle>A melhor plataforma de anúncios de carros do país</Subtitle>
         </Flex>
       </Box>
       <StyledContainer className="main container">
@@ -81,25 +85,7 @@ const Home = () => {
           </UnorderedList>
         )}
       </StyledContainer>
-      <Flex className="pageButton">
-        {cars?.previous ? (
-          <button onClick={() => handlePagination(cars.previous)}>
-            <FaAngleLeft /> Anterior
-          </button>
-        ) : (
-          ""
-        )}
-        <HStack>
-          {cars?.currentPage} de {cars?.totalPages}
-        </HStack>
-        {cars?.next ? (
-          <button onClick={() => handlePagination(cars.next)}>
-            Seguinte <FaAngleRight />
-          </button>
-        ) : (
-          ""
-        )}
-      </Flex>
+      <PaginationButtons cars={cars!} handlePagination={handlePagination} />
     </Main>
   );
 };

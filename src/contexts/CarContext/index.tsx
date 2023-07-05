@@ -26,7 +26,7 @@ export const CarContextProvider = ({ children }: CarProviderProps) => {
 
   const refreshCars = async () => {
     try {
-      const { data } = await api.get<iPaginationCars>("car");
+      const { data } = await api.get<iPaginationCars>("car?is_published=true");
 
       setCars(data);
     } catch (err) {
