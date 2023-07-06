@@ -6,7 +6,7 @@ export const apicep = axios.create({
 });
 
 export const api = axios.create({
-  baseURL: "http://localhost:3000/",
+  baseURL: "https://wos-api-nztb.onrender.com/",
   timeout: 10000,
 });
 
