@@ -59,7 +59,7 @@ export const Button = styled.button`
   &:hover {
     background-color: ${(props) => props.theme.pallete.randomColors.random4};
     & > svg {
-      color: ${(props) => props.theme.pallete.greyScale.grey10};
+      color: ${(props) => props.theme.pallete.greyScale.whiteFixed};
     }
   }
 `;
