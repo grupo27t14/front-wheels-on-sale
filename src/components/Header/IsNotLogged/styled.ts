@@ -68,7 +68,7 @@ export const ListItem = styled.li`
     }
 
     &:hover {
-      color: ${(props) => props.theme.pallete.greyScale.grey10};
+      color: ${(props) => props.theme.pallete.greyScale.whiteFixed};
       background-color: ${(props) => props.theme.pallete.randomColors.random4};
       border-color: ${(props) => props.theme.pallete.randomColors.random4};
     }
