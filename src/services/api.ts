@@ -6,7 +6,7 @@ export const apicep = axios.create({
 });
 
 export const api = axios.create({
-  baseURL: "https://wos-api-nztb.onrender.com/",
+  baseURL: "https://api-wheelsonsale.onrender.com",
   timeout: 10000,
 });
 
